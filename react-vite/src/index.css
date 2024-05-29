@@ -1,1 +1,11 @@
 /* TODO: Add sitewide styles */
+* {
+    font-family: "EB Garamond", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+li {
+  list-style-type: none;
+}

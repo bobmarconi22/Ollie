@@ -1,3 +1,50 @@
 .profile-dropdown {
   position: absolute;
+  width: 20px;
+}
+
+.profile-dropdown > li {
+  background-color: aqua;
+  width: 150px;
+}
+
+#logo{
+  width: 100px;
+  margin-left: 10px;
+}
+
+nav{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(32, 156, 133);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+#search-bar{
+  border: none;
+  border-radius: 2em;
+  padding: 0.5em;
+  padding-right: 2em;
+  width: 40%;
+  height: 25px;
+  font-size: 16px;
+  box-shadow: 3px 3px 3px black;
+}
+
+#search-bar:focus{
+  box-shadow: 4px 4px 4px black;
+}
+
+#search-bar:focus{
+  border: none;
+  outline: none;
+}
+
+nav > button{
+  margin-right: 25px;
 }

@@ -7,6 +7,8 @@ import "./SignupForm.css";
 function SignupFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
+  const [imageLoading, setImageLoading] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -22,14 +24,15 @@ function SignupFormModal() {
           "Confirm Password field must be the same as the Password field",
       });
     }
-
-    const serverResponse = await dispatch(
-      thunkSignup({
-        email,
-        username,
-        password,
-      })
-    );
+    const formData = new FormData();
+    formData.append("profile_pic", image);
+    formData.append("email", email);
+    formData.append("username", username);
+    formData.append("password", password);
+    // aws uploads can be a bit slow—displaying
+    // some sort of loading message is a good idea
+    setImageLoading(true);
+    const serverResponse = await dispatch(thunkSignup(formData));
 
     if (serverResponse) {
       setErrors(serverResponse);
@@ -42,7 +45,19 @@ function SignupFormModal() {
     <>
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+      >
+      <label>
+          Profile Image
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])}
+
+          />
+        </label>
         <label>
           Email
           <input
@@ -84,6 +99,7 @@ function SignupFormModal() {
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <button type="submit">Sign Up</button>
+        {(imageLoading)&& <p>Loading...</p>}
       </form>
     </>
   );

@@ -1,8 +1,9 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from .AWS_helpers import upload_file_to_s3, remove_file_from_s3, get_unique_filename
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -50,9 +51,17 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('================>',request.files)
     if form.validate_on_submit():
+
+        image = form.data['profile_pic']
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print(upload)
+
         user = User(
             username=form.data['username'],
+            profile_pic=upload['url'],
             email=form.data['email'],
             password=form.data['password']
         )
@@ -60,7 +69,21 @@ def sign_up():
         db.session.commit()
         login_user(user)
         return user.to_dict()
+    print(form.errors)
     return form.errors, 401
+
+@auth_routes.route('/delete/<int:user_id>', methods=['DELETE'])
+def del_user(user_id):
+    user_to_delete = User.query.get(user_id)
+    file_to_delete = remove_file_from_s3(user_to_delete.profile_pic)
+    print(file_to_delete)
+    if not user_to_delete:
+        response = jsonify({"message": "Shop user couldn't be found"})
+        response.status_code = 404
+        return response
+    db.session.delete(user_to_delete)
+    db.session.commit()
+    return jsonify({"message": "Successfully deleted"}), 200
 
 
 @auth_routes.route('/unauthorized')
