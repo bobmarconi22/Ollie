@@ -42,7 +42,7 @@ function ProfileButton() {
   return (
     <>
       <button onClick={toggleMenu} id={"user-menu"}>
-        <FaUserCircle />
+        <img src="/paw.png" alt="" style={{width: '40px'}}/>
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>

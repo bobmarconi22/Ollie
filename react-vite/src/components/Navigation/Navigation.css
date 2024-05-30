@@ -1,11 +1,22 @@
 .profile-dropdown {
   position: absolute;
   width: 20px;
+  right: 0;
+  margin-right: 150px;
+  margin-top: 196px;
 }
 
 .profile-dropdown > li {
-  background-color: aqua;
+  background-color: rgb(1, 26, 48, .3);
+  border: none;
   width: 150px;
+  padding: 10px;
+}
+
+.profile-dropdown > li:hover{
+  cursor: pointer;;
+  background-color: rgb(1, 26, 48, .9);
+  color: #209c85;
 }
 
 #logo{
@@ -18,7 +29,7 @@ nav{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(32, 156, 133);
+  background-color: #209c85;
   position: fixed;
   top: 0;
   right: 0;
@@ -47,4 +58,10 @@ nav{
 
 nav > button{
   margin-right: 25px;
+  background-color: #209c85;
+  border: none;
+}
+
+nav > button:hover{
+  cursor: pointer;
 }
