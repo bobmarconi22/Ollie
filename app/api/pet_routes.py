@@ -6,6 +6,9 @@ from .AWS_helpers import upload_file_to_s3, remove_file_from_s3, get_unique_file
 
 pet_routes = Blueprint('pets', __name__)
 
+#GET USER PETS
+
+#CREATE PET
 @pet_routes.route('/create', methods=['POST'])
 def create_pet():
     form = PetForm()
