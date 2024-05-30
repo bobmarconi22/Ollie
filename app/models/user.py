@@ -13,18 +13,19 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(10), nullable=False)
     last_name = db.Column(db.String(20), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
-    profile_pic = db.Column(db.String(100), nullable=False)
+    profile_pic = db.Column(db.String(100), nullable=False, default='https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg')
     email = db.Column(db.String(255), nullable=False, unique=True)
     phone = db.Column(db.String(15), nullable=True, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     sitter = db.Column(db.Boolean)
+    sitter_id = db.Column(db.Integer)
     overnight = db.Column(db.Boolean)
     at_home = db.Column(db.Boolean)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     pets = db.relationship('Pet', back_populates='owner', cascade='all, delete-orphan')
-    address = db.relationship('Address', back_populates='user', uselist=False, cascade='all, delete-orphan')
+    addresses = db.relationship('Address', back_populates='user', cascade='all, delete-orphan')
     reviews = db.relationship('Review', back_populates='sitter', cascade='all, delete-orphan')
     bookings = db.relationship('Booking', back_populates='sitter', cascade='all, delete-orphan')
     booking_requests = db.relationship('BookingRequest', back_populates='sitter', cascade='all, delete-orphan')
@@ -44,7 +45,17 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'profile_pic': self.profile_pic,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'overnight': self.overnight,
+            'at_home': self.at_home,
+            'phone': self.phone,
+            'profile_pic': self.profile_pic,
+            'sitter': self.sitter,
+            'sitter_id': self.sitter_id,
+            'reviews': [review.to_dict() for review in self.reviews],
+            'pets': [pet.to_dict() for pet in self.pets],
+            'addresses': [address.to_dict() for address in self.addresses]
         }

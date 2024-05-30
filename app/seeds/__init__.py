@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .pets import seed_pets, undo_pets
 from .reviews import seed_reviews, undo_reviews
 from .bookings import seed_bookings, undo_bookings
+from .addresses import seed_addresses, undo_addresses
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -21,10 +22,12 @@ def seed():
         undo_users()
         undo_pets()
         undo_reviews()
+        undo_addresses()
         undo_bookings()
     seed_users()
     seed_pets()
     seed_reviews()
+    seed_addresses()
     seed_bookings()
     # Add other seed functions here
 
@@ -35,5 +38,6 @@ def undo():
     undo_users()
     undo_pets()
     undo_reviews()
+    undo_addresses()
     undo_bookings()
     # Add other undo functions here

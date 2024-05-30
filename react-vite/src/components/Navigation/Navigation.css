@@ -1,8 +1,8 @@
 .profile-dropdown {
   position: absolute;
-  width: 20px;
+  width: 22px;
   right: 0;
-  margin-right: 150px;
+  margin-right: 144px;
   margin-top: 196px;
 }
 
@@ -10,7 +10,9 @@
   background-color: rgb(1, 26, 48, .3);
   border: none;
   width: 150px;
-  padding: 10px;
+  padding: 8px;
+  text-align: center;
+  font-size: 12px;
 }
 
 .profile-dropdown > li:hover{
@@ -34,17 +36,18 @@ nav{
   top: 0;
   right: 0;
   left: 0;
+  z-index: 100;
 }
 
 #search-bar{
   border: none;
   border-radius: 2em;
-  padding: 0.5em;
-  padding-right: 2em;
+  padding: 0.5em 1em;
   width: 40%;
   height: 25px;
   font-size: 16px;
   box-shadow: 3px 3px 3px black;
+  font-size: 18px;
 }
 
 #search-bar:focus{

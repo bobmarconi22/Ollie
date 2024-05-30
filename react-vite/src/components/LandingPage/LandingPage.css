@@ -1,0 +1,101 @@
+#all-sitters{
+    margin-top: 125px;
+    color: black;
+    justify-content: center;
+    text-align: center;
+}
+.sitter-card{
+    border: 1px solid black;
+    margin: 35px auto;
+    min-width: 350px;
+    max-width: 60%;
+    border-radius: 1em;
+    background-color: #011a30;
+    height: 150px;
+}
+
+.sitter-card:hover{
+    cursor: pointer;
+    box-shadow: 3px 3px 10px #209c85;
+}
+
+#sitter-name{
+    color: #209c85;
+    position: relative;
+    text-align: start;
+    margin-left: 20px;
+    margin-top: 35px;
+    font-size: 30px;
+    line-height: 0px;
+}
+
+.sitter-card:hover > #sitter-name{
+    color: rgb(0, 199, 163);
+}
+
+#sitter-username{
+    position: relative;
+    text-align: start;
+    margin-left: 25px;
+    margin-top: -25px;
+    color: #b4b4b4;
+}
+
+.sitter-card:hover > #sitter-username{
+    text-decoration: underline;
+}
+
+#sitter-pfp{
+    float: right;
+    margin-right: 3px;
+    margin-top: -81.8px;
+    height: 145px;
+    width: 145px;
+    border-radius: 1em;
+}
+
+#sitter-reviews{
+    text-align: start;
+    margin-top: -10px;
+    margin-left: 20px;
+    color: #b4b4b4;
+}
+
+/* .sitter-total-reviews{
+    color: #b4b4b4;
+    position: relative;
+    margin-left: -256px;
+    margin-top: -2px;
+    text-align: center;
+    font-size: 12px;
+} */
+
+.paw-wrapper {
+    display: inline-flex;
+    position: relative;
+    font-size: 22px;
+    color: #b4b4b4;
+    margin-top: 40px;
+}
+
+.paw-wrapper > p {
+    color: #b4b4b4;
+}
+
+.paw-wrapper .filled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #209c85;
+}
+
+.sitter-card:hover > .paw-wrapper .filled{
+    color: rgb(0, 199, 163);
+}
+
+#sitter-location{
+    color: #b4b4b4;
+    margin-top: -77px;
+    min-width: 200px;
+    margin-left: 50px;
+}

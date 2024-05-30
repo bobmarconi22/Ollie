@@ -13,7 +13,7 @@ def seed_pets():
             special_requests=None
         ),
         Pet(
-            owner_id=4,
+            owner_id=2,
             name='Bella',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg',
             birthday=datetime(2018, 7, 23),
@@ -21,7 +21,7 @@ def seed_pets():
             special_requests='Needs daily exercise'
         ),
         Pet(
-            owner_id=5,
+            owner_id=2,
             name='Max',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg',
             birthday=datetime(2019, 3, 22),
@@ -29,7 +29,7 @@ def seed_pets():
             special_requests='Special diet'
         ),
         Pet(
-            owner_id=5,
+            owner_id=3,
             name='Lucy',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg',
             birthday=datetime(2021, 1, 10),
@@ -37,7 +37,7 @@ def seed_pets():
             special_requests='Grooming required'
         ),
         Pet(
-            owner_id=6,
+            owner_id=3,
             name='Charlie',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg',
             birthday=datetime(2020, 6, 15),
@@ -45,7 +45,7 @@ def seed_pets():
             special_requests=None
         ),
         Pet(
-            owner_id=6,
+            owner_id=4,
             name='Daisy',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg',
             birthday=datetime(2019, 11, 2),
@@ -53,7 +53,7 @@ def seed_pets():
             special_requests='Loves long walks'
         ),
         Pet(
-            owner_id=7,
+            owner_id=4,
             name='Molly',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg',
             birthday=datetime(2020, 2, 20),
@@ -61,7 +61,7 @@ def seed_pets():
             special_requests=None
         ),
         Pet(
-            owner_id=7,
+            owner_id=4,
             name='Buddy',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg',
             birthday=datetime(2019, 9, 15),
@@ -69,7 +69,7 @@ def seed_pets():
             special_requests='Requires medication'
         ),
         Pet(
-            owner_id=8,
+            owner_id=5,
             name='Rocky',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg',
             birthday=datetime(2021, 4, 18),
@@ -77,7 +77,7 @@ def seed_pets():
             special_requests=None
         ),
         Pet(
-            owner_id=8,
+            owner_id=5,
             name='Sadie',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg',
             birthday=datetime(2020, 12, 12),

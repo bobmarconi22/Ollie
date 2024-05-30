@@ -8,6 +8,7 @@ pet_routes = Blueprint('pets', __name__)
 
 #GET USER PETS
 
+
 #CREATE PET
 @pet_routes.route('/create', methods=['POST'])
 def create_pet():

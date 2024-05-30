@@ -30,8 +30,8 @@ export const thunkLogin = (credentials) => async dispatch => {
   });
 
   if(response.ok) {
-    const { resUser } = await response.json();
-    dispatch(setUser(resUser));
+    const data = await response.json();
+    dispatch(setUser(data));
   } else if (response.status < 500) {
     const errorMessages = await response.json();
     return errorMessages
@@ -39,7 +39,6 @@ export const thunkLogin = (credentials) => async dispatch => {
     return { server: "Something went wrong. Please try again" }
   }
 };
-
 export const thunkSignup = (formData) => async (dispatch) => {
   const response = await fetch("/api/auth/signup", {
     method: "POST",

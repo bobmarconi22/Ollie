@@ -7,7 +7,6 @@ class Address(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    pet_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('pets.id'), ondelete='SET NULL'), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
     address_line = db.Column(db.String(50), nullable=False)
     city = db.Column(db.String(50), nullable=False)
@@ -15,5 +14,16 @@ class Address(db.Model):
     postal_code = db.Column(db.String(50), nullable=False)
     public = db.Column(db.Boolean)
 
-    pet = db.relationship('Pet', back_populates='home_address', uselist=False)
-    user = db.relationship('User', back_populates='address', uselist=False)
+    user = db.relationship('User', back_populates='addresses')
+    pets = db.relationship('Pet', back_populates='home_address', foreign_keys='Pet.home_address_id')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'address_line': self.address_line,
+            'city': self.city,
+            'state': self.state,
+            'postal_code': self.postal_code,
+            'public': self.public
+        }

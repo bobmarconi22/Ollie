@@ -1,0 +1,17 @@
+#profile-info{
+    text-align: center;
+    border: 1px solid #011a30;
+    border-radius: 2em;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 125px;
+}
+
+button > li{
+    color: #b4b4b4;
+    font-size: 12px;
+}
+
+button:hover > li{
+    color: #209c85;
+}
