@@ -17,7 +17,7 @@ class Review(db.Model):
 
     pet = db.relationship('Pet', back_populates='reviews')
     sitter = db.relationship('User', back_populates='reviews')
-    
+
     def to_dict(self):
         return {
             'id': self.id,

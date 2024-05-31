@@ -1,8 +1,8 @@
 """initial commit
 
-Revision ID: de997ce90111
+Revision ID: c82d12e80e6a
 Revises:
-Create Date: 2024-05-30 19:01:47.076207
+Create Date: 2024-05-30 20:13:10.488522
 
 """
 from alembic import op
@@ -11,9 +11,8 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
-
 # revision identifiers, used by Alembic.
-revision = 'de997ce90111'
+revision = 'c82d12e80e6a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -88,7 +87,7 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['pet_id'], ['pets.id'], ondelete='CASCADE'),
-    sa.ForeignKeyConstraint(['sitter_id'], ['users.sitter_id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['sitter_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('bookings',
@@ -106,8 +105,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
 
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+if environment == "production":
+    op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
