@@ -1,8 +1,9 @@
-import { useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import EditUserFormModal from "../EditUserFormModal";
+import PetModal from "../PetModal/PetModal";
 import "./ProfilePage.css";
 
 function ProfilePage() {
@@ -29,6 +30,12 @@ function ProfilePage() {
           <p>{user.phone}</p>
         </div>
         <div id="profile-pets"></div>
+        <button>
+            <OpenModalMenuItem
+              itemText="New Pet"
+              modalComponent={<PetModal user={user} />}
+            />
+          </button>
       </>
     )
   );

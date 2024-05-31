@@ -7,6 +7,7 @@ import "./SignupForm.css";
 function SignupFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [image, setImage] = useState("");
   const [imageLoading, setImageLoading] = useState("");
   const [username, setUsername] = useState("");
@@ -79,7 +80,17 @@ function SignupFormModal() {
         </label>
         {errors.username && <p>{errors.username}</p>}
         <label>
+          Phone Number
+          <input
+            type="text"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
+        </label>
+        {errors.phone && <p>{errors.phone}</p>}
           Password
+          <label>
           <input
             type="password"
             value={password}

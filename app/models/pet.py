@@ -10,7 +10,7 @@ class Pet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String(20), nullable=False, unique=True)
-    pet_pic = db.Column(db.String(100), nullable=False)
+    pet_pic = db.Column(db.String(100), nullable=False, default='https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg')
     birthday = db.Column(db.DateTime, nullable=False)
     breed = db.Column(db.String(255), nullable=False)
     special_requests = db.Column(db.String(255), nullable=True)

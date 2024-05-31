@@ -11,6 +11,7 @@ pet_routes = Blueprint('pets', __name__)
 
 #CREATE PET
 @pet_routes.route('/create', methods=['POST'])
+@login_required
 def create_pet():
     form = PetForm()
     form['csrf_token'].data = request.cookies['csrf_token']

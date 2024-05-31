@@ -8,6 +8,7 @@ function EditUserFormModal({ user }) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState(user.email);
   const [image, setImage] = useState(user.profile_pic);
+  const [phone, setPhone] = useState(user.phone);
   const [imageLoading, setImageLoading] = useState(false);
   const [username, setUsername] = useState(user.username);
   const [errors, setErrors] = useState({});
@@ -16,12 +17,6 @@ function EditUserFormModal({ user }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
-    }
     const formData = new FormData();
     formData.append("profile_pic", image);
     formData.append("email", email);
@@ -48,7 +43,7 @@ function EditUserFormModal({ user }) {
         encType="multipart/form-data"
       >
       <label>
-          Profile Image
+          <img src={image} alt="" id='profile-form' style={{width: '40px'}}/>
           <input
             type="file"
             accept="image/*"
@@ -66,6 +61,16 @@ function EditUserFormModal({ user }) {
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
+        <label>
+          Phone Number
+          <input
+            type="text"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
+        </label>
+        {errors.phone && <p>{errors.phone}</p>}
         <label>
           Username
           <input
