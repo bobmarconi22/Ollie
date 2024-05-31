@@ -7,7 +7,7 @@ def seed_bookings():
 
     demo_bookings = [
         Booking(
-            sitter_id=2,  # Demo Sitter
+            sitter_id=7,  # Demo Sitter
             pet_id=1,
             start_date=now + timedelta(days=1),
             end_date=now + timedelta(days=3),
@@ -15,7 +15,7 @@ def seed_bookings():
             overnight=False,
         ),
         Booking(
-            sitter_id=3,  # John Doe
+            sitter_id=8,  # John Doe
             pet_id=2,
             start_date=now + timedelta(days=4),
             end_date=now + timedelta(days=5),
@@ -23,7 +23,7 @@ def seed_bookings():
             overnight=False,
         ),
         Booking(
-            sitter_id=4,  # Jane Smith
+            sitter_id=9,  # Jane Smith
             pet_id=3,
             start_date=now + timedelta(days=6),
             end_date=now + timedelta(days=7),
@@ -31,7 +31,7 @@ def seed_bookings():
             overnight=True,
         ),
         Booking(
-            sitter_id=6,  # Bob Williams
+            sitter_id=11,  # Bob Williams
             pet_id=4,
             start_date=now + timedelta(days=1),
             end_date=now + timedelta(days=2),
@@ -39,7 +39,7 @@ def seed_bookings():
             overnight=False,
         ),
         Booking(
-            sitter_id=7,  # Carol Brown
+            sitter_id=12,  # Carol Brown
             pet_id=5,
             start_date=now + timedelta(days=3),
             end_date=now + timedelta(days=4),
@@ -47,7 +47,7 @@ def seed_bookings():
             overnight=False,
         ),
         Booking(
-            sitter_id=8,  # Maya Lee
+            sitter_id=13,  # Maya Lee
             pet_id=6,
             start_date=now + timedelta(days=2),
             end_date=now + timedelta(days=3),
@@ -55,7 +55,7 @@ def seed_bookings():
             overnight=False,
         ),
         Booking(
-            sitter_id=10,  # Emma Miller
+            sitter_id=16,  # Emma Miller
             pet_id=7,
             start_date=now + timedelta(days=5),
             end_date=now + timedelta(days=6),
@@ -63,7 +63,7 @@ def seed_bookings():
             overnight=True,
         ),
         Booking(
-            sitter_id=11,  # Frank Moore
+            sitter_id=17,  # Frank Moore
             pet_id=8,
             start_date=now + timedelta(days=7),
             end_date=now + timedelta(days=8),
@@ -71,7 +71,7 @@ def seed_bookings():
             overnight=False,
         ),
         Booking(
-            sitter_id=12,  # Grace Taylor
+            sitter_id=18,  # Grace Taylor
             pet_id=9,
             start_date=now + timedelta(days=1),
             end_date=now + timedelta(days=2),
@@ -79,7 +79,7 @@ def seed_bookings():
             overnight=False,
         ),
         Booking(
-            sitter_id=14,  # Irene Thomas
+            sitter_id=19,  # Irene Thomas
             pet_id=10,
             start_date=now + timedelta(days=3),
             end_date=now + timedelta(days=4),

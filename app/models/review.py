@@ -9,7 +9,7 @@ class Review(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     pet_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('pets.id'), ondelete='CASCADE'), nullable=False)
-    sitter_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.sitter_id'), ondelete='CASCADE'), nullable=False)
+    sitter_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
     review = db.Column(db.String(250), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)

@@ -1,8 +1,8 @@
 """initial migrate
 
-Revision ID: eb801e465307
+Revision ID: f051da617fed
 Revises:
-Create Date: 2024-05-30 22:04:15.010157
+Create Date: 2024-05-30 22:23:16.668453
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'eb801e465307'
+revision = 'f051da617fed'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,7 +31,6 @@ def upgrade():
     sa.Column('phone', sa.String(length=15), nullable=True),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('sitter', sa.Boolean(), nullable=True),
-    sa.Column('sitter_id', sa.Integer(), nullable=True),
     sa.Column('overnight', sa.Boolean(), nullable=True),
     sa.Column('at_home', sa.Boolean(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
@@ -88,7 +87,7 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['pet_id'], ['pets.id'], ondelete='CASCADE'),
-    sa.ForeignKeyConstraint(['sitter_id'], ['users.sitter_id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['sitter_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('bookings',

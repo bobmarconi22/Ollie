@@ -18,7 +18,6 @@ class User(db.Model, UserMixin):
     phone = db.Column(db.String(15), nullable=True, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     sitter = db.Column(db.Boolean)
-    sitter_id = db.Column(db.Integer)
     overnight = db.Column(db.Boolean)
     at_home = db.Column(db.Boolean)
     created_at = db.Column(db.DateTime, default=datetime.now)
@@ -54,7 +53,6 @@ class User(db.Model, UserMixin):
             'phone': self.phone,
             'profile_pic': self.profile_pic,
             'sitter': self.sitter,
-            'sitter_id': self.sitter_id,
             'reviews': [review.to_dict() for review in self.reviews],
             'pets': [pet.to_dict() for pet in self.pets],
             'addresses': [address.to_dict() for address in self.addresses]
