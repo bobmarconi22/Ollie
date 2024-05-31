@@ -15,7 +15,7 @@ class Pet(db.Model):
     breed = db.Column(db.String(255), nullable=False)
     special_requests = db.Column(db.String(255), nullable=True)
 
-    home_address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'), nullable=True)
+    home_address_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('addresses.id')), nullable=True)
     home_address = db.relationship('Address', back_populates='pets', foreign_keys=[home_address_id])
     owner = db.relationship('User', back_populates='pets', foreign_keys=[owner_id])
     reviews = db.relationship('Review', back_populates='pet', cascade='all, delete-orphan')
