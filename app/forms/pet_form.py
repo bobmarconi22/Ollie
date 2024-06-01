@@ -7,7 +7,7 @@ from app.api.AWS_helpers import ALLOWED_EXTENSIONS
 
 class PetForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
-    pet_pic = FileField("pet_pic", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    pet_pic = FileField("pet_pic", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     birthday = StringField('birthday', validators=[DataRequired()])
     breed = StringField('breed', validators=[DataRequired()])
     special_requests = StringField('special_requests')

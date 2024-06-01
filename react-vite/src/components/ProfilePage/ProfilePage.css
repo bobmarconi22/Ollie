@@ -7,11 +7,16 @@
     margin-top: 125px;
 }
 
-button > li{
-    color: #b4b4b4;
-    font-size: 12px;
+.pet-card{
+    border: 1px solid #011a30;
+    text-align: center;
+    margin: 25px auto;
+    width: 50%;
+    border-radius: 2em;
 }
 
-button:hover > li{
-    color: #209c85;
+.pet-pfp{
+    width: 150px;
+    border: none;
+    border-radius: 5em;
 }

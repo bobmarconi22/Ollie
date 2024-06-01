@@ -30,5 +30,6 @@ class Pet(db.Model):
             'pet_pic': self.pet_pic,
             'birthday': self.birthday,
             'breed': self.breed,
-            'special_requests': self.special_requests
+            'special_requests': self.special_requests,
+            'address': self.home_address,
         }

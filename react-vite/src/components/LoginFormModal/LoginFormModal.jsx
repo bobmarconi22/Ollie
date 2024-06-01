@@ -49,7 +49,7 @@ function LoginFormModal() {
 
   return (
     <>
-      <h1>Log In</h1>
+      <h1 className="form-title">Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Email

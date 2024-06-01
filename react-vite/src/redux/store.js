@@ -7,10 +7,12 @@ import {
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import sitterReducer from "./sitter";
+import petReducer from "./pet";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  sitter: sitterReducer
+  sitter: sitterReducer,
+  pet: petReducer
 });
 
 let enhancer;

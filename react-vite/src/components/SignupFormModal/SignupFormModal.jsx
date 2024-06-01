@@ -9,6 +9,7 @@ function SignupFormModal() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [image, setImage] = useState("");
+  const [imagePreview, setImagePreview] = useState("https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg");
   const [imageLoading, setImageLoading] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -42,20 +43,30 @@ function SignupFormModal() {
     }
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+
+
   return (
     <>
-      <h1>Sign Up</h1>
+      <h1 className="form-title">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form
         onSubmit={handleSubmit}
         encType="multipart/form-data"
       >
+        <img src={imagePreview} alt="Pet" className='form-pic'/>
       <label>
           Profile Image
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={(e) => handleImageChange(e)}
 
           />
         </label>

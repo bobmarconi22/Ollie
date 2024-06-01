@@ -61,6 +61,37 @@ export const thunkLogout = () => async (dispatch) => {
   dispatch(removeUser());
 };
 
+export const editUserThunk = (formData, userId) => async(dispatch) => {
+  const res = await fetch(`/api/auth/${userId}`, {
+      method: "POST",
+      body: formData
+    });
+
+  if (res.ok) {
+      const user = await res.json();
+      dispatch(thunkAuthenticate());
+      return user;
+  }else{
+      const errors = await res.json()
+      return errors;
+  }
+}
+
+export const deleteUserThunk = (userId) => async(dispatch) =>{
+  const res = await fetch(`/api/auth/delete/${userId}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+    if (res.ok) {
+      const message = await res.json();
+      dispatch(removeUser());
+      return message
+    } else {
+      const errors = await res.json()
+      return errors
+    }
+  }
+
 const initialState = { user: null };
 
 function sessionReducer(state = initialState, action) {

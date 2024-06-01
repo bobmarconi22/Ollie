@@ -1,0 +1,12 @@
+.modal-button{
+    background-color: #011a30;
+    color: #b4b4b4;
+    border: none;
+    border-radius: 1em;
+    padding: 10px 20px;
+  }
+
+  .modal-button:hover{
+    cursor: pointer;
+    color: #209c85;
+  }

@@ -1,9 +1,15 @@
 const GET_SITTERS = 'GET_SITTERS'
+const GET_SITTER_BY_ID = 'GET_SITTER_BY_ID'
 
 
 const getSitters = (sitters) => ({
     type: GET_SITTERS,
     payload: sitters
+})
+
+const getSitterById = (sitter) => ({
+    type: GET_SITTER_BY_ID,
+    payload: sitter
 })
 
 export const getSittersThunk = () => async(dispatch) => {
@@ -18,12 +24,28 @@ export const getSittersThunk = () => async(dispatch) => {
     }
 }
 
+export const getSitterByIdThunk = (sitterId) => async(dispatch) => {
+    const res = await fetch(`/api/sitter/${sitterId}`)
+    if (res.ok) {
+        const sitter = await res.json();
+        dispatch(getSitterById(sitter));
+        return sitter;
+    }else{
+        const errors = await res.json()
+        return errors;
+    }
+}
+
 const initialState = { all: null, selected: null }
 
 function sitterReducer(state = initialState, action){
     switch (action.type) {
         case GET_SITTERS:
-            return { ...state, all: action.payload }
+            return { ...state, all: action.payload
+        }
+        case GET_SITTER_BY_ID:
+            return { ...state, selected: action.payload
+        }
         default:
             return state
     }

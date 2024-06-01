@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { thunkSignup } from "../../redux/session";
+import { editUserThunk } from "../../redux/session";
 import "./EditUserForm.css";
 
 function EditUserFormModal({ user }) {
@@ -20,35 +20,32 @@ function EditUserFormModal({ user }) {
     const formData = new FormData();
     formData.append("profile_pic", image);
     formData.append("email", email);
+    formData.append("phone", phone);
     formData.append("username", username);
-    formData.append("password", password);
     // aws uploads can be a bit slow—displaying
     // some sort of loading message is a good idea
     setImageLoading(true);
-    const serverResponse = await dispatch(thunkSignup(formData));
-
-    if (serverResponse) {
-      setErrors(serverResponse);
-    } else {
-      closeModal();
-    }
-  };
+    await dispatch(editUserThunk(formData, user.id)).then(() => {
+      closeModal()
+      setImageLoading(false)
+      setIsLoaded(false)
+    });
+  }
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <h1 className="form-title">Edit Info</h1>
       {errors.server && <p>{errors.server}</p>}
       <form
         onSubmit={handleSubmit}
         encType="multipart/form-data"
       >
       <label>
-          <img src={image} alt="" id='profile-form' style={{width: '40px'}}/>
+          <img src={image} alt="" className='form-pic'/>
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setImage(e.target.files[0])}
-
           />
         </label>
         <label>
@@ -60,7 +57,6 @@ function EditUserFormModal({ user }) {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
         <label>
           Phone Number
           <input
@@ -70,7 +66,6 @@ function EditUserFormModal({ user }) {
             required
           />
         </label>
-        {errors.phone && <p>{errors.phone}</p>}
         <label>
           Username
           <input
@@ -80,7 +75,6 @@ function EditUserFormModal({ user }) {
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
         <button type="submit">Update</button>
         {(imageLoading)&& <p>Loading...</p>}
       </form>

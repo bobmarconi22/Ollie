@@ -25,6 +25,8 @@ class Review(db.Model):
             'sitter_id': self.sitter_id,
             'review': self.review,
             'rating': self.rating,
+            'pet': self.pet.to_dict(),
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+
         }

@@ -6,7 +6,11 @@ sitter_routes = Blueprint('sitters', __name__)
 
 
 @sitter_routes.route('/all')
-@login_required
 def sitters():
     sitters = User.query.filter(User.sitter==True).all()
     return {'sitters': [sitter.to_dict() for sitter in sitters]}
+
+@sitter_routes.route('/<int:sitter_id>')
+def sitter_by_id(sitter_id):
+    sitter = User.query.get(sitter_id)
+    return sitter.to_dict()

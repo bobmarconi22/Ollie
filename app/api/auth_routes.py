@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from app.forms import EditUserForm
 from flask_login import current_user, login_user, logout_user, login_required
 from .AWS_helpers import upload_file_to_s3, remove_file_from_s3, get_unique_filename
 
@@ -51,18 +52,20 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('================>',request.files)
     if form.validate_on_submit():
-
-        image = form.data['profile_pic']
-        image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image)
-        print(upload)
+        if form.data['profile_pic']:
+            image = form.data['profile_pic']
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            image_url = upload['url']
+        else:
+            image_url = 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/1007d6fe3d324359aa693458943b25dd.png'
 
         user = User(
             username=form.data['username'],
-            profile_pic=upload['url'],
+            profile_pic=image_url,
             email=form.data['email'],
+            phone=form.data['phone'],
             password=form.data['password']
         )
         db.session.add(user)
@@ -72,6 +75,37 @@ def sign_up():
     print(form.errors)
     return form.errors, 401
 
+
+#UPDATE USER
+@auth_routes.route('/<int:user_id>', methods=['POST'])
+@login_required
+def update_user(user_id):
+    user_to_edit = User.query.get(user_id)
+
+    if user_to_edit.id == current_user.id:
+        form = EditUserForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        if form.data['profile_pic']:
+            image = form.data['profile_pic']
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            image_url = upload['url']
+        else:
+            image_url = user_to_edit.profile_pic
+
+        user_to_edit.username=form.data['username']
+        user_to_edit.profile_pic=image_url
+        user_to_edit.email=form.data['email']
+        user_to_edit.phone=form.data['phone']
+
+        db.session.commit()
+
+        return user_to_edit.to_dict()
+    print(form.errors)
+    return form.errors, 401
+
+#DELETES A USER
 @auth_routes.route('/delete/<int:user_id>', methods=['DELETE'])
 def del_user(user_id):
     user_to_delete = User.query.get(user_id)

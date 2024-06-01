@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom'
 import { getSittersThunk } from "../../redux/sitter";
 import './LandingPage.css'
-import { applyMiddleware } from "redux";
 
 function LandingPage() {
     const dispatch = useDispatch();
@@ -63,7 +62,7 @@ function LandingPage() {
     return (isLoaded && (
         <div id="all-sitters">
             {allSitters && allSitters.sitters.map((sitter) => (
-                <div className="sitter-card" onClick={() => navigate(`/sitter/${sitter.sitter_id}`)} key={sitter.id}>
+                <div className="sitter-card" onClick={() => navigate(`/sitter/${sitter.id}`)} key={sitter.id}>
                     <h4 id="sitter-name">{sitter.first_name} {sitter.last_name}</h4>
                     <p id="sitter-username">@{sitter.username}</p>
                     <img src={sitter.profile_pic} alt="" id="sitter-pfp"/>
