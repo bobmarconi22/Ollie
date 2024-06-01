@@ -9,11 +9,18 @@ function SignupFormModal() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [image, setImage] = useState("");
-  const [imagePreview, setImagePreview] = useState("https://marconi22-ollie.s3.us-east-2.amazonaws.com/8512b4f33e95447db806cb48a74957b0.jpg");
+  const [imagePreview, setImagePreview] = useState(
+    "https://marconi22-ollie.s3.us-east-2.amazonaws.com/5a423169513c4a26ab5053ed05efcf41.png"
+  );
   const [imageLoading, setImageLoading] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isSitter, setIsSitter] = useState(false);
+  const [overnight, setOvernight] = useState(false);
+  const [atHome, setAtHome] = useState(false);
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -31,6 +38,12 @@ function SignupFormModal() {
     formData.append("email", email);
     formData.append("username", username);
     formData.append("password", password);
+    formData.append("phone", phone);
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("sitter", isSitter);
+    formData.append("at_home", atHome);
+    formData.append("overnight", overnight);
     // aws uploads can be a bit slow—displaying
     // some sort of loading message is a good idea
     setImageLoading(true);
@@ -51,23 +64,18 @@ function SignupFormModal() {
     }
   };
 
-
   return (
     <>
       <h1 className="form-title">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form
-        onSubmit={handleSubmit}
-        encType="multipart/form-data"
-      >
-        <img src={imagePreview} alt="Pet" className='form-pic'/>
-      <label>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <img src={imagePreview} alt="Pet" className="form-pic" />
+        <label>
           Profile Image
           <input
             type="file"
             accept="image/*"
             onChange={(e) => handleImageChange(e)}
-
           />
         </label>
         <label>
@@ -91,6 +99,26 @@ function SignupFormModal() {
         </label>
         {errors.username && <p>{errors.username}</p>}
         <label>
+          First Name
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </label>
+        {errors.firstName && <p>{errors.firstName}</p>}
+        <label>
+          Last Name
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </label>
+        {errors.lastName && <p>{errors.lastName}</p>}
+        <label>
           Phone Number
           <input
             type="text"
@@ -99,9 +127,52 @@ function SignupFormModal() {
             required
           />
         </label>
+        <label style={{ paddingTop: "10px" }}>
+          Create a Sitter Account?
+          <input
+            type="checkbox"
+            checked={isSitter}
+            onChange={() => setIsSitter((prev) => !prev)}
+          />
+        </label>
+        {isSitter ? (
+          <label
+            style={{
+              width: "500px",
+              padding: "14px 10px",
+              paddingTop: "7px",
+            }}
+          >
+            Overnight? (Always a drop off)
+            <input
+              type="checkbox"
+              checked={overnight}
+              onChange={() => setOvernight((prev) => !prev)}
+            />
+          </label>
+        ) : (
+          <p style={{ width: "500px", padding: "10px", paddingTop: "3px" }}></p>
+        )}
+        {isSitter ? (
+          <label
+            style={{
+              width: "500px",
+              padding: "14px 10px",
+            }}
+          >
+            Travel? (Go to the pets home?)
+            <input
+              type="checkbox"
+              checked={atHome}
+              onChange={() => setAtHome((prev) => !prev)}
+            />
+          </label>
+        ) : (
+          <p style={{ width: "500px", padding: "10px", paddingTop: "3px" }}></p>
+        )}
         {errors.phone && <p>{errors.phone}</p>}
-          Password
-          <label>
+        Password
+        <label>
           <input
             type="password"
             value={password}
@@ -120,8 +191,8 @@ function SignupFormModal() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
-        {(imageLoading)&& <p>Loading...</p>}
+        <button type="submit">Create Account</button>
+        {imageLoading && <p>Loading...</p>}
       </form>
     </>
   );

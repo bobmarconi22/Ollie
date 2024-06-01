@@ -82,9 +82,12 @@ def update_pet(pet_id):
 @pet_routes.route("/<int:pet_id>/delete", methods=['DELETE'])
 @login_required
 def delete_pet(pet_id):
-    pet = Pet.query.get(pet_id)
-    if not pet:
-        return jsonify({"message": "Pet couldn't be found"}), 404
-    db.session.delete(pet)
+    pet_to_delete = Pet.query.get(pet_id)
+    if not pet_to_delete.pet_pic == 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/5a423169513c4a26ab5053ed05efcf41.png':
+        file_to_delete = remove_file_from_s3(pet_to_delete.pet_pic)
+        print(file_to_delete)
+    if not pet_to_delete:
+        return jsonify({"message": "pet couldn't be found"}), 404
+    db.session.delete(pet_to_delete)
     db.session.commit()
     return jsonify({"message": "Successfully deleted"}), 200

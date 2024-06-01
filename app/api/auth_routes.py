@@ -59,13 +59,18 @@ def sign_up():
             upload = upload_file_to_s3(image)
             image_url = upload['url']
         else:
-            image_url = 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/1007d6fe3d324359aa693458943b25dd.png'
+            image_url = 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/5a423169513c4a26ab5053ed05efcf41.png'
 
         user = User(
             username=form.data['username'],
             profile_pic=image_url,
             email=form.data['email'],
             phone=form.data['phone'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
+            sitter=form.data['sitter'],
+            overnight=form.data['overnight'],
+            at_home=form.data['at_home'],
             password=form.data['password']
         )
         db.session.add(user)
@@ -109,8 +114,9 @@ def update_user(user_id):
 @auth_routes.route('/delete/<int:user_id>', methods=['DELETE'])
 def del_user(user_id):
     user_to_delete = User.query.get(user_id)
-    file_to_delete = remove_file_from_s3(user_to_delete.profile_pic)
-    print(file_to_delete)
+    if not user_to_delete.profile_pic == 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/5a423169513c4a26ab5053ed05efcf41.png':
+        file_to_delete = remove_file_from_s3(user_to_delete.profile_pic)
+        print(file_to_delete)
     if not user_to_delete:
         response = jsonify({"message": "Shop user couldn't be found"})
         response.status_code = 404

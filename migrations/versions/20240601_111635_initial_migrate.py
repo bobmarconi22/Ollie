@@ -1,8 +1,8 @@
 """initial migrate
 
-Revision ID: 31ca814dec23
+Revision ID: cee755aab9c0
 Revises:
-Create Date: 2024-05-31 21:51:16.951518
+Create Date: 2024-06-01 11:16:35.863570
 
 """
 from alembic import op
@@ -12,9 +12,8 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 
-
 # revision identifiers, used by Alembic.
-revision = '31ca814dec23'
+revision = 'cee755aab9c0'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -105,6 +104,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['sitter_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
+
 
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
