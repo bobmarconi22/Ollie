@@ -42,6 +42,7 @@ function ProfilePage() {
       <>
         <div id="profile-info">
           <h1 className="form-title" style={{marginBottom: '10px'}}>Hi, {user.first_name}</h1>
+          <img src={user.profile_pic} alt="" className="pet-pfp" />
           <OpenModalMenuItem
             itemText="Edit"
             modalComponent={<EditUserFormModal user={user} setIsLoaded={setIsLoaded} />}
