@@ -10,9 +10,18 @@ function EditUserFormModal({ user }) {
   const [image, setImage] = useState(user.profile_pic);
   const [phone, setPhone] = useState(user.phone);
   const [imageLoading, setImageLoading] = useState(false);
+  const [imagePreview, setImagePreview] = useState(user.profile_pic);
   const [username, setUsername] = useState(user.username);
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,11 +50,11 @@ function EditUserFormModal({ user }) {
         encType="multipart/form-data"
       >
       <label>
-          <img src={image} alt="" className='form-pic'/>
+          <img src={imagePreview} alt="" className='form-pic'/>
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={handleImageChange}
           />
         </label>
         <label>

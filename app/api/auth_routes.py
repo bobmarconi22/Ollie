@@ -59,7 +59,7 @@ def sign_up():
             upload = upload_file_to_s3(image)
             image_url = upload['url']
         else:
-            image_url = 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/5a423169513c4a26ab5053ed05efcf41.png'
+            image_url = 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/4dead4e64d8e410bb7e0b8050a34f38c.png'
 
         user = User(
             username=form.data['username'],
@@ -114,7 +114,7 @@ def update_user(user_id):
 @auth_routes.route('/delete/<int:user_id>', methods=['DELETE'])
 def del_user(user_id):
     user_to_delete = User.query.get(user_id)
-    if not user_to_delete.profile_pic == 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/5a423169513c4a26ab5053ed05efcf41.png':
+    if user_to_delete.profile_pic != 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/4dead4e64d8e410bb7e0b8050a34f38c.png':
         file_to_delete = remove_file_from_s3(user_to_delete.profile_pic)
         print(file_to_delete)
     if not user_to_delete:

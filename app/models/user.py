@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(10), nullable=False)
     last_name = db.Column(db.String(20), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
-    profile_pic = db.Column(db.String(100), nullable=False, default='https://marconi22-ollie.s3.us-east-2.amazonaws.com/5a423169513c4a26ab5053ed05efcf41.png')
+    profile_pic = db.Column(db.String(100), nullable=False, default='https://marconi22-ollie.s3.us-east-2.amazonaws.com/4dead4e64d8e410bb7e0b8050a34f38c.png')
     email = db.Column(db.String(255), nullable=False, unique=True)
     phone = db.Column(db.String(15), nullable=True, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
@@ -55,5 +55,6 @@ class User(db.Model, UserMixin):
             'sitter': self.sitter,
             'reviews': [review.to_dict() for review in self.reviews],
             'pets': [pet.to_dict() for pet in self.pets],
-            'addresses': [address.to_dict() for address in self.addresses]
+            'addresses': [address.to_dict() for address in self.addresses],
+            'bookings': [booking.to_dict() for booking in self.bookings]
         }

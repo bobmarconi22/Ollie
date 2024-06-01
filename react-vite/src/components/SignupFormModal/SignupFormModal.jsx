@@ -10,7 +10,7 @@ function SignupFormModal() {
   const [phone, setPhone] = useState("");
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState(
-    "https://marconi22-ollie.s3.us-east-2.amazonaws.com/5a423169513c4a26ab5053ed05efcf41.png"
+    "https://marconi22-ollie.s3.us-east-2.amazonaws.com/4dead4e64d8e410bb7e0b8050a34f38c.png"
   );
   const [imageLoading, setImageLoading] = useState("");
   const [username, setUsername] = useState("");
@@ -23,6 +23,14 @@ function SignupFormModal() {
   const [atHome, setAtHome] = useState(false);
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,13 +64,6 @@ function SignupFormModal() {
     }
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-      setImagePreview(URL.createObjectURL(file));
-    }
-  };
 
   return (
     <>
@@ -75,7 +76,7 @@ function SignupFormModal() {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => handleImageChange(e)}
+            onChange={handleImageChange}
           />
         </label>
         <label>

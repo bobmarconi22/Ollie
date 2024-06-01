@@ -26,7 +26,7 @@ def create_pet():
             upload = upload_file_to_s3(image)
             image_url = upload['url']
         else:
-            image_url = 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/1007d6fe3d324359aa693458943b25dd.png'
+            image_url = 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/7d4c441d895e45c7856f569a466eb240.png'
 
         birthday = datetime.strptime(form.data['birthday'], '%Y-%m-%d')
 
@@ -83,7 +83,7 @@ def update_pet(pet_id):
 @login_required
 def delete_pet(pet_id):
     pet_to_delete = Pet.query.get(pet_id)
-    if not pet_to_delete.pet_pic == 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/5a423169513c4a26ab5053ed05efcf41.png':
+    if pet_to_delete.pet_pic != 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/7d4c441d895e45c7856f569a466eb240.png':
         file_to_delete = remove_file_from_s3(pet_to_delete.pet_pic)
         print(file_to_delete)
     if not pet_to_delete:
