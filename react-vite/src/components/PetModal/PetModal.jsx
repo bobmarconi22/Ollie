@@ -101,39 +101,56 @@ function PetModal({ user, pet, setIsLoaded }) {
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <label>
             <img src={imagePreview} alt="Pet" className="form-pic" />
-            <input type="file" accept="image/*" onChange={handleImageChange} />
+            <input
+              type="file"
+              accept="image/*"
+              className="choose-file"
+              onChange={handleImageChange}
+            />
           </label>
-          <label>
-            Name
+          <div className="form">
             <input
               type="text"
               value={name}
+              id={"name"}
+              className="form__input"
+              placeholder=" "
               onChange={(e) => setName(e.target.value)}
               required
             />
-          </label>
-          {errors.name && <p>{errors.name}</p>}
-          <label>
-            Birthday
+            <label for={"name"} className="form__label">
+              Name
+            </label>
+          </div>
+          <div className="form">
             <input
               type="date"
               value={birthday}
+              id={"birthday"}
+              className="form__input"
+              placeholder=" "
               onChange={(e) => setBirthday(e.target.value)}
               required
             />
-          </label>
-          {errors.birthday && <p>{errors.birthday}</p>}
-          <label>
-            Breed
+            <label for={"birthday"} className="form__label">
+              Birthday
+            </label>
+          </div>
+          <div className="form">
             <input
               type="text"
               value={breed}
+              id={"breed"}
+              className="form__input"
+              placeholder=" "
               onChange={(e) => setBreed(e.target.value)}
               required
             />
-          </label>
-          {errors.breed && <p>{errors.breed}</p>}
-          <label style={{ paddingTop: "10px" }}>
+            <label for={"name"} className="form__label">
+              Name
+            </label>
+          </div>
+          <label style={{ padding: "15px 0" }}>
             Pet in need of Special Care?
             <input
               type="checkbox"
@@ -142,24 +159,23 @@ function PetModal({ user, pet, setIsLoaded }) {
             />
           </label>
           {isSpecial ? (
-            <label
-              style={{
-                width: "500px",
-                padding: "14px 10px",
-                paddingTop: "7px",
-              }}
-            >
-              Special Requirements
+            <div className="form">
               <input
                 type="text"
                 value={special}
+                id={"special"}
+                className="form__input"
+                placeholder=" "
                 onChange={(e) => setSpecial(e.target.value)}
-                required={isSpecial}
+                required
               />
-            </label>
+              <label for={"special"} className="form__label">
+                Special Requests
+              </label>
+            </div>
           ) : (
             <p
-              style={{ width: "500px", padding: "10px", paddingTop: "3px" }}
+              style={{height: '19px', padding: "10px", paddingTop: "3px" }}
             ></p>
           )}
           {errors.special && <p>{errors.special}</p>}

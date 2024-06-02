@@ -5,13 +5,13 @@
     display: flex;
     flex-direction: row;
     border: 1px solid black;
-    padding: 10px;
+    padding: 45px;
     justify-content: center;
     gap: 10%;
     align-items: start;
-    background-color: #b4b4b4;
+    background-color: #212f44;
     border-radius: 3em;
-    box-shadow: 1px 1px 60px #011a30;
+    box-shadow: 0px 0px 10px #209c85;
 }
 #sitter-page-pfp{
     position: relative;
@@ -24,7 +24,7 @@
     padding: 10px;
     background-color: #011a30;
     border-radius: 10em;
-    box-shadow: 1px 1px 14px #209c85;
+    box-shadow: 0px 0px 14px #209c85;
 }
 
 #sitter-facts{
@@ -35,11 +35,11 @@
 }
 
 #sitter-page-name{
-    border-bottom: 1px solid #209c85;
-    width: 50%;
+    border-bottom: 2.5px solid #011a30;
+    width: 75%;
     margin: 0 auto;
-    font-size: 38px;
-    color: #011a30;
+    font-size: 44px;
+    color: #209c85;
 }
 
 #sitter-page-reviews{
@@ -51,14 +51,10 @@
     margin: 0 auto;
     margin-top: 25px;
     border: 1px solid #209c85;
-    background-color: #011a30;
+    background-color: #212f44;
     border-radius: 2em;
-    padding: 20px;
-    border: 3px solid #209c85;
     padding: 10px;
-    background-color: #011a30;
-    border-radius: 2em;
-    box-shadow: 1px 1px 30px #209c85;
+    box-shadow: 0px 0px 7px #209c85;
 }
 
 .review-card > h1{

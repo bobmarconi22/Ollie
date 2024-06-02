@@ -55,19 +55,21 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <ul className={"profile-dropdown"} style={{margin: '0', marginTop: '-38px'}}>
-              <li onClick={handleNav}>{user.username}</li>
-              <li onClick={logout}>Logout</li>
+              <li onClick={handleNav} style={{borderRadius: '0'}}>{user.username}</li>
+              <li onClick={logout} style={{borderRadius: '0 0 1em 1em'}}>Logout</li>
             </ul>
           ) : (
             <>
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}
+                style={{borderRadius: '0'}}
                 modalComponent={<LoginFormModal />}
               />
               <OpenModalMenuItem
                 itemText="Sign Up"
                 onItemClick={closeMenu}
+                style={{borderRadius: '0 0 1em 1em'}}
                 modalComponent={<SignupFormModal />}
               />
             </>

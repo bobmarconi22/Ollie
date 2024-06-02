@@ -72,62 +72,98 @@ function SignupFormModal() {
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <img src={imagePreview} alt="Pet" className="form-pic" />
         <label>
-          Profile Image
           <input
             type="file"
             accept="image/*"
+            className="choose-file"
             onChange={handleImageChange}
           />
         </label>
-        <label>
-          Email
+        <div className="form">
           <input
-            type="text"
+            type="email"
             value={email}
+            id={'email'}
+            className="form__input"
+            placeholder=" "
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Username
+        <label for={'email'} className="form__label">Email</label>
+        </div>
+                <div className="form">
           <input
             type="text"
             value={username}
+            id={'username'}
+            className="form__input"
+            placeholder=" "
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </label>
-        {errors.username && <p>{errors.username}</p>}
-        <label>
-          First Name
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
-        <label>
-          Last Name
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-        </label>
-        {errors.lastName && <p>{errors.lastName}</p>}
-        <label>
-          Phone Number
+        <label for={'username'} className="form__label">Username</label>
+        </div>
+        <div className="form">
           <input
             type="text"
             value={phone}
+            id={'phone'}
+            className="form__input"
+            placeholder=" "
             onChange={(e) => setPhone(e.target.value)}
             required
           />
-        </label>
+        <label for={'phone'} className="form__label">Phone <i style={{fontSize: '11px', fontStyle: 'italic'}}>optional</i></label>
+        </div>
+        <div className="form">
+          <input
+            type="text"
+            value={firstName}
+            id={'firstName'}
+            className="form__input"
+            placeholder=" "
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        <label for={'firstName'} className="form__label">First Name</label>
+        </div>
+        <div className="form">
+          <input
+            type="text"
+            value={lastName}
+            id={'lastName'}
+            className="form__input"
+            placeholder=" "
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        <label for={'lastName'} className="form__label">Last Name</label>
+        </div>
+        <div className="form">
+          <input
+            type="password"
+            value={password}
+            id={'password'}
+            className="form__input"
+            placeholder=" "
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        <label for={'password'} className="form__label">Password</label>
+        </div>
+        <div className="form">
+          <input
+            type="password"
+            value={confirmPassword}
+            id={'confirmPassword'}
+            className="form__input"
+            placeholder=" "
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+        <label for={'confirmPassword'} className="form__label">Confirm Password</label>
+        </div>
+        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <label style={{ paddingTop: "10px" }}>
           Create a Sitter Account?
           <input
@@ -139,12 +175,10 @@ function SignupFormModal() {
         {isSitter ? (
           <label
             style={{
-              width: "500px",
-              padding: "14px 10px",
-              paddingTop: "7px",
+              paddingTop: "18px",
+              textAlign: 'center'
             }}
-          >
-            Overnight? (Always a drop off)
+          >Overnight Sitter? <i style={{fontSize: '11px', fontStyle: 'italic'}}>optional</i>
             <input
               type="checkbox"
               checked={overnight}
@@ -157,11 +191,11 @@ function SignupFormModal() {
         {isSitter ? (
           <label
             style={{
-              width: "500px",
-              padding: "14px 10px",
+              paddingTop: "16px",
+              paddingBottom: '16px'
             }}
           >
-            Travel? (Go to the pets home?)
+            Travel Sitter? <i style={{fontSize: '11px', fontStyle: 'italic'}}>optional</i>
             <input
               type="checkbox"
               checked={atHome}
@@ -171,27 +205,6 @@ function SignupFormModal() {
         ) : (
           <p style={{ width: "500px", padding: "10px", paddingTop: "3px" }}></p>
         )}
-        {errors.phone && <p>{errors.phone}</p>}
-        Password
-        <label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <label>
-          Confirm Password
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <button type="submit">Create Account</button>
         {imageLoading && <p>Loading...</p>}
       </form>

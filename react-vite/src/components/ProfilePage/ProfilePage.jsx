@@ -30,6 +30,136 @@ function ProfilePage() {
     }
   };
 
+  const avgReviews = (arr) => {
+    let sum = 0;
+    for (let review of arr) {
+      sum += review.rating;
+    }
+    let avg = (sum / arr.length).toFixed(1);
+
+    return arr.length ? (
+      <div className="sitter-reviews">
+        <span className="paw-wrapper">
+          <i
+            className="fa-solid fa-paw"
+            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
+          ></i>
+          <i
+            className="fa-solid fa-paw filled"
+            style={{
+              clipPath:
+                avg >= 1
+                  ? "none"
+                  : `polygon(0 0, ${avg * 100}% 0, ${avg * 100}% 100%, 0 100%)`,
+              fontSize: "50px",
+              margin: "5px",
+            }}
+          ></i>
+        </span>
+        <span className="paw-wrapper">
+          <i
+            className="fa-solid fa-paw"
+            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
+          ></i>
+          <i
+            className="fa-solid fa-paw filled"
+            style={{
+              clipPath:
+                avg >= 2
+                  ? "none"
+                  : `polygon(0 0, ${(avg - 1) * 100}% 0, ${
+                      (avg - 1) * 100
+                    }% 100%, 0 100%)`,
+              fontSize: "50px",
+              margin: "5px",
+            }}
+          ></i>
+        </span>
+        <span className="paw-wrapper">
+          <i
+            className="fa-solid fa-paw"
+            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
+          ></i>
+          <i
+            className="fa-solid fa-paw filled"
+            style={{
+              clipPath:
+                avg >= 3
+                  ? "none"
+                  : `polygon(0 0, ${(avg - 2) * 100}% 0, ${
+                      (avg - 2) * 100
+                    }% 100%, 0 100%)`,
+              fontSize: "50px",
+              margin: "5px",
+            }}
+          ></i>
+        </span>
+        <span className="paw-wrapper">
+          <i
+            className="fa-solid fa-paw"
+            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
+          ></i>
+          <i
+            className="fa-solid fa-paw filled"
+            style={{
+              clipPath:
+                avg >= 4
+                  ? "none"
+                  : `polygon(0 0, ${(avg - 3) * 100}% 0, ${
+                      (avg - 3) * 100
+                    }% 100%, 0 100%)`,
+              fontSize: "50px",
+              margin: "5px",
+            }}
+          ></i>
+        </span>
+        <span className="paw-wrapper">
+          <i
+            className="fa-solid fa-paw"
+            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
+          ></i>
+          <i
+            className="fa-solid fa-paw filled"
+            style={{
+              clipPath:
+                avg >= 5
+                  ? "none"
+                  : `polygon(0 0, ${(avg - 4) * 100}% 0, ${
+                      (avg - 4) * 100
+                    }% 100%, 0 100%)`,
+              fontSize: "50px",
+              margin: "5px",
+            }}
+          ></i>
+        </span>
+        &nbsp;&nbsp;
+        <span className="paw-wrapper">
+          <p style={{ fontSize: "24px" }}>
+            <b
+              style={{
+                color: "rgba(255, 255, 255, 0.75)",
+                textDecoration: "underline",
+                fontSize: "24px",
+              }}
+            >
+              {arr.length}
+            </b>{" "}
+            Reviews
+          </p>
+        </span>
+      </div>
+    ) : (
+      <div className="sitter-page-reviews">
+        <p
+          className="paw-wrapper"
+          style={{ color: "rgba(255, 255, 255, 0.75)", fontSize: "17px" }}
+        >
+          No Reviews
+        </p>
+      </div>
+    );
+  };
+
   useEffect(() => {
     if (user && !isLoaded) {
       dispatch(thunkAuthenticate(user.id));
@@ -49,12 +179,15 @@ function ProfilePage() {
           />
           <p>{user.username}</p>
           <p>Email: {user.email}</p>
-          <p>Phone: {user.phone}</p>
+          {user.phone && <p>Phone: {user.phone}</p>}
           {user.sitter ?
           <>
             <p>Bookings: {user.bookings.length}</p>
             <p>Addresses: {user.addresses.length}</p>
-            <p>Services: {user.at_home ? 'true' : 'false'}</p>
+            <p>Reviews: {user.reviews.length}</p>
+            <h4 style={{fontSize: '25px', textDecoration: 'underline', margin: 0}}>Services:</h4>
+            <p>Travel: {user.at_home ? <i style={{color: '#209c85'}}>✓</i> : <i style={{color: '#ec223a', fontSize: '18px'}}>𐄂</i>}</p>
+            <p>Overnight: {user.overnight ? <i style={{color: '#209c85'}}>✓</i> : <i style={{color: '#ec223a', fontSize: '18px'}}>𐄂</i>}</p>
           </>
           :
           <>
@@ -74,14 +207,46 @@ function ProfilePage() {
           modalComponent={<PetModal user={user} setIsLoaded={setIsLoaded} />}
         />}
         {user.sitter ?
-        user.bookings.map(booking => (
+        <>
+        {user.bookings.map(booking => (
           <div className="pet-card" key={booking.id}>
             <h2>{booking.pet.name} - <i style={{ fontSize: '14px', fontStyle: 'italic' }}>{booking.pet.breed} ({getAge(booking.pet.birthday)})</i></h2>
             <img src={booking.pet.pet_pic} alt="" className="pet-pfp" />
             <p>Address: {booking.at_home ? `${user.addresses[0].address_line} ${user.addresses[0].city}, ${user.addresses[0].state} ${user.addresses[0].postal_code}` : `${user.booking.pet.home_address.address_line} ${user.booking.pet.home_address.city}, ${user.booking.pet.home_address.state} ${user.booking.pet.home_address.postal_code}`}</p>
-            {booking.special_requests && <p>Special requests: {booking.special_requests}</p>}
+            {booking.pet.special_requests && <p>Special requests: {booking.special_requests}</p>}
           </div>
-        ))
+        ))}
+        <h1 className="form-title">Reviews</h1>
+        <div id="sitter-page-reviews">
+        <div id="sitter-page-avg-reviews" style={{ textAlign: "center" }}>
+          {avgReviews(user.reviews)}
+        </div>
+        {user.reviews.map((review) => {
+          // Log outside JSX
+          return (
+            <div className="review-card" key={review.id}>
+              <h1 className="review-pet-name">
+                {review.pet.name} -{" "}
+                <i
+                  style={{
+                    fontSize: "16px",
+                    fontStyle: "italic",
+                    color: "rgba(255, 255, 255, 0.75)",
+                  }}
+                >
+                  {getAge(review.pet.birthday)}
+                </i>
+              </h1>
+
+              <p className="review-pet-rating">
+                {review.rating} <i className="fa-solid fa-paw filled"></i>
+              </p>
+              <p className="review-pet-review">{review.review}</p>
+            </div>
+          );
+        })}
+      </div>
+      </>
         :
         user.pets.map(pet => (
           <div className="pet-card" key={pet.id}>

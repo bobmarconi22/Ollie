@@ -1,34 +1,36 @@
 .profile-dropdown {
   position: absolute;
-  width: 22px;
   right: 0;
-  margin-right: 144px;
-  margin-top: 196px;
+  margin-right: -10px;
+  margin-top: 195px;
+  border-radius: 0 0 1em 1em;
+  background-color: #212f44;
 }
 
 .profile-dropdown > li {
-  background-color: rgb(1, 26, 48, .3);
-  color: #011a30;
+  background-color: #212f44;
+  color: rgba(255, 255, 255, 0.75);
   border: none;
   width: 150px;
-  padding: 8px;
-  text-align: center;
-  font-size: 12px;
+  padding: 10px;
+  margin-left: -55px;
+  text-align: start;
+  font-size: 15px;
   margin: 0;
 }
 
-.profile-dropdown > li:hover{
-  cursor: pointer;;
-  background-color: rgb(1, 26, 48, .9);
+.profile-dropdown > li:hover {
+  cursor: pointer;
   color: #209c85;
+  text-decoration: underline;
 }
 
-#logo{
+#logo {
   width: 100px;
   margin-left: 10px;
 }
 
-nav{
+nav {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -41,7 +43,7 @@ nav{
   z-index: 10;
 }
 
-#search-bar{
+#search-bar {
   border: none;
   border-radius: 2em;
   padding: 0.5em 1em;
@@ -52,21 +54,21 @@ nav{
   font-size: 18px;
 }
 
-#search-bar:focus{
+#search-bar:focus {
   box-shadow: 4px 4px 4px black;
 }
 
-#search-bar:focus{
+#search-bar:focus {
   border: none;
   outline: none;
 }
 
-nav > button{
+nav > button {
   margin-right: 25px;
   background-color: #209c85;
   border: none;
 }
 
-nav > button:hover{
+nav > button:hover {
   cursor: pointer;
 }

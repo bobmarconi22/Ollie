@@ -11,7 +11,11 @@ function EditUserFormModal({ user }) {
   const [phone, setPhone] = useState(user.phone);
   const [imageLoading, setImageLoading] = useState(false);
   const [imagePreview, setImagePreview] = useState(user.profile_pic);
+  const [firstName, setFirstName] = useState(user.first_name);
+  const [lastName, setLastName] = useState(user.last_name);
   const [username, setUsername] = useState(user.username);
+  const [travel, setTravel] = useState(user.at_home);
+  const [overnight, setOvernight] = useState(user.overnight);
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -31,6 +35,10 @@ function EditUserFormModal({ user }) {
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("username", username);
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("overnight", overnight);
+    formData.append("at_home", travel);
     // aws uploads can be a bit slow—displaying
     // some sort of loading message is a good idea
     setImageLoading(true);
@@ -54,36 +62,90 @@ function EditUserFormModal({ user }) {
           <input
             type="file"
             accept="image/*"
+            className="choose-file"
             onChange={handleImageChange}
           />
         </label>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Phone Number
-          <input
-            type="text"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Username
+        <div className="form">
           <input
             type="text"
             value={username}
+            id={'username'}
+            className="form__input"
+            placeholder=" "
             onChange={(e) => setUsername(e.target.value)}
             required
           />
+        <label for={'username'} className="form__label">Username</label>
+        </div>
+        <div className="form">
+          <input
+            type="email"
+            value={email}
+            id={'email'}
+            className="form__input"
+            placeholder=" "
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        <label for={'email'} className="form__label">Email</label>
+        </div>
+        <div className="form">
+          <input
+            type="phone"
+            value={phone}
+            id={'phone'}
+            className="form__input"
+            placeholder=" "
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        <label for={'phone'} className="form__label">Phone <i style={{fontSize: '11px', fontStyle: 'italic'}}>optional</i></label>
+        </div>
+        <div className="form">
+          <input
+            type="text"
+            value={firstName}
+            id={'firstName'}
+            className="form__input"
+            placeholder=" "
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        <label for={'firstName'} className="form__label">First Name</label>
+        </div>
+        <div className="form">
+          <input
+            type="text"
+            value={lastName}
+            id={'lastName'}
+            className="form__input"
+            placeholder=" "
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        <label for={'lastName'} className="form__label">Last Name</label>
+        </div>
+        {user.sitter && (
+        <>
+           <h1 className="form-title" style={{marginBottom: '10px'}}>Services</h1>
+          <label>
+          Overnight
+          <input
+            type="checkbox"
+            checked={overnight}
+            onChange={() => setOvernight((prevOvernight) => !prevOvernight)}
+          />
         </label>
+        <label>
+          Travel
+          <input
+            type="checkbox"
+            checked={travel}
+            onChange={() => setTravel((prevTravel) => !prevTravel)}
+          />
+        </label>
+          </>
+        )}
         <button type="submit">Update</button>
         {(imageLoading)&& <p>Loading...</p>}
       </form>

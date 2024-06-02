@@ -50,7 +50,7 @@ function SitterPage() {
         <span className="paw-wrapper">
           <i
             className="fa-solid fa-paw"
-            style={{ fontSize: "50px", margin: "5px", marginTop: '7px' }}
+            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
           ></i>
           <i
             className="fa-solid fa-paw filled"
@@ -67,7 +67,7 @@ function SitterPage() {
         <span className="paw-wrapper">
           <i
             className="fa-solid fa-paw"
-            style={{ fontSize: "50px", margin: "5px", marginTop: '7px'}}
+            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
           ></i>
           <i
             className="fa-solid fa-paw filled"
@@ -86,7 +86,7 @@ function SitterPage() {
         <span className="paw-wrapper">
           <i
             className="fa-solid fa-paw"
-            style={{ fontSize: "50px", margin: "5px", marginTop: '7px' }}
+            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
           ></i>
           <i
             className="fa-solid fa-paw filled"
@@ -105,7 +105,7 @@ function SitterPage() {
         <span className="paw-wrapper">
           <i
             className="fa-solid fa-paw"
-            style={{ fontSize: "50px", margin: "5px", marginTop: '7px' }}
+            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
           ></i>
           <i
             className="fa-solid fa-paw filled"
@@ -124,7 +124,7 @@ function SitterPage() {
         <span className="paw-wrapper">
           <i
             className="fa-solid fa-paw"
-            style={{ fontSize: "50px", margin: "5px", marginTop: '7px' }}
+            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
           ></i>
           <i
             className="fa-solid fa-paw filled"
@@ -145,7 +145,7 @@ function SitterPage() {
           <p style={{ fontSize: "24px" }}>
             <b
               style={{
-                color: "#b4b4b4",
+                color: "rgba(255, 255, 255, 0.75)",
                 textDecoration: "underline",
                 fontSize: "24px",
               }}
@@ -160,7 +160,7 @@ function SitterPage() {
       <div className="sitter-page-reviews">
         <p
           className="paw-wrapper"
-          style={{ color: "#b4b4b4", fontSize: "17px" }}
+          style={{ color: "rgba(255, 255, 255, 0.75)", fontSize: "17px" }}
         >
           No Reviews
         </p>
@@ -191,20 +191,29 @@ function SitterPage() {
           </div>
         </div>
         <div id="sitter-page-reviews">
-          <div id="sitter-page-avg-reviews" style={{textAlign: 'center'}}>{avgReviews(sitter.reviews)}</div>
+          <div id="sitter-page-avg-reviews" style={{ textAlign: "center" }}>
+            {avgReviews(sitter.reviews)}
+          </div>
           {sitter.reviews.map((review) => {
             // Log outside JSX
             return (
               <div className="review-card" key={review.id}>
                 <h1 className="review-pet-name">
-                  {review.pet.name} - <i style={{fontSize: '16px', fontStyle: 'italic', color: '#b4b4b4'}}>
-                  {getAge(review.pet.birthday)}
-                </i>
+                  {review.pet.name} -{" "}
+                  <i
+                    style={{
+                      fontSize: "16px",
+                      fontStyle: "italic",
+                      color: "rgba(255, 255, 255, 0.75)",
+                    }}
+                  >
+                    {getAge(review.pet.birthday)}
+                  </i>
                 </h1>
 
-                <p className="review-pet-rating">{review.rating} <i
-            className="fa-solid fa-paw filled"
-          ></i></p>
+                <p className="review-pet-rating">
+                  {review.rating} <i className="fa-solid fa-paw filled"></i>
+                </p>
                 <p className="review-pet-review">{review.review}</p>
               </div>
             );

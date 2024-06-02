@@ -103,6 +103,10 @@ def update_user(user_id):
         user_to_edit.profile_pic=image_url
         user_to_edit.email=form.data['email']
         user_to_edit.phone=form.data['phone']
+        user_to_edit.first_name=form.data['first_name']
+        user_to_edit.last_name=form.data['last_name']
+        user_to_edit.overnight=form.data['overnight']
+        user_to_edit.at_home=form.data['at_home']
 
         db.session.commit()
 
