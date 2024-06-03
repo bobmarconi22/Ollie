@@ -172,3 +172,9 @@ form{
 input[type="checkbox"]:hover {
   cursor: pointer;
 }
+
+select{
+  color: #011a30;
+  padding: 1px 10px;
+  margin: 7px;
+}

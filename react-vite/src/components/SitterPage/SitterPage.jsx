@@ -8,12 +8,13 @@ import { useEffect, useState } from "react";
 import { getSitterByIdThunk } from "../../redux/sitter";
 import "./SitterPage.css";
 import { getPetsThunk } from "../../redux/pet";
+import ReviewModal from "../ReviewModal/ReviewModal";
 
 function SitterPage() {
   const dispatch = useDispatch();
   const { sitterId } = useParams();
   const sitter = useSelector((state) => state.sitter.selected);
-  const pets = useSelector((state) => state.pet.all.pets);
+  const user = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ function SitterPage() {
         setIsLoaded(true);
       });
     });
-  }, [dispatch, sitterId]);
+  }, [dispatch, sitterId, isLoaded]);
 
   const getAge = (date) => {
     const diffTime = Math.abs(new Date() - new Date(date));
@@ -193,9 +194,16 @@ function SitterPage() {
         <div id="sitter-page-reviews">
           <div id="sitter-page-avg-reviews" style={{ textAlign: "center" }}>
             {avgReviews(sitter.reviews)}
+            {sitter.id !== user.id && (
+              <OpenModalMenuItem
+                itemText="New Review"
+                modalComponent={
+                  <ReviewModal user={user} setIsLoaded={setIsLoaded} sitterId={sitterId} sitter={sitter} />
+                }
+              />
+            )}
           </div>
-          {sitter.reviews.map((review) => {
-            // Log outside JSX
+          {sitter.reviews.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map((review) => {
             return (
               <div className="review-card" key={review.id}>
                 <h1 className="review-pet-name">
@@ -215,6 +223,21 @@ function SitterPage() {
                   {review.rating} <i className="fa-solid fa-paw filled"></i>
                 </p>
                 <p className="review-pet-review">{review.review}</p>
+                {user.pets.filter((pet) => pet.id === review.pet_id).length !== 0 && (
+                  <>
+                    <OpenModalMenuItem
+                      itemText="Edit Review"
+                      modalComponent={
+                        <ReviewModal user={user} review={review} setIsLoaded={setIsLoaded} sitterId={sitterId} sitter={sitter} />
+                      }
+                    />
+                    <OpenDeleteModal
+                      modalComponent={
+                        <DeleteModal review={review} setIsLoaded={setIsLoaded} />
+                      }
+                    />
+                  </>
+                )}
               </div>
             );
           })}

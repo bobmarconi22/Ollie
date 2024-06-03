@@ -5,7 +5,7 @@ import { newPetThunk } from "../../redux/pet";
 import { editPetThunk } from "../../redux/pet";
 import "./PetModal.css";
 
-function PetModal({ user, pet, setIsLoaded }) {
+function PetModal({ pet, setIsLoaded }) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
@@ -36,7 +36,7 @@ function PetModal({ user, pet, setIsLoaded }) {
         setImagePreview(pet.pet_pic);
         setBirthday(formatDate(pet.birthday));
         setBreed(pet.breed);
-        if (pet.special_requests !== "") {
+        if (pet.special_requests) {
           setSpecial(pet.special_requests);
           setIsSpecial(true);
         }
@@ -48,6 +48,7 @@ function PetModal({ user, pet, setIsLoaded }) {
         );
         setBirthday("");
         setBreed("");
+        setIsSpecial(false)
         setSpecial("");
       }
       setIsEditLoaded(true);
@@ -147,7 +148,7 @@ function PetModal({ user, pet, setIsLoaded }) {
               required
             />
             <label for={"name"} className="form__label">
-              Name
+              Breed
             </label>
           </div>
           <label style={{ padding: "15px 0" }}>

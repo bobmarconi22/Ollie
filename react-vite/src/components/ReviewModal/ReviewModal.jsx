@@ -1,0 +1,122 @@
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useModal } from "../../context/Modal";
+import { newReviewThunk } from "../../redux/review";
+import { editReviewThunk } from "../../redux/review";
+
+function ReviewModal({ user, sitter, review, setIsLoaded, sitterId}) {
+  const dispatch = useDispatch();
+  const [rating, setRating] = useState();
+  const [reviewContext, setReviewContext] = useState("");
+  const [petId, setPetId] = useState(0);
+  const [isEditLoaded, setIsEditLoaded] = useState(false);
+  const [errors, setErrors] = useState({});
+  const { closeModal, isOpen } = useModal();
+
+  useEffect(() => {
+    if (!isOpen) {
+      if (review) {
+        setRating(review.rating);
+        setReviewContext(review.review);
+        setPetId(review.pet_id);
+      } else {
+        setRating(0);
+        setReviewContext("");
+      }
+      setIsEditLoaded(true);
+      setErrors({});
+    }
+  }, [review, isOpen, isEditLoaded]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      rating: rating,
+      review: reviewContext,
+      pet_id: petId,
+      sitter_id: sitterId
+    };
+
+    if (review) {
+      dispatch(editReviewThunk(formData, review.id)).then(() => {
+        closeModal();
+        setIsLoaded(false);
+      });
+    } else {
+      dispatch(newReviewThunk(formData)).then(() => {
+        closeModal();
+        setIsLoaded(false);
+      });
+    }
+  };
+
+  return (
+    isEditLoaded && (
+      <>
+        {console.log(petId)}
+        <h1 className="form-title">{review ? `Edit Review` : "New Review"}</h1>
+        {errors.server && <p>{errors.server}</p>}
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
+          {!review && <div className="select-container">
+            <label htmlFor="select-box">Who Stayed?</label>
+            <select
+              id="select-box"
+              value={petId === 0 ? '' : petId}
+              onChange={(e) => setPetId(e.target.value)}
+              required
+            >
+              <option value="" disabled>Select a Pet
+              </option>
+              {user.pets.map((pet) => (
+                <option key={pet.id} value={pet.id} disabled={sitter.reviews.filter(review => review.pet_id === pet.id).length === 1}>
+                  {pet.name}
+                </option>
+              ))}
+            </select>
+          </div>}
+          <label className="rating-label">
+            <div className="star-rating">
+              {[1, 2, 3, 4, 5].map((value) => (
+                <span key={value} onClick={() => setRating(value)}>
+                  <i
+                    className="fa-solid fa-paw filled"
+                    style={{
+                      fontSize: "50px",
+                      margin: "5px",
+                      marginTop: "7px",
+                      color:
+                        value <= rating
+                          ? "#209c85"
+                          : "rgba(255, 255, 255, 0.75)",
+                    }}
+                  ></i>
+                </span>
+              ))}
+            </div>
+            <p className="star-total">
+              {rating} <b style={{ fontSize: "12px" }}>Paws</b>{" "}
+            </p>
+          </label>
+          <div className="form">
+            <input
+              type="text"
+              value={reviewContext}
+              id={"reviewContext"}
+              className="form__input"
+              placeholder=" "
+              onChange={(e) => setReviewContext(e.target.value)}
+              required
+            />
+            <label for={"name"} className="form__label">
+              Review
+            </label>
+          </div>
+          <button type="submit">{review ? "Update" : "Create"}</button>
+        </form>
+      </>
+    )
+  );
+}
+
+export default ReviewModal;

@@ -12,6 +12,7 @@ import { thunkAuthenticate } from "../../redux/session";
 
 function ProfilePage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const user = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -204,7 +205,7 @@ function ProfilePage() {
         <h1 className="form-title" style={{marginBottom: '10px'}}>{user.sitter ? 'Bookings' : 'Pets'}</h1>
         {!user.sitter && <OpenModalMenuItem
           itemText="New Pet"
-          modalComponent={<PetModal user={user} setIsLoaded={setIsLoaded} />}
+          modalComponent={<PetModal setIsLoaded={setIsLoaded} />}
         />}
         {user.sitter ?
         <>
@@ -222,7 +223,6 @@ function ProfilePage() {
           {avgReviews(user.reviews)}
         </div>
         {user.reviews.map((review) => {
-          // Log outside JSX
           return (
             <div className="review-card" key={review.id}>
               <h1 className="review-pet-name">
@@ -251,7 +251,7 @@ function ProfilePage() {
         user.pets.map(pet => (
           <div className="pet-card" key={pet.id}>
             <h2>{pet.name} - <i style={{ fontSize: '14px', fontStyle: 'italic' }}>{pet.breed} ({getAge(pet.birthday)})</i></h2>
-            <img src={pet.pet_pic} alt="" className="pet-pfp" />
+            <img src={pet.pet_pic} alt="" className="pet-pfp-link" onClick={() => navigate(`/pet/${pet.id}`)}/>
             <p>Address: {pet.home_address || <button onClick={() => alert('feature coming soon')}>Assign an Address</button>}</p>
             {pet.special_requests && <p>Special requests: {pet.special_requests}</p>}
             <OpenModalMenuItem

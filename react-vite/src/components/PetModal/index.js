@@ -1,3 +1,3 @@
-import EditUserFormModal from './PetModal';
+import PetModal from './PetModal';
 
-export default EditUserFormModal;
+export default PetModal;

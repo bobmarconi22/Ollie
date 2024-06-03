@@ -1,4 +1,4 @@
-#profile-info {
+#pet-profile {
   text-align: center;
   border: 1px solid #209c85;
   border-radius: 4em;
@@ -28,17 +28,4 @@
   border-radius: 5em;
   border: 3px solid #209c85;
   box-shadow: 0px 0px 12px #209c85;
-}
-
-.pet-pfp-link {
-  width: 150px;
-  border: none;
-  border-radius: 5em;
-  border: 3px solid #209c85;
-  box-shadow: 0px 0px 12px #209c85;
-}
-
-.pet-pfp-link:hover {
-  cursor: pointer;
-  box-shadow: 0px 0px 24px #209c85;
 }

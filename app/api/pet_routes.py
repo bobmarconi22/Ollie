@@ -13,6 +13,12 @@ def pets():
     pets = Pet.query.all()
     return {'pets': [pet.to_dict() for pet in pets]}
 
+#GET PET BY ID
+@pet_routes.route('/<int:pet_id>')
+def pet_by_id(pet_id):
+    pet = Pet.query.get(pet_id)
+    return pet.to_dict()
+
 #CREATE PET
 @pet_routes.route('/create', methods=['POST'])
 @login_required
@@ -45,7 +51,7 @@ def create_pet():
     return form.errors, 401
 
 #UPDATE PET
-@pet_routes.route('/<int:pet_id>', methods=['POST'])
+@pet_routes.route('/<int:pet_id>/update', methods=['POST'])
 @login_required
 def update_pet(pet_id):
     pet_to_edit = Pet.query.get(pet_id)

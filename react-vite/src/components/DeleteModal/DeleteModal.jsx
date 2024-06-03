@@ -3,6 +3,7 @@ import { useModal } from "../../context/Modal";
 import { deletePetThunk } from "../../redux/pet";
 import { deleteUserThunk } from "../../redux/session";
 import "./DeleteModal.css";
+import { deleteReviewThunk } from "../../redux/review";
 import { useNavigate } from "react-router-dom";
 
 function DeleteModal({ user, pet, review, setIsLoaded }) {

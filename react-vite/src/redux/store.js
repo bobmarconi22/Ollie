@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import sitterReducer from "./sitter";
 import petReducer from "./pet";
+import reviewReducer from "./review";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   sitter: sitterReducer,
-  pet: petReducer
+  pet: petReducer,
+  review: reviewReducer
 });
 
 let enhancer;
