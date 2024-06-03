@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { newPetThunk } from "../../redux/pet";
 import { editPetThunk } from "../../redux/pet";
+import OpenDeleteModal from "../OpenDeleteModal";
+import DeleteModal from "../DeleteModal";
 import "./PetModal.css";
 
 function PetModal({ pet, setIsLoaded }) {
@@ -48,7 +50,7 @@ function PetModal({ pet, setIsLoaded }) {
         );
         setBirthday("");
         setBreed("");
-        setIsSpecial(false)
+        setIsSpecial(false);
         setSpecial("");
       }
       setIsEditLoaded(true);
@@ -176,11 +178,20 @@ function PetModal({ pet, setIsLoaded }) {
             </div>
           ) : (
             <p
-              style={{height: '19px', padding: "10px", paddingTop: "3px" }}
+              style={{ height: "19px", padding: "10px", paddingTop: "3px" }}
             ></p>
           )}
           {errors.special && <p>{errors.special}</p>}
           <button type="submit">{pet ? "Update" : "Create"}</button>
+          <div className="delete-div">
+            {pet && (
+              <OpenDeleteModal
+                modalComponent={
+                  <DeleteModal pet={pet} setIsLoaded={setIsLoaded} />
+                }
+              />
+            )}
+          </div>
           {imageLoading && <p>Loading...</p>}
         </form>
       </>

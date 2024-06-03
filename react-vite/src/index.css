@@ -81,14 +81,8 @@ button:hover {
 
 .delete {
   list-style-type: none;
-  position: absolute;
   background-color: transparent;
-  border-radius: 1em;
   padding: 1px;
-  width: 5%;
-  right: 0;
-  margin-right: 25%;
-  margin-top: -34px;
 }
 
 .delete:hover > .fa-trash-can {
@@ -177,4 +171,8 @@ select{
   color: #011a30;
   padding: 1px 10px;
   margin: 7px;
+}
+
+.delete-div{
+  margin-top: 50px;
 }

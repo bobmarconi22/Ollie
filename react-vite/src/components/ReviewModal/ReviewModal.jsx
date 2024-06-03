@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { newReviewThunk } from "../../redux/review";
 import { editReviewThunk } from "../../redux/review";
+import DeleteModal from "../DeleteModal";
+import OpenDeleteModal from "../OpenDeleteModal";
 
 function ReviewModal({ user, sitter, review, setIsLoaded, sitterId}) {
   const dispatch = useDispatch();
@@ -113,6 +115,15 @@ function ReviewModal({ user, sitter, review, setIsLoaded, sitterId}) {
             </label>
           </div>
           <button type="submit">{review ? "Update" : "Create"}</button>
+          {review && <div className="delete-div">
+            {review && (
+              <OpenDeleteModal
+                modalComponent={
+                  <DeleteModal review={review} setIsLoaded={setIsLoaded} />
+                }
+              />
+            )}
+          </div>}
         </form>
       </>
     )

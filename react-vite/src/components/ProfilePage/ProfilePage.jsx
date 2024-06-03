@@ -197,9 +197,6 @@ function ProfilePage() {
           <p>Bookings: {user.reviews.length}</p>
           </>
           }
-          <OpenDeleteModal
-              modalComponent={<DeleteModal user={user} setIsLoaded={setIsLoaded} />}
-            />
         </div>
         <div id="profile-pets"></div>
         <h1 className="form-title" style={{marginBottom: '10px'}}>{user.sitter ? 'Bookings' : 'Pets'}</h1>
@@ -257,9 +254,6 @@ function ProfilePage() {
             <OpenModalMenuItem
               itemText="Edit"
               modalComponent={<PetModal pet={pet} setIsLoaded={setIsLoaded} />}
-            />
-            <OpenDeleteModal
-              modalComponent={<DeleteModal pet={pet} setIsLoaded={setIsLoaded} />}
             />
           </div>
         ))}

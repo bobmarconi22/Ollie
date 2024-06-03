@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { editUserThunk } from "../../redux/session";
+import OpenDeleteModal from "../OpenDeleteModal";
+import DeleteModal from "../DeleteModal";
 import "./EditUserForm.css";
 
-function EditUserFormModal({ user }) {
+function EditUserFormModal({ user, setIsLoaded }) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState(user.email);
   const [image, setImage] = useState(user.profile_pic);
@@ -147,6 +149,13 @@ function EditUserFormModal({ user }) {
           </>
         )}
         <button type="submit">Update</button>
+        <div className="delete-div">
+              <OpenDeleteModal
+                modalComponent={
+                  <DeleteModal user={user} setIsLoaded={setIsLoaded} />
+                }
+              />
+          </div>
         {(imageLoading)&& <p>Loading...</p>}
       </form>
     </>

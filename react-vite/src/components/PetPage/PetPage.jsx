@@ -87,11 +87,6 @@ useEffect(() => {
                       <ReviewModal user={user} review={review} setIsLoaded={setIsLoaded} sitterId={review.sitter_id} />
                     }
                   />
-                  <OpenDeleteModal
-                    modalComponent={
-                      <DeleteModal review={review} setIsLoaded={setIsLoaded} />
-                    }
-                  />
             </div>
           ))}
         </div>

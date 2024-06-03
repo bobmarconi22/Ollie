@@ -231,11 +231,6 @@ function SitterPage() {
                         <ReviewModal user={user} review={review} setIsLoaded={setIsLoaded} sitterId={sitterId} sitter={sitter} />
                       }
                     />
-                    <OpenDeleteModal
-                      modalComponent={
-                        <DeleteModal review={review} setIsLoaded={setIsLoaded} />
-                      }
-                    />
                   </>
                 )}
               </div>
