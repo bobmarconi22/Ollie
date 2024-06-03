@@ -16,8 +16,9 @@ function EditUserFormModal({ user, setIsLoaded }) {
   const [firstName, setFirstName] = useState(user.first_name);
   const [lastName, setLastName] = useState(user.last_name);
   const [username, setUsername] = useState(user.username);
-  const [travel, setTravel] = useState(user.at_home);
+  const [isSitter, setIsSitter] = useState(user.sitter);
   const [overnight, setOvernight] = useState(user.overnight);
+  const [atHome, setAtHome] = useState(user.at_home);
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -40,7 +41,8 @@ function EditUserFormModal({ user, setIsLoaded }) {
     formData.append("first_name", firstName);
     formData.append("last_name", lastName);
     formData.append("overnight", overnight);
-    formData.append("at_home", travel);
+    formData.append("at_home", atHome);
+    formData.append("sitter", isSitter);
     // aws uploads can be a bit slow—displaying
     // some sort of loading message is a good idea
     setImageLoading(true);
@@ -127,26 +129,46 @@ function EditUserFormModal({ user, setIsLoaded }) {
           />
         <label for={'lastName'} className="form__label">Last Name</label>
         </div>
-        {user.sitter && (
-        <>
-           <h1 className="form-title" style={{marginBottom: '10px'}}>Services</h1>
-          <label>
-          Overnight
+        <label style={{ paddingTop: "10px" }}>
+          Offer Pet Sitting Services?
           <input
             type="checkbox"
-            checked={overnight}
-            onChange={() => setOvernight((prevOvernight) => !prevOvernight)}
+            checked={isSitter}
+            onChange={() => setIsSitter((prev) => !prev)}
           />
         </label>
-        <label>
-          Travel
-          <input
-            type="checkbox"
-            checked={travel}
-            onChange={() => setTravel((prevTravel) => !prevTravel)}
-          />
-        </label>
-          </>
+        {isSitter ? (
+          <label
+            style={{
+              paddingTop: "18px",
+              textAlign: 'center'
+            }}
+          >Overnight Sitter? <i style={{fontSize: '11px', fontStyle: 'italic'}}>optional</i>
+            <input
+              type="checkbox"
+              checked={overnight}
+              onChange={() => setOvernight((prev) => !prev)}
+            />
+          </label>
+        ) : (
+          <p style={{ width: "500px", padding: "10px", paddingTop: "3px" }}></p>
+        )}
+        {isSitter ? (
+          <label
+            style={{
+              paddingTop: "16px",
+              paddingBottom: '16px'
+            }}
+          >
+            Travel Sitter? <i style={{fontSize: '11px', fontStyle: 'italic'}}>optional</i>
+            <input
+              type="checkbox"
+              checked={atHome}
+              onChange={() => setAtHome((prev) => !prev)}
+            />
+          </label>
+        ) : (
+          <p style={{ width: "500px", padding: "10px", paddingTop: "3px" }}></p>
         )}
         <button type="submit">Update</button>
         <div className="delete-div">

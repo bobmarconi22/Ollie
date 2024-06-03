@@ -70,9 +70,6 @@ function PetPage() {
             itemText="Edit"
             modalComponent={<PetModal pet={pet} setIsLoaded={setIsLoaded} />}
           />
-          <OpenDeleteModal
-            modalComponent={<DeleteModal pet={pet} setIsLoaded={setIsLoaded} />}
-          />
           <h1
             className="form-title"
             style={{ marginBottom: "10px", marginTop: "30px" }}

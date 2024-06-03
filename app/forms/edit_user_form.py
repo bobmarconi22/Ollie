@@ -12,5 +12,6 @@ class EditUserForm(FlaskForm):
     phone = StringField('phone')
     first_name = StringField('first_name', validators=[DataRequired()])
     last_name = StringField('last_name', validators=[DataRequired()])
+    sitter = BooleanField('sitter')
     overnight = BooleanField('overnight')
     at_home = BooleanField('at_home')

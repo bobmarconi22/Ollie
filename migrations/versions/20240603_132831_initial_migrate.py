@@ -1,8 +1,8 @@
 """initial migrate
 
-Revision ID: 045da64b2617
+Revision ID: ecc84c5ce5a4
 Revises:
-Create Date: 2024-06-02 21:20:47.156718
+Create Date: 2024-06-03 13:28:31.590998
 
 """
 from alembic import op
@@ -11,8 +11,9 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
 # revision identifiers, used by Alembic.
-revision = '045da64b2617'
+revision = 'ecc84c5ce5a4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -61,8 +62,7 @@ def upgrade():
     sa.Column('home_address_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['home_address_id'], ['addresses.id'], ),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ondelete='CASCADE'),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('booking_requests',
     sa.Column('id', sa.Integer(), nullable=False),

@@ -8,6 +8,7 @@ function LandingPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const allSitters = useSelector((state) => state.sitter.all);
+  const user = useSelector((state) => state.session.user)
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -125,7 +126,7 @@ function LandingPage() {
       <div id="all-sitters">
         {allSitters &&
           allSitters.sitters.map((sitter) => (
-            <div
+            (!user || sitter.id !== user.id) && <div
               className="sitter-card"
               onClick={() => navigate(`/sitter/${sitter.id}`)}
               key={sitter.id}

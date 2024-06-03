@@ -224,38 +224,43 @@ function ProfilePage() {
             </>
           )}
         </div>
+        {user.sitter && (
+          <>
         <div id="profile-pets"></div>
         <h1 className="form-title" style={{ marginBottom: "10px" }}>
-          {user.sitter ? "Bookings" : "Pets"}
+          Bookings
         </h1>
-        {!user.sitter && (
-          <OpenModalMenuItem
-            itemText="New Pet"
-            modalComponent={<PetModal setIsLoaded={setIsLoaded} />}
-          />
-        )}
-        {user.sitter ? (
-          <>
-            {user.bookings.map((booking) => (
-              <div className="pet-card" key={booking.id}>
-                <h2>
-                  {booking.pet.name} -{" "}
-                  <i style={{ fontSize: "14px", fontStyle: "italic" }}>
-                    {booking.pet.breed} ({getAge(booking.pet.birthday)})
-                  </i>
-                </h2>
-                <img src={booking.pet.pet_pic} alt="" className="pfp" />
-                <p>
-                  Address:{" "}
-                  {booking.at_home
-                    ? `${user.addresses[0].address_line} ${user.addresses[0].city}, ${user.addresses[0].state} ${user.addresses[0].postal_code}`
-                    : `${user.booking.pet.home_address.address_line} ${user.booking.pet.home_address.city}, ${user.booking.pet.home_address.state} ${user.booking.pet.home_address.postal_code}`}
-                </p>
-                {booking.pet.special_requests && (
-                  <p>Special requests: {booking.special_requests}</p>
-                )}
-              </div>
-            ))}
+        {user.bookings.length ? (
+  user.bookings.map((booking) => (
+    <div className="pet-card" key={booking.id}>
+      <h2>
+        {booking.pet.name} -{" "}
+        <i style={{ fontSize: "14px", fontStyle: "italic" }}>
+          {booking.pet.breed} ({getAge(booking.pet.birthday)})
+        </i>
+      </h2>
+      <img src={booking.pet.pet_pic} alt="" className="pfp" />
+      <p>
+        Address:{" "}
+        {booking.at_home
+          ? `${user.addresses[0]?.address_line} ${user.addresses[0]?.city}, ${user.addresses[0]?.state} ${user.addresses[0]?.postal_code}`
+          : `${booking.pet.home_address?.address_line} ${booking.pet.home_address?.city}, ${booking.pet.home_address?.state} ${booking.pet.home_address?.postal_code}`}
+      </p>
+      {booking.pet.special_requests && (
+        <p>Special requests: {booking.special_requests}</p>
+      )}
+    </div>
+  ))
+) : (
+  <div className="sitter-page-reviews" style={{textAlign: 'center'}}>
+    <p
+      className="paw-wrapper"
+      style={{ color: "rgba(255, 255, 255, 0.75)", fontSize: "17px" }}
+    >
+      No Bookings
+    </p>
+  </div>
+)}
             <h1 className="form-title">Reviews</h1>
             <div id="sitter-page-reviews">
               <div id="sitter-page-avg-reviews" style={{ textAlign: "center" }}>
@@ -286,8 +291,15 @@ function ProfilePage() {
               })}
             </div>
           </>
-        ) : (
-          user.pets.map((pet) => (
+        )}
+<h1 className="form-title" style={{ marginBottom: "10px" }}>
+          Pets
+        </h1>
+<OpenModalMenuItem
+            itemText="New Pet"
+            modalComponent={<PetModal setIsLoaded={setIsLoaded} />}
+          />
+         {user.pets.map((pet) => (
             <div className="pet-card" key={pet.id}>
               <h2>
                 {pet.name} -{" "}
@@ -320,7 +332,7 @@ function ProfilePage() {
               />
             </div>
           ))
-        )}
+        }
       </>
     )
   );

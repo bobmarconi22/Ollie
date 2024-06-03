@@ -6,31 +6,28 @@ from werkzeug.security import generate_password_hash
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo_users = [
-        # NON SITTERS
-        User(
-            username='demo_user', email='demo@aa.io', first_name='Demo', last_name='User', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/4dead4e64d8e410bb7e0b8050a34f38c.png', phone='555-555-5500', sitter=False, at_home=None,overnight=None, password='password'),
         User(
             username='nate_hall', email='nate.hall@aa.io', first_name='Nate', last_name='Hall', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/4dead4e64d8e410bb7e0b8050a34f38c.png', phone='555-555-5517', sitter=False, at_home=None, overnight=None, password='password'),
+        User(
+            username='darnell_pumpernickel', email='darnell.pumpernickel@aa.io', first_name='Darnell', last_name='Pumpernickel', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/4dead4e64d8e410bb7e0b8050a34f38c.png', phone='555-555-5537', sitter=False, at_home=None, overnight=None, password='password'),
         User(
             username='olivia_harris', email='olivia.harris@aa.io', first_name='Olivia', last_name='Harris', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/4dead4e64d8e410bb7e0b8050a34f38c.png', phone='555-555-5518', sitter=False, at_home=None, overnight=None, password='password'),
         User(
             username='quinn_walker', email='quinn.walker@aa.io', first_name='Quinn', last_name='Walker', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/4dead4e64d8e410bb7e0b8050a34f38c.png', phone='555-555-5519', sitter=False, at_home=None, overnight=None, password='password'),
         User(
             username='rachel_scott', email='rachel.scott@aa.io', first_name='Rachel', last_name='Scott', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/4dead4e64d8e410bb7e0b8050a34f38c.png', phone='555-555-5520', sitter=False, at_home=None, overnight=None, password='password'),
-
-        # SITTERS
-        User(
-            username='demo_sitter', email='demo.sitter@aa.io', first_name='Demo', last_name='Sitter', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/4dead4e64d8e410bb7e0b8050a34f38c.png', phone='555-555-5501', sitter=True, at_home=True, overnight=True, password='password'),
         User(
             username='john_doe', email='john.doe@aa.io', first_name='John', last_name='Doe', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/1211e568519c4c368e3a502f09e67340.jpg', phone='555-555-5502', sitter=True, at_home=True, overnight=False, password='password'),
         User(
             username='jane_smith', email='jane.smith@aa.io', first_name='Jane', last_name='Smith', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/22c5df5a73fa4d80b8163082fc7195af.jpg', phone='555-555-5503', sitter=True, at_home=False,overnight=True, password='password'),
         User(
+            username='demo_user', email='demo@aa.io', first_name='Demo', last_name='User', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/4dead4e64d8e410bb7e0b8050a34f38c.png', phone='555-555-5501', sitter=True, at_home=True, overnight=True, password='password'),
+        User(
+            username='wilfred_crocker', email='wilfred.crocker@aa.io', first_name='Wilfred', last_name='Crocker', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/b9511b8a42bd480283d39ed526ac6a8e.jpg', phone='555-555-5531', sitter=True, at_home=True, overnight=True, password='password'),
+        User(
             username='alice_johnson', email='alice.johnson@aa.io', first_name='Alice', last_name='Johnson', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/cf1b4a0753c34960a053fe4efd9c0b9d.jpg', phone='555-555-5504', sitter=True, at_home=False, overnight=False, password='password'),
         User(
             username='bob_williams', email='bob.williams@aa.io', first_name='Bob', last_name='Williams', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/ce1a69eb9bab47d3be4e6481bbaf005e.jpg', phone='555-555-5505', sitter=True, at_home=True, overnight=True, password='password'),
-        User(
-            username='carol_brown', email='carol.brown@aa.io', first_name='Carol', last_name='Brown', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/f893c0c1a2e540daa199891e2ccda2bd.jpg', phone='555-555-5506', sitter=True, at_home=True, overnight=False, password='password'),
         User(
             username='maya_lee', email='maya.lee@aa.io', first_name='Maya', last_name='Lee', profile_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/ce8ef7e9be7247a09b89965799714822.jpg', phone='555-555-5507', sitter=True, at_home=True, overnight=True, password='password'),
         User(
