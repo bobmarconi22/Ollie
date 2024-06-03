@@ -134,7 +134,7 @@ function LandingPage() {
                 {sitter.first_name} {sitter.last_name}
               </h4>
               <p id="sitter-username">@{sitter.username}</p>
-              <img src={sitter.profile_pic} alt="" id="sitter-pfp" />
+              <img src={sitter.profile_pic} alt="" className="sitter-pfp" />
               <div id="sitter-reviews">{avgReviews(sitter.reviews)}</div>
               <p id="sitter-location">
                 x Miles away:&nbsp;&nbsp;{sitter.addresses[0]?.city},{" "}
