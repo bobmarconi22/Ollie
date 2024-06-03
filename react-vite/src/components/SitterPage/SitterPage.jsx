@@ -194,7 +194,7 @@ function SitterPage() {
         <div id="sitter-page-reviews">
           <div id="sitter-page-avg-reviews" style={{ textAlign: "center" }}>
             {avgReviews(sitter.reviews)}
-            {sitter.id !== user.id && (
+            {user && sitter.id !== user.id && (
               <OpenModalMenuItem
                 itemText="New Review"
                 modalComponent={
@@ -223,7 +223,7 @@ function SitterPage() {
                   {review.rating} <i className="fa-solid fa-paw filled"></i>
                 </p>
                 <p className="review-pet-review">{review.review}</p>
-                {user.pets.filter((pet) => pet.id === review.pet_id).length !== 0 && (
+                {user && user.pets.filter((pet) => pet.id === review.pet_id).length !== 0 && (
                   <>
                     <OpenModalMenuItem
                       itemText="Edit Review"
