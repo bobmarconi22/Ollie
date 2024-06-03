@@ -197,7 +197,7 @@ def seed_pets():
             special_requests='Requires special shampoo'
         ),
         Pet(
-            owner_id=20,
+            owner_id=18,
             name='Hazel',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/7d4c441d895e45c7856f569a466eb240.png',
             birthday=datetime(2020, 10, 10),
@@ -205,7 +205,7 @@ def seed_pets():
             special_requests='Prefers soft toys'
         ),
         Pet(
-            owner_id=21,
+            owner_id=19,
             name='Leo',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/7d4c441d895e45c7856f569a466eb240.png',
             birthday=datetime(2019, 3, 15),
@@ -213,7 +213,7 @@ def seed_pets():
             special_requests=None
         ),
         Pet(
-            owner_id=22,
+            owner_id=19,
             name='Ruby',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/7d4c441d895e45c7856f569a466eb240.png',
             birthday=datetime(2021, 8, 8),
@@ -221,7 +221,7 @@ def seed_pets():
             special_requests='Enjoys fetch'
         ),
         Pet(
-            owner_id=23,
+            owner_id=20,
             name='Minnie',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/7d4c441d895e45c7856f569a466eb240.png',
             birthday=datetime(2020, 12, 12),
@@ -229,7 +229,7 @@ def seed_pets():
             special_requests='Sensitive to cold'
         ),
         Pet(
-            owner_id=24,
+            owner_id=20,
             name='Duke',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/7d4c441d895e45c7856f569a466eb240.png',
             birthday=datetime(2018, 4, 18),
@@ -237,7 +237,7 @@ def seed_pets():
             special_requests='Needs large space'
         ),
         Pet(
-            owner_id=25,
+            owner_id=21,
             name='Scout',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/7d4c441d895e45c7856f569a466eb240.png',
             birthday=datetime(2021, 1, 1),
@@ -245,7 +245,7 @@ def seed_pets():
             special_requests='Requires mental stimulation'
         ),
         Pet(
-            owner_id=26,
+            owner_id=21,
             name='Archie',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/7d4c441d895e45c7856f569a466eb240.png',
             birthday=datetime(2021, 7, 7),
