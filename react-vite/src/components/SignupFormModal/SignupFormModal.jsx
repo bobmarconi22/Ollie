@@ -35,35 +35,52 @@ function SignupFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const err = {};
+
+    if (password.length > 8) {
+      err.password = "Password must be 8 characters";
+    }
+    if (username.includes(" ")) {
+      err.username = "Username cannot contain spaces";
+    }
+    if (firstName.includes(" ")) {
+      err.firstName = "First Name cannot contain spaces";
+    }
+    if (lastName.includes(" ")) {
+      err.lastName = "Last Name cannot contain spaces";
+    }
+    setErrors(err);
+
     if (password !== confirmPassword) {
       return setErrors({
         confirmPassword:
           "Confirm Password field must be the same as the Password field",
       });
     }
-    const formData = new FormData();
-    formData.append("profile_pic", image);
-    formData.append("email", email);
-    formData.append("username", username);
-    formData.append("password", password);
-    formData.append("phone", phone);
-    formData.append("first_name", firstName);
-    formData.append("last_name", lastName);
-    formData.append("sitter", isSitter);
-    formData.append("at_home", atHome);
-    formData.append("overnight", overnight);
-    // aws uploads can be a bit slow—displaying
-    // some sort of loading message is a good idea
-    setImageLoading(true);
-    const serverResponse = await dispatch(thunkSignup(formData));
+    if (Object.keys(errors).length !== 0) {
+      const formData = new FormData();
+      formData.append("profile_pic", image);
+      formData.append("email", email);
+      formData.append("username", username);
+      formData.append("password", password);
+      formData.append("phone", phone);
+      formData.append("first_name", firstName);
+      formData.append("last_name", lastName);
+      formData.append("sitter", isSitter);
+      formData.append("at_home", atHome);
+      formData.append("overnight", overnight);
+      // aws uploads can be a bit slow—displaying
+      // some sort of loading message is a good idea
+      setImageLoading(true);
+      const serverResponse = await dispatch(thunkSignup(formData));
 
-    if (serverResponse) {
-      setErrors(serverResponse);
-    } else {
-      closeModal();
+      if (serverResponse) {
+        setErrors(serverResponse);
+      } else {
+        closeModal();
+      }
     }
   };
-
 
   return (
     <>
@@ -83,85 +100,99 @@ function SignupFormModal() {
           <input
             type="email"
             value={email}
-            id={'email'}
+            id={"email"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        <label for={'email'} className="form__label">Email</label>
+          <label for={"email"} className="form__label">
+            Email
+          </label>
         </div>
-                <div className="form">
+        <div className="form">
           <input
             type="text"
             value={username}
-            id={'username'}
+            id={"username"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        <label for={'username'} className="form__label">Username</label>
+          <label for={"username"} className="form__label">
+            Username
+          </label>
         </div>
         <div className="form">
           <input
             type="text"
             value={phone}
-            id={'phone'}
+            id={"phone"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setPhone(e.target.value)}
-            required
           />
-        <label for={'phone'} className="form__label">Phone <i style={{fontSize: '11px', fontStyle: 'italic'}}>optional</i></label>
+          <label for={"phone"} className="form__label">
+            Phone{" "}
+            <i style={{ fontSize: "11px", fontStyle: "italic" }}>optional</i>
+          </label>
         </div>
         <div className="form">
           <input
             type="text"
             value={firstName}
-            id={'firstName'}
+            id={"firstName"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
-        <label for={'firstName'} className="form__label">First Name</label>
+          <label for={"firstName"} className="form__label">
+            First Name
+          </label>
         </div>
         <div className="form">
           <input
             type="text"
             value={lastName}
-            id={'lastName'}
+            id={"lastName"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setLastName(e.target.value)}
             required
           />
-        <label for={'lastName'} className="form__label">Last Name</label>
+          <label for={"lastName"} className="form__label">
+            Last Name
+          </label>
         </div>
         <div className="form">
           <input
             type="password"
             value={password}
-            id={'password'}
+            id={"password"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        <label for={'password'} className="form__label">Password</label>
+          <label for={"password"} className="form__label">
+            Password
+          </label>
         </div>
         <div className="form">
           <input
             type="password"
             value={confirmPassword}
-            id={'confirmPassword'}
+            id={"confirmPassword"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        <label for={'confirmPassword'} className="form__label">Confirm Password</label>
+          <label for={"confirmPassword"} className="form__label">
+            Confirm Password
+          </label>
         </div>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <label style={{ paddingTop: "10px" }}>
@@ -176,9 +207,11 @@ function SignupFormModal() {
           <label
             style={{
               paddingTop: "18px",
-              textAlign: 'center'
+              textAlign: "center",
             }}
-          >Overnight Sitter? <i style={{fontSize: '11px', fontStyle: 'italic'}}>optional</i>
+          >
+            Overnight Sitter?{" "}
+            <i style={{ fontSize: "11px", fontStyle: "italic" }}>optional</i>
             <input
               type="checkbox"
               checked={overnight}
@@ -192,10 +225,11 @@ function SignupFormModal() {
           <label
             style={{
               paddingTop: "16px",
-              paddingBottom: '16px'
+              paddingBottom: "16px",
             }}
           >
-            Travel Sitter? <i style={{fontSize: '11px', fontStyle: 'italic'}}>optional</i>
+            Travel Sitter?{" "}
+            <i style={{ fontSize: "11px", fontStyle: "italic" }}>optional</i>
             <input
               type="checkbox"
               checked={atHome}

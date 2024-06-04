@@ -33,36 +33,47 @@ function EditUserFormModal({ user, setIsLoaded }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("profile_pic", image);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("username", username);
-    formData.append("first_name", firstName);
-    formData.append("last_name", lastName);
-    formData.append("overnight", overnight);
-    formData.append("at_home", atHome);
-    formData.append("sitter", isSitter);
-    // aws uploads can be a bit slow—displaying
-    // some sort of loading message is a good idea
-    setImageLoading(true);
-    await dispatch(editUserThunk(formData, user.id)).then(() => {
-      closeModal()
-      setImageLoading(false)
-      setIsLoaded(false)
-    });
-  }
+    const err = {};
+    setErrors({})
+    if (username.includes(" ")) {
+      err.username = "Username cannot contain spaces";
+    }
+    if (firstName.includes(" ")) {
+      err.firstName = "First Name cannot contain spaces";
+    }
+    if (lastName.includes(" ")) {
+      err.lastName = "Last Name cannot contain spaces";
+    }
+    setErrors(err)
+    if (Object.keys(err).length === 0) {
+      const formData = new FormData();
+      formData.append("profile_pic", image);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("username", username);
+      formData.append("first_name", firstName);
+      formData.append("last_name", lastName);
+      formData.append("overnight", overnight);
+      formData.append("at_home", atHome);
+      formData.append("sitter", isSitter);
+      // aws uploads can be a bit slow—displaying
+      // some sort of loading message is a good idea
+      setImageLoading(true);
+      await dispatch(editUserThunk(formData, user.id)).then(() => {
+        closeModal();
+        setImageLoading(false);
+        setIsLoaded(false);
+      });
+    }
+  };
 
   return (
     <>
       <h1 className="form-title">Edit Info</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form
-        onSubmit={handleSubmit}
-        encType="multipart/form-data"
-      >
-      <label>
-          <img src={imagePreview} alt="" className='form-pic'/>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <label>
+          <img src={imagePreview} alt="" className="form-pic" />
           <input
             type="file"
             accept="image/*"
@@ -74,61 +85,75 @@ function EditUserFormModal({ user, setIsLoaded }) {
           <input
             type="text"
             value={username}
-            id={'username'}
+            id={"username"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        <label for={'username'} className="form__label">Username</label>
+          <label for={"username"} className="form__label">
+            Username
+          </label>
         </div>
+        {errors.username && <p style={{ color: 'red', marginTop: '-10px', marginBottom: '22px', fontStyle: 'italic'}}>{errors.username}</p>}
         <div className="form">
           <input
             type="email"
             value={email}
-            id={'email'}
+            id={"email"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        <label for={'email'} className="form__label">Email</label>
+          <label for={"email"} className="form__label">
+            Email
+          </label>
         </div>
         <div className="form">
           <input
             type="phone"
             value={phone}
-            id={'phone'}
+            id={"phone"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setPhone(e.target.value)}
           />
-        <label for={'phone'} className="form__label">Phone <i style={{fontSize: '11px', fontStyle: 'italic'}}>optional</i></label>
+          <label for={"phone"} className="form__label">
+            Phone{" "}
+            <i style={{ fontSize: "11px", fontStyle: "italic" }}>optional</i>
+          </label>
         </div>
         <div className="form">
           <input
             type="text"
             value={firstName}
-            id={'firstName'}
+            id={"firstName"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
-        <label for={'firstName'} className="form__label">First Name</label>
+          <label for={"firstName"} className="form__label">
+            First Name
+          </label>
         </div>
+        {errors.firstName && <p style={{ color: 'red', marginTop: '-10px', marginBottom: '22px', fontStyle: 'italic'}}>{errors.firstName}</p>}
         <div className="form">
           <input
             type="text"
             value={lastName}
-            id={'lastName'}
+            id={"lastName"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setLastName(e.target.value)}
             required
           />
-        <label for={'lastName'} className="form__label">Last Name</label>
+          <label for={"lastName"} className="form__label">
+            Last Name
+          </label>
         </div>
+        {errors.lastName && <p style={{ color: 'red', marginTop: '-10px', marginBottom: '22px', fontStyle: 'italic'}}>{errors.lastName}</p>}
         <label style={{ paddingTop: "10px" }}>
           Offer Pet Sitting Services?
           <input
@@ -141,9 +166,11 @@ function EditUserFormModal({ user, setIsLoaded }) {
           <label
             style={{
               paddingTop: "18px",
-              textAlign: 'center'
+              textAlign: "center",
             }}
-          >Overnight Sitter? <i style={{fontSize: '11px', fontStyle: 'italic'}}>optional</i>
+          >
+            Overnight Sitter?{" "}
+            <i style={{ fontSize: "11px", fontStyle: "italic" }}>optional</i>
             <input
               type="checkbox"
               checked={overnight}
@@ -157,10 +184,11 @@ function EditUserFormModal({ user, setIsLoaded }) {
           <label
             style={{
               paddingTop: "16px",
-              paddingBottom: '16px'
+              paddingBottom: "16px",
             }}
           >
-            Travel Sitter? <i style={{fontSize: '11px', fontStyle: 'italic'}}>optional</i>
+            Travel Sitter?{" "}
+            <i style={{ fontSize: "11px", fontStyle: "italic" }}>optional</i>
             <input
               type="checkbox"
               checked={atHome}
@@ -172,13 +200,13 @@ function EditUserFormModal({ user, setIsLoaded }) {
         )}
         <button type="submit">Update</button>
         <div className="delete-div">
-              <OpenDeleteModal
-                modalComponent={
-                  <DeleteModal user={user} setIsLoaded={setIsLoaded} />
-                }
-              />
-          </div>
-        {(imageLoading)&& <p>Loading...</p>}
+          <OpenDeleteModal
+            modalComponent={
+              <DeleteModal user={user} setIsLoaded={setIsLoaded} />
+            }
+          />
+        </div>
+        {imageLoading && <p>Loading...</p>}
       </form>
     </>
   );
