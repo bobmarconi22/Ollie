@@ -144,7 +144,7 @@ function EditUserFormModal({ user, setIsLoaded }) {
             className="form__input"
             placeholder=" "
             onChange={(e) => setFirstName(e.target.value)}
-            maxLength={10}
+            maxLength={18}
             required
           />
           <label htmlFor={"firstName"} className="form__label">
