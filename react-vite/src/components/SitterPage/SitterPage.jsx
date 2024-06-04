@@ -222,7 +222,8 @@ function SitterPage() {
                 <p className="review-pet-rating">
                   {review.rating} <i className="fa-solid fa-paw filled"></i>
                 </p>
-                <p className="review-pet-review">{review.review}</p>
+                <p className="review-pet-review" style={{maxWidth: '50%', maxHeight: '300px'
+                }}>{review.review}</p>
                 {user && user.pets.filter((pet) => pet.id === review.pet_id).length !== 0 && (
                   <>
                     <OpenModalMenuItem

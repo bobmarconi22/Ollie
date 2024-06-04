@@ -34,7 +34,7 @@ function EditUserFormModal({ user, setIsLoaded }) {
     e.preventDefault();
 
     const err = {};
-    setErrors({})
+    setErrors({});
     if (username.includes(" ")) {
       err.username = "Username cannot contain spaces";
     }
@@ -44,7 +44,7 @@ function EditUserFormModal({ user, setIsLoaded }) {
     if (lastName.includes(" ")) {
       err.lastName = "Last Name cannot contain spaces";
     }
-    setErrors(err)
+    setErrors(err);
     if (Object.keys(err).length === 0) {
       const formData = new FormData();
       formData.append("profile_pic", image);
@@ -89,13 +89,25 @@ function EditUserFormModal({ user, setIsLoaded }) {
             className="form__input"
             placeholder=" "
             onChange={(e) => setUsername(e.target.value)}
+            maxLength={20}
             required
           />
-          <label for={"username"} className="form__label">
+          <label htmlFor={"username"} className="form__label">
             Username
           </label>
         </div>
-        {errors.username && <p style={{ color: 'red', marginTop: '-10px', marginBottom: '22px', fontStyle: 'italic'}}>{errors.username}</p>}
+        {errors.username && (
+          <p
+            style={{
+              color: "red",
+              marginTop: "-10px",
+              marginBottom: "22px",
+              fontStyle: "italic",
+            }}
+          >
+            {errors.username}
+          </p>
+        )}
         <div className="form">
           <input
             type="email"
@@ -106,7 +118,7 @@ function EditUserFormModal({ user, setIsLoaded }) {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <label for={"email"} className="form__label">
+          <label htmlFor={"email"} className="form__label">
             Email
           </label>
         </div>
@@ -119,7 +131,7 @@ function EditUserFormModal({ user, setIsLoaded }) {
             placeholder=" "
             onChange={(e) => setPhone(e.target.value)}
           />
-          <label for={"phone"} className="form__label">
+          <label htmlFor={"phone"} className="form__label">
             Phone{" "}
             <i style={{ fontSize: "11px", fontStyle: "italic" }}>optional</i>
           </label>
@@ -132,13 +144,25 @@ function EditUserFormModal({ user, setIsLoaded }) {
             className="form__input"
             placeholder=" "
             onChange={(e) => setFirstName(e.target.value)}
+            maxLength={10}
             required
           />
-          <label for={"firstName"} className="form__label">
+          <label htmlFor={"firstName"} className="form__label">
             First Name
           </label>
         </div>
-        {errors.firstName && <p style={{ color: 'red', marginTop: '-10px', marginBottom: '22px', fontStyle: 'italic'}}>{errors.firstName}</p>}
+        {errors.firstName && (
+          <p
+            style={{
+              color: "red",
+              marginTop: "-10px",
+              marginBottom: "22px",
+              fontStyle: "italic",
+            }}
+          >
+            {errors.firstName}
+          </p>
+        )}
         <div className="form">
           <input
             type="text"
@@ -147,13 +171,25 @@ function EditUserFormModal({ user, setIsLoaded }) {
             className="form__input"
             placeholder=" "
             onChange={(e) => setLastName(e.target.value)}
+            maxLength={20}
             required
           />
-          <label for={"lastName"} className="form__label">
+          <label htmlFor={"lastName"} className="form__label">
             Last Name
           </label>
         </div>
-        {errors.lastName && <p style={{ color: 'red', marginTop: '-10px', marginBottom: '22px', fontStyle: 'italic'}}>{errors.lastName}</p>}
+        {errors.lastName && (
+          <p
+            style={{
+              color: "red",
+              marginTop: "-10px",
+              marginBottom: "22px",
+              fontStyle: "italic",
+            }}
+          >
+            {errors.lastName}
+          </p>
+        )}
         <label style={{ paddingTop: "10px" }}>
           Offer Pet Sitting Services?
           <input

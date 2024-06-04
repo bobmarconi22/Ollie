@@ -48,7 +48,7 @@ def create_pet():
         db.session.commit()
         return new_pet.to_dict()
     print(form.errors)
-    return form.errors, 401
+    return form.errors, 400
 
 #UPDATE PET
 @pet_routes.route('/<int:pet_id>/update', methods=['POST'])
@@ -81,7 +81,7 @@ def update_pet(pet_id):
 
             return pet_to_edit.to_dict()
 
-        return form.errors, 401
+        return form.errors, 400
     return {'error': 'Unauthorized'}, 401
 
 #DELETE PET

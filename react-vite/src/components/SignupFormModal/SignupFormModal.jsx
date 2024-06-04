@@ -57,7 +57,7 @@ function SignupFormModal() {
           "Confirm Password field must be the same as the Password field",
       });
     }
-    if (Object.keys(errors).length !== 0) {
+    if (Object.keys(errors).length === 0) {
       const formData = new FormData();
       formData.append("profile_pic", image);
       formData.append("email", email);
@@ -106,7 +106,7 @@ function SignupFormModal() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <label for={"email"} className="form__label">
+          <label htmlFor={"email"} className="form__label">
             Email
           </label>
         </div>
@@ -118,9 +118,10 @@ function SignupFormModal() {
             className="form__input"
             placeholder=" "
             onChange={(e) => setUsername(e.target.value)}
+            maxLength={20}
             required
           />
-          <label for={"username"} className="form__label">
+          <label htmlFor={"username"} className="form__label">
             Username
           </label>
         </div>
@@ -133,7 +134,7 @@ function SignupFormModal() {
             placeholder=" "
             onChange={(e) => setPhone(e.target.value)}
           />
-          <label for={"phone"} className="form__label">
+          <label htmlFor={"phone"} className="form__label">
             Phone{" "}
             <i style={{ fontSize: "11px", fontStyle: "italic" }}>optional</i>
           </label>
@@ -146,9 +147,10 @@ function SignupFormModal() {
             className="form__input"
             placeholder=" "
             onChange={(e) => setFirstName(e.target.value)}
+            maxLength={10}
             required
           />
-          <label for={"firstName"} className="form__label">
+          <label htmlFor={"firstName"} className="form__label">
             First Name
           </label>
         </div>
@@ -160,9 +162,10 @@ function SignupFormModal() {
             className="form__input"
             placeholder=" "
             onChange={(e) => setLastName(e.target.value)}
+            maxLength={20}
             required
           />
-          <label for={"lastName"} className="form__label">
+          <label htmlFor={"lastName"} className="form__label">
             Last Name
           </label>
         </div>
@@ -176,7 +179,7 @@ function SignupFormModal() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <label for={"password"} className="form__label">
+          <label htmlFor={"password"} className="form__label">
             Password
           </label>
         </div>
@@ -190,11 +193,22 @@ function SignupFormModal() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          <label for={"confirmPassword"} className="form__label">
+          <label htmlFor={"confirmPassword"} className="form__label">
             Confirm Password
           </label>
         </div>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {errors.confirmPassword && (
+          <p
+            style={{
+              color: "red",
+              marginTop: "-10px",
+              marginBottom: "22px",
+              fontStyle: "italic",
+            }}
+          >
+            {errors.confirmPassword}
+          </p>
+        )}
         <label style={{ paddingTop: "10px" }}>
           Create a Sitter Account?
           <input

@@ -54,26 +54,30 @@ function LoginFormModal() {
           <input
             type="text"
             value={email}
-            id={'email'}
+            id={"email"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        <label for={'email'} className="form__label">Email</label>
+          <label htmlFor={"email"} className="form__label">
+            Email
+          </label>
         </div>
         {errors.email && <p>{errors.email}</p>}
         <div className="form">
           <input
             type="password"
             value={password}
-            id={'password'}
+            id={"password"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        <label for={'password'} className="form__label">Password</label>
+          <label htmlFor={"password"} className="form__label">
+            Password
+          </label>
         </div>
         {errors.password && <p>{errors.password}</p>}
         <button type="submit">Log In</button>
