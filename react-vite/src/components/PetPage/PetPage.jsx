@@ -92,7 +92,8 @@ function PetPage() {
                 <p className="review-pet-rating">
                   {review.rating} <i className="fa-solid fa-paw filled"></i>
                 </p>
-                <p className="review-pet-review">{review.review}</p>
+                <p className="review-pet-review" style={{wordWrap: 'break-word'
+                }}>{review.review}</p>
                 <OpenModalMenuItem
                   itemText="Edit Review"
                   modalComponent={
