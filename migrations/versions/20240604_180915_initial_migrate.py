@@ -1,8 +1,8 @@
 """initial migrate
 
-Revision ID: ecc84c5ce5a4
+Revision ID: 0870ba70eab1
 Revises:
-Create Date: 2024-06-03 13:28:31.590998
+Create Date: 2024-06-04 18:09:15.339918
 
 """
 from alembic import op
@@ -12,8 +12,9 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 
+
 # revision identifiers, used by Alembic.
-revision = 'ecc84c5ce5a4'
+revision = '0870ba70eab1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,7 +27,7 @@ def upgrade():
     sa.Column('first_name', sa.String(length=10), nullable=False),
     sa.Column('last_name', sa.String(length=20), nullable=False),
     sa.Column('username', sa.String(length=40), nullable=False),
-    sa.Column('profile_pic', sa.String(length=100), nullable=False),
+    sa.Column('profile_pic', sa.String(length=300), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('phone', sa.String(length=15), nullable=True),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
@@ -55,9 +56,9 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=20), nullable=False),
-    sa.Column('pet_pic', sa.String(length=100), nullable=False),
+    sa.Column('pet_pic', sa.String(length=400), nullable=False),
     sa.Column('birthday', sa.DateTime(), nullable=False),
-    sa.Column('breed', sa.String(length=255), nullable=False),
+    sa.Column('breed', sa.String(length=30), nullable=False),
     sa.Column('special_requests', sa.String(length=255), nullable=True),
     sa.Column('home_address_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['home_address_id'], ['addresses.id'], ),
@@ -81,7 +82,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('pet_id', sa.Integer(), nullable=False),
     sa.Column('sitter_id', sa.Integer(), nullable=False),
-    sa.Column('review', sa.String(length=250), nullable=False),
+    sa.Column('review', sa.String(length=255), nullable=False),
     sa.Column('rating', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
@@ -104,7 +105,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
 
-
+    
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
