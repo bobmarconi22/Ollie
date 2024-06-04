@@ -7,7 +7,7 @@ import OpenDeleteModal from "../OpenDeleteModal";
 import DeleteModal from "../DeleteModal";
 import "./PetModal.css";
 
-function PetModal({ pet, setIsLoaded }) {
+function PetModal({ user, pet, setIsLoaded }) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
@@ -16,6 +16,7 @@ function PetModal({ pet, setIsLoaded }) {
   const [imageLoading, setImageLoading] = useState(false);
   const [breed, setBreed] = useState("");
   const [special, setSpecial] = useState("");
+  const [addressId, setAddressId] = useState(0);
   const [isSpecial, setIsSpecial] = useState(false);
   const [isEditLoaded, setIsEditLoaded] = useState(false);
   const [errors, setErrors] = useState({});
@@ -153,6 +154,20 @@ function PetModal({ pet, setIsLoaded }) {
               Breed
             </label>
           </div>
+          <select
+              id="select-box"
+              value={addressId === 0 ? '' : addressId}
+              onChange={(e) => setPetId(e.target.value)}
+              required
+            >
+              <option value="" disabled>Assign an Address
+              </option>
+              {user.addresses.map((address) => (
+                <option key={address.id} value={address.id}>
+                  {address.name}
+                </option>
+              ))}
+            </select>
           <label style={{ padding: "15px 0" }}>
             Pet in need of Special Care?
             <input

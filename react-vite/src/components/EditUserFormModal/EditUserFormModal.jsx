@@ -134,8 +134,10 @@ function EditUserFormModal({ user, setIsLoaded }) {
           <input
             type="checkbox"
             checked={isSitter}
+            disabled={isSitter && user.bookings.length !== 0}
             onChange={() => setIsSitter((prev) => !prev)}
           />
+<p style={{fontSize: '12px', fontStyle: 'italic'}}>Note: you can not disable your sitting services with upcoming bookings.</p>
         </label>
         {isSitter ? (
           <label
@@ -166,7 +168,9 @@ function EditUserFormModal({ user, setIsLoaded }) {
               checked={atHome}
               onChange={() => setAtHome((prev) => !prev)}
             />
+            <p style={{fontSize: '12px', fontStyle: 'italic'}}>Note: any changes made to offered services will take effect to any future requests, not to existing requests or bookings</p>
           </label>
+
         ) : (
           <p style={{ width: "500px", padding: "10px", paddingTop: "3px" }}></p>
         )}
