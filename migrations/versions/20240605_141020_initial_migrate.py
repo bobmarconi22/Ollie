@@ -1,8 +1,8 @@
 """initial migrate
 
-Revision ID: ac85283f485c
+Revision ID: 2d5d2029cbec
 Revises:
-Create Date: 2024-06-04 18:33:15.149308
+Create Date: 2024-06-05 14:10:20.852630
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'ac85283f485c'
+revision = '2d5d2029cbec'
 down_revision = None
 branch_labels = None
 depends_on = None
