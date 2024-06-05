@@ -186,7 +186,6 @@ function SitterPage() {
             <p id="sitter-page-location">
               {sitter.addresses[0]?.city} {sitter.addresses[0]?.state}
             </p>
-            <p id="sitter-page-distance">X miles away</p>
             {sitter.overnight && <p>Overnight Available</p>}
             {sitter.at_home && <p>Comes to you!</p>}
           </div>

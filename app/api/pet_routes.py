@@ -67,11 +67,11 @@ def update_pet(pet_id):
                 upload = upload_file_to_s3(image)
                 pet_picture = upload['url']
             else:
-                pet_picture = pet_to_edit.pet_pic  # Use the existing picture if no new image is provided
+                pet_picture = pet_to_edit.pet_pic
 
             birthday = datetime.strptime(form.data['birthday'], '%Y-%m-%d')
 
-            pet_to_edit.name = form.name.data  # Fix the incorrect field
+            pet_to_edit.name = form.name.data 
             pet_to_edit.pet_pic = pet_picture
             pet_to_edit.birthday = birthday
             pet_to_edit.breed = form.breed.data

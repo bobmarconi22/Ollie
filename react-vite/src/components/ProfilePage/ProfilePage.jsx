@@ -307,14 +307,6 @@ function ProfilePage() {
                 className="pfp-link"
                 onClick={() => navigate(`/pet/${pet.id}`)}
               />
-              <p>
-                Address:{" "}
-                {pet.home_address || (
-                  <button onClick={() => alert("feature coming soon")}>
-                    Assign an Address
-                  </button>
-                )}
-              </p>
               {pet.special_requests && (
                 <p>Special requests: {pet.special_requests}</p>
               )}

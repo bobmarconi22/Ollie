@@ -21,6 +21,8 @@ function SignupFormModal() {
   const [isSitter, setIsSitter] = useState(false);
   const [overnight, setOvernight] = useState(false);
   const [atHome, setAtHome] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfPassword, setShowConfPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -37,7 +39,7 @@ function SignupFormModal() {
 
     const err = {};
 
-    if (password.length > 8) {
+    if (password.length < 8) {
       err.password = "Password must be 8 characters";
     }
     if (username.includes(" ")) {
@@ -83,7 +85,7 @@ function SignupFormModal() {
   };
 
   return (
-    <>
+    <>{console.log(errors)}
       <h1 className="form-title">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -91,7 +93,7 @@ function SignupFormModal() {
         <label>
           <input
             type="file"
-            accept="image/*"
+            accept="image/jpeg, image/png"
             className="choose-file"
             onChange={handleImageChange}
           />
@@ -125,6 +127,12 @@ function SignupFormModal() {
             Username
           </label>
         </div>
+          {errors.username && <p style={{
+              color: "red",
+              fontStyle: "italic",
+              marginTop: '-10px',
+              marginBottom: '15px'
+            }}>{errors.username}</p>}
         <div className="form">
           <input
             type="text"
@@ -154,6 +162,12 @@ function SignupFormModal() {
             First Name
           </label>
         </div>
+        {errors.firstName && <p style={{
+              color: "red",
+              fontStyle: "italic",
+              marginTop: '-10px',
+              marginBottom: '15px'
+            }}>{errors.firstName}</p>}
         <div className="form">
           <input
             type="text"
@@ -169,23 +183,31 @@ function SignupFormModal() {
             Last Name
           </label>
         </div>
+        {errors.lastName && <p style={{
+              color: "red",
+              fontStyle: "italic",
+              marginTop: '-10px',
+              marginBottom: '15px'
+            }}>{errors.lastName}</p>}
         <div className="form">
           <input
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             value={password}
             id={"password"}
             className="form__input"
             placeholder=" "
             onChange={(e) => setPassword(e.target.value)}
+            minLength={8}
             required
           />
           <label htmlFor={"password"} className="form__label">
             Password
           </label>
+          <i className={showPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"} onClick={() => setShowPassword(prevShowPassword => !prevShowPassword)}></i>
         </div>
         <div className="form">
           <input
-            type="password"
+            type={showConfPassword ? 'text' : 'password'}
             value={confirmPassword}
             id={"confirmPassword"}
             className="form__input"
@@ -196,14 +218,14 @@ function SignupFormModal() {
           <label htmlFor={"confirmPassword"} className="form__label">
             Confirm Password
           </label>
+          <i className={showConfPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"} onClick={() => setShowConfPassword(prevShowConfPassword => !prevShowConfPassword)}></i>
         </div>
         {errors.confirmPassword && (
           <p
             style={{
               color: "red",
-              marginTop: "-10px",
-              marginBottom: "22px",
               fontStyle: "italic",
+              marginBottom: '10px'
             }}
           >
             {errors.confirmPassword}

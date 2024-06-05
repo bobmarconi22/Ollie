@@ -71,8 +71,8 @@ function PetModal({ pet, setIsLoaded }) {
 
     const err = {};
     setErrors(err);
-    if (!imagePreview.includes(".png") || !imagePreview.includes(".jpeg")) {
-      err.image = "Image file must be a .JPEG or .PNG";
+    if (!imagePreview.includes(".png") || !imagePreview.includes(".jpg")) {
+      err.image = "Image file must be a .JPG or .PNG";
     }
 
     setErrors(err);

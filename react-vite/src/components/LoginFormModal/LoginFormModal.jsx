@@ -8,6 +8,7 @@ function LoginFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -67,7 +68,7 @@ function LoginFormModal() {
         {errors.email && <p>{errors.email}</p>}
         <div className="form">
           <input
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             value={password}
             id={"password"}
             className="form__input"
@@ -78,6 +79,7 @@ function LoginFormModal() {
           <label htmlFor={"password"} className="form__label">
             Password
           </label>
+          <i className={showPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"} onClick={() => setShowPassword(prevShowPassword => !prevShowPassword)}></i>
         </div>
         {errors.password && <p>{errors.password}</p>}
         <button type="submit">Log In</button>

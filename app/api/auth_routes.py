@@ -112,8 +112,7 @@ def update_user(user_id):
         db.session.commit()
 
         return user_to_edit.to_dict()
-    print(form.errors)
-    return form.errors, 401
+    return {'errors': form.errors}, 401
 
 #DELETES A USER
 @auth_routes.route('/delete/<int:user_id>', methods=['DELETE'])

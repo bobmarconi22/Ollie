@@ -59,16 +59,19 @@ function EditUserFormModal({ user, setIsLoaded }) {
       // aws uploads can be a bit slow—displaying
       // some sort of loading message is a good idea
       setImageLoading(true);
-      await dispatch(editUserThunk(formData, user.id)).then(() => {
+      const serverResponse = await dispatch(editUserThunk(formData, user.id));
+      console.log("===========================>",serverResponse)
+      if (serverResponse.errors) {
+        setErrors(serverResponse.errors);
+      } else {
         closeModal();
-        setImageLoading(false);
-        setIsLoaded(false);
-      });
+      }
     }
   };
 
   return (
     <>
+      {console.log(errors)}
       <h1 className="form-title">Edit Info</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -101,7 +104,7 @@ function EditUserFormModal({ user, setIsLoaded }) {
             style={{
               color: "red",
               marginTop: "-10px",
-              marginBottom: "22px",
+              marginBottom: "15px",
               fontStyle: "italic",
             }}
           >
