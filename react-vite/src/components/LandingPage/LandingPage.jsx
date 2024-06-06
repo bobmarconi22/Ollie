@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { getSittersThunk } from "../../redux/sitter";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs"
 import "./LandingPage.css";
-import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs'
 
 function LandingPage() {
   const dispatch = useDispatch();
