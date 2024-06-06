@@ -9,7 +9,7 @@ def seed_pets():
             name='Louie',
             pet_pic='https://marconi22-ollie.s3.us-east-2.amazonaws.com/7d4c441d895e45c7856f569a466eb240.png',
             birthday=datetime(2014, 10, 7),
-            breed='Beagle',
+            breed='Beagle Mix',
             special_requests=None
         ),
         Pet(

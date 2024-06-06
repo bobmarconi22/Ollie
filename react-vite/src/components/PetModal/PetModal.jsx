@@ -70,34 +70,45 @@ function PetModal({ user, pet, setIsLoaded }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("pet_pic", image);
-    formData.append("name", name);
-    formData.append("breed", breed);
-    formData.append("birthday", birthday);
-    formData.append("special_requests", isSpecial ? special : "");
+    const err = {};
+    setErrors(err);
+    if (!imagePreview.includes(".png") || !imagePreview.includes(".jpg")) {
+      err.image = "Image file must be a .JPG or .PNG";
+    }
 
-    setImageLoading(true);
+    setErrors(err);
 
-    if (pet) {
-      dispatch(editPetThunk(formData, pet.id)).then(() => {
-        closeModal();
-        setImageLoading(false);
-        setIsLoaded(false);
-      });
-    } else {
-      dispatch(newPetThunk(formData)).then(() => {
-        closeModal();
-        setImageLoading(false);
-        setIsLoaded(false);
-      });
+    if (Object.keys(errors).length === 0) {
+      const formData = new FormData();
+      formData.append("pet_pic", image);
+      formData.append("name", name);
+      formData.append("breed", breed);
+      formData.append("birthday", birthday);
+      formData.append("special_requests", isSpecial ? special : "");
+
+      setImageLoading(true);
+
+      if (pet) {
+        dispatch(editPetThunk(formData, pet.id)).then(() => {
+          closeModal();
+          setImageLoading(false);
+          setIsLoaded(false);
+        });
+      } else {
+        dispatch(newPetThunk(formData)).then(() => {
+          closeModal();
+          setImageLoading(false);
+          setIsLoaded(false);
+        });
+      }
+
+
     }
   };
 
   return (
     isEditLoaded && (
       <>
-        {console.log(isSpecial)}
         <h1 className="form-title">
           {pet ? `Edit ${pet.name}'s Information` : "New Pet"}
         </h1>
@@ -107,11 +118,12 @@ function PetModal({ user, pet, setIsLoaded }) {
             <img src={imagePreview} alt="Pet" className="form-pic" />
             <input
               type="file"
-              accept="image/*"
+              accept="image/jpeg, image/png"
               className="choose-file"
               onChange={handleImageChange}
             />
           </label>
+          {errors.image && <p style={{margin: '10px'}}>words</p>}
           <div className="form">
             <input
               type="text"
@@ -120,9 +132,10 @@ function PetModal({ user, pet, setIsLoaded }) {
               className="form__input"
               placeholder=" "
               onChange={(e) => setName(e.target.value)}
+              maxLength={20}
               required
             />
-            <label for={"name"} className="form__label">
+            <label htmlFor={"name"} className="form__label">
               Name
             </label>
           </div>
@@ -136,7 +149,7 @@ function PetModal({ user, pet, setIsLoaded }) {
               onChange={(e) => setBirthday(e.target.value)}
               required
             />
-            <label for={"birthday"} className="form__label">
+            <label htmlFor={"birthday"} className="form__label">
               Birthday
             </label>
           </div>
@@ -148,9 +161,10 @@ function PetModal({ user, pet, setIsLoaded }) {
               className="form__input"
               placeholder=" "
               onChange={(e) => setBreed(e.target.value)}
+              maxLength={30}
               required
             />
-            <label for={"name"} className="form__label">
+            <label htmlFor={"name"} className="form__label">
               Breed
             </label>
           </div>
@@ -185,9 +199,10 @@ function PetModal({ user, pet, setIsLoaded }) {
                 className="form__input"
                 placeholder=" "
                 onChange={(e) => setSpecial(e.target.value)}
+                maxLength={255}
                 required
               />
-              <label for={"special"} className="form__label">
+              <label htmlFor={"special"} className="form__label">
                 Special Requests
               </label>
             </div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getSittersThunk } from "../../redux/sitter";
+import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs"
 import "./LandingPage.css";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs'
 
@@ -9,20 +10,15 @@ function LandingPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const allSitters = useSelector((state) => state.sitter.all);
-  const user = useSelector((state) => state.session.user)
+  const user = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
   const [slide, setSlide] = useState(0)
-  const [search, setSearch] = useState('')
 
   useEffect(() => {
     dispatch(getSittersThunk()).then(() => {
       setIsLoaded(true);
     });
   }, [dispatch]);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, [allSitters]);
 
   const slides = [
     {
@@ -173,7 +169,6 @@ function LandingPage() {
     });
   };
 
-
   return (
     isLoaded && (
       <>
@@ -187,7 +182,7 @@ function LandingPage() {
             {slides.map((pic, i) => {
               return <img src={pic.src} alt={pic.alt} key={i} className={slide === i ? 'slide' : "slide-hidden"}></img>
             })}
-          <BsArrowRightCircleFill className="arrow arrow-right" style={{cursor: 'pointer'}} onClick={nextSlide}/>
+          <BsArrowRightCircleFill className="arrow arrow-right" onClick={nextSlide}/>
           <span className="indicators">
             {slides.map((_pic, i) => {
               return <button key={i} onClick={() => setSlide(i)} style={{backgroundColor: slide === i ? '#209c85' : '#ffffff80'}} className="indicator"></button>

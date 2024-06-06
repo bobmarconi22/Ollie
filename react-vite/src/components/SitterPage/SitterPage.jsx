@@ -184,9 +184,8 @@ function SitterPage() {
               {sitter.first_name} {sitter.last_name}
             </h1>
             <p id="sitter-page-location">
-              {sitter.addresses[0].city}, {sitter.addresses[0].state}
+              {sitter.addresses[0]?.city} {sitter.addresses[0]?.state}
             </p>
-            <p id="sitter-page-distance">X miles away</p>
             {sitter.overnight && <p>Overnight Available</p>}
             {sitter.at_home && <p>Comes to you!</p>}
           </div>
@@ -222,7 +221,8 @@ function SitterPage() {
                 <p className="review-pet-rating">
                   {review.rating} <i className="fa-solid fa-paw filled"></i>
                 </p>
-                <p className="review-pet-review">{review.review}</p>
+                <p className="review-pet-review" style={{wordWrap: 'break-word'
+                }}>{review.review}</p>
                 {user && user.pets.filter((pet) => pet.id === review.pet_id).length !== 0 && (
                   <>
                     <OpenModalMenuItem

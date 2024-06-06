@@ -33,9 +33,7 @@ def create_review():
         db.session.add(new_review)
         db.session.commit()
         return jsonify(new_review.to_dict())
-
-    print(form.errors)
-    return jsonify(form.errors), 401
+    return jsonify(form.errors), 400
 
 #UPDATE REVIEW
 @review_routes.route('/<int:review_id>', methods=['POST'])
@@ -48,7 +46,6 @@ def update_review(review_id):
         body = request.get_json()
         form = ReviewForm(data=body)
         form['csrf_token'].data = request.cookies['csrf_token']
-        print('=======================================>',form.validate_on_submit())
         if form.validate_on_submit():
             print('=======================================>',form.data)
             review_to_edit.rating = form.rating.data
@@ -58,7 +55,7 @@ def update_review(review_id):
 
             return review_to_edit.to_dict()
 
-        return form.errors, 401
+        return form.errors, 400
     return {'error': 'Unauthorized'}, 401
 
 #DELETE REVIEW

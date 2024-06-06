@@ -3,16 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ReviewModal from "../ReviewModal";
 import PetModal from "../PetModal/PetModal";
-import DeleteModal from "../DeleteModal";
 import "./PetPage.css";
-import OpenDeleteModal from "../OpenDeleteModal";
 import { useEffect, useState } from "react";
 import { getPetByIdThunk } from "../../redux/pet";
 import { getReviewsByPetThunk } from "../../redux/review";
 
 function PetPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { petId } = useParams();
   const user = useSelector((state) => state.session.user);
   const pet = useSelector((state) => state.pet.selected);
@@ -27,10 +24,8 @@ function PetPage() {
 
     if (years >= 1) {
       return `${years} Years`;
-    } else if (months >= 1) {
-      return `${months} Months`;
     } else {
-      return `${days} days`;
+      return `${months} Months`;
     }
   };
 
@@ -100,7 +95,8 @@ function PetPage() {
                 <p className="review-pet-rating">
                   {review.rating} <i className="fa-solid fa-paw filled"></i>
                 </p>
-                <p className="review-pet-review">{review.review}</p>
+                <p className="review-pet-review" style={{wordWrap: 'break-word'
+                }}>{review.review}</p>
                 <OpenModalMenuItem
                   itemText="Edit Review"
                   modalComponent={

@@ -222,48 +222,35 @@ function ProfilePage() {
         </div>
         {user.sitter && (
           <>
-            <div id="profile-pets"></div>
-            <h1 className="form-title" style={{ marginBottom: "10px" }}>
-              Upcoming Bookings
-            </h1>
-            {user.bookings.length ? (
-              user.bookings.map((booking) => (
-                <div className="pet-card" key={booking.id}>
-                  <h2 style={{ fontSize: "25px", borderBottom: "1px solid", paddingBottom: '5px' }}>
-                    {booking.pet.name}
-                    <br />
-                    <i style={{ fontSize: "14px", fontStyle: "italic" }}>
-                      {booking.pet.breed} ({getAge(booking.pet.birthday)})
-                    </i>
-                  </h2>
-                  <img src={booking.pet.pet_pic} alt="" className="pfp" />
-                  <p>
-                    Address:{" "}
-                    {booking.at_home
-                      ? `${user.addresses[0]?.address_line} ${user.addresses[0]?.city}, ${user.addresses[0]?.state} ${user.addresses[0]?.postal_code}`
-                      : `${booking.pet.home_address?.address_line} ${booking.pet.home_address?.city}, ${booking.pet.home_address?.state} ${booking.pet.home_address?.postal_code}`}
-                  </p>
-                  {booking.pet.special_requests && (
-                    <p>Special requests: {booking.special_requests}</p>
-                  )}
-                </div>
-              ))
-            ) : (
-              <div
-                className="sitter-page-reviews"
-                style={{ textAlign: "center" }}
-              >
-                <p
-                  className="paw-wrapper"
-                  style={{
-                    color: "rgba(255, 255, 255, 0.75)",
-                    fontSize: "17px",
-                  }}
-                >
-                  You Have No Upcoming Bookings
-                </p>
-              </div>
-            )}
+        <div id="profile-pets"></div>
+        <h1 className="form-title" style={{ marginBottom: "10px" }}>
+          Upcoming Bookings
+        </h1>
+        {user.bookings.length ? (
+  user.bookings.map((booking) => (
+    <div className="pet-card" key={booking.id}>
+      <h2>
+        {booking.pet.name} -{" "}
+        <i style={{ fontSize: "14px", fontStyle: "italic" }}>
+          {booking.pet.breed} ({getAge(booking.pet.birthday)})
+        </i>
+      </h2>
+      <img src={booking.pet.pet_pic} alt="" className="pfp" />
+      {booking.pet.special_requests && (
+        booking.special_requests ? <p>Special requests: {booking.special_requests}</p> : <></>
+      )}
+    </div>
+  ))
+) : (
+  <div className="sitter-page-reviews" style={{textAlign: 'center'}}>
+    <p
+      className="paw-wrapper"
+      style={{ color: "rgba(255, 255, 255, 0.75)", fontSize: "17px" }}
+    >
+      No Bookings
+    </p>
+  </div>
+)}
             <h1 className="form-title">My Reviews</h1>
             <div id="sitter-page-reviews">
               <div id="sitter-page-avg-reviews" style={{ textAlign: "center" }}>
@@ -295,65 +282,39 @@ function ProfilePage() {
             </div>
           </>
         )}
-        <h1 className="form-title" style={{ marginBottom: "10px" }}>
+<h1 className="form-title" style={{ marginBottom: "10px" }}>
           My Pets
         </h1>
-        <OpenModalMenuItem
-          itemText="New Pet"
-          modalComponent={<PetModal setIsLoaded={setIsLoaded} />}
-        />
-        {user.pets.map((pet) => (
-          <div className="pet-card" key={pet.id}>
-            <h2 style={{ fontSize: "25px", borderBottom: "1px solid", paddingBottom: '5px' }}>
-              {pet.name}
-              <br />
-              <i style={{ fontSize: "14px", fontStyle: "italic" }}>
-                {pet.breed} ({getAge(pet.birthday)})
-              </i>
-            </h2>
-            <img
-              src={pet.pet_pic}
-              alt=""
-              className="pfp-link"
-              onClick={() => navigate(`/pet/${pet.id}`)}
-            />
-            <p>
-              Address:&nbsp;
-              {pet.home_address || "No Address Assigned"}
-            </p>
-            {pet.special_requests && (
-              <p>Special requests: {pet.special_requests}</p>
-            )}
-            <OpenModalMenuItem
-              itemText="Edit"
-              modalComponent={
-                <PetModal pet={pet} user={user} setIsLoaded={setIsLoaded} />
-              }
-            />
-          </div>
-        ))}
-        <h1 className="form-title" style={{ marginBottom: "10px" }}>
-          My Addresses
-        </h1>
-        <OpenModalMenuItem
-          itemText="New Address"
-          modalComponent={<AddressModal setIsLoaded={setIsLoaded} />}
-        />
-        {user.addresses.map((address) => (
-          <div className="pet-card" key={address.id}>
-            <h2 style={{ fontSize: "25px", borderBottom: "1px solid", paddingBottom: '5px' }}>
-              {address.nickname ? `${address.nickname}` : `${address.address_line}`}
-            </h2>
-
-            <p>{address.address_line} {address.city}, {address.state} {address.postal_code}</p>
-            <OpenModalMenuItem
-              itemText="Edit"
-              modalComponent={
-                <AddressModal address={address} user={user} setIsLoaded={setIsLoaded} />
-              }
-            />
-          </div>
-        ))}
+<OpenModalMenuItem
+            itemText="New Pet"
+            modalComponent={<PetModal setIsLoaded={setIsLoaded} />}
+          />
+         {user.pets.map((pet) => (
+            <div className="pet-card" key={pet.id}>
+              <h2>
+                {pet.name} -{" "}
+                <i style={{ fontSize: "14px", fontStyle: "italic" }}>
+                  {pet.breed} ({getAge(pet.birthday)})
+                </i>
+              </h2>
+              <img
+                src={pet.pet_pic}
+                alt=""
+                className="pfp-link"
+                onClick={() => navigate(`/pet/${pet.id}`)}
+              />
+              {pet.special_requests && (
+                <p>Special requests: {pet.special_requests}</p>
+              )}
+              <OpenModalMenuItem
+                itemText="Edit"
+                modalComponent={
+                  <PetModal pet={pet} setIsLoaded={setIsLoaded} />
+                }
+              />
+            </div>
+          ))
+        }
       </>
     )
   );
