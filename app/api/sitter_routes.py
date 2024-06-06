@@ -15,7 +15,7 @@ def sitters():
     if search_filter:
         search_filter = f'%{search_filter}%'
         sitters_query = sitters_query.filter(
-            or_(
+            db.or_(
                 User.first_name.ilike(search_filter),
                 User.last_name.ilike(search_filter),
                 User.username.ilike(search_filter)
