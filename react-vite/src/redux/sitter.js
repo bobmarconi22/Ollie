@@ -12,6 +12,16 @@ const getSitterById = (sitter) => ({
     payload: sitter
 })
 
+export const searchThunk = (search) => async (dispatch) => {
+    const res = await fetch(`/api/sitters?filter=${search}`);
+    if (!res.ok) {
+      throw new Error('Search Failed');
+    }
+    const data = await res.json();
+    dispatch(getSitters(data.sitters || []));
+    return data.sitters;
+  };
+
 export const getSittersThunk = () => async(dispatch) => {
     const res = await fetch('/api/sitter/all')
     if (res.ok) {

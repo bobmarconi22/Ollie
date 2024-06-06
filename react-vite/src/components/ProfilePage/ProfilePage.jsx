@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import EditUserFormModal from "../EditUserFormModal";
 import PetModal from "../PetModal/PetModal";
-import AddressModal from "../AddressModal";
 import "./ProfilePage.css";
 import { useEffect, useState } from "react";
 import { thunkAuthenticate } from "../../redux/session";
@@ -24,8 +23,6 @@ function ProfilePage() {
       return `${years} Years`; // Return the age in years
     } else if (months >= 1) {
       return `${months} Months`; // Return the age in months if less than 1 year
-    } else {
-      return `${days} days`;
     }
   };
 
