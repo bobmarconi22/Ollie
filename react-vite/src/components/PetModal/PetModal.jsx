@@ -108,7 +108,7 @@ function PetModal({ user, pet, setIsLoaded }) {
 
   return (
     isEditLoaded && (
-      <>
+      <>{console.log('==============================>',user)}
         <h1 className="form-title">
           {pet ? `Edit ${pet.name}'s Information` : "New Pet"}
         </h1>
@@ -174,20 +174,21 @@ function PetModal({ user, pet, setIsLoaded }) {
           </div>
           <div className="custom-select-wrapper">
           <select
-              id="select-box"
-              className="custom-select"
-              value={addressId === 0 ? '' : addressId}
-              onChange={(e) => setPetId(e.target.value)}
-              required
-            >
-              <option value="" disabled>Assign an Address
-              </option>
-              {user?.addresses.map((address) => (
-                <option key={address.id} value={address.id}>
-                  {address.name}
-                </option>
-              ))}
-            </select>
+      id="select-box"
+      className="custom-select"
+      value={addressId === 0 ? '' : addressId}
+      onChange={(e) => setAddressId(parseInt(e.target.value, 10))}
+      required
+    >
+      <option value="" disabled>
+        Assign an Address
+      </option>
+      {user?.addresses.map((address) => (
+        <option key={address.id} value={address.id}>
+          {address.nickname || address.address_line}
+        </option>
+      ))}
+    </select>
             </div>
           <label style={{ padding: "15px 0" }}>
             Pet in need of Special Care?

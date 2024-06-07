@@ -263,16 +263,20 @@ select{
 .custom-select-wrapper {
   position: relative;
   display: inline-block;
-  width: 100%;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: -15px;
+  margin-bottom: 10px;
 }
 
 .custom-select {
   display: inline-block;
   width: 100%;
-  padding: 5px;
+  margin: 0 auto;
+  padding: 10px;
   font-size: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 1em;
   background-color: transparent;
   color: rgba(255, 255, 255, 0.75);
   cursor: pointer;

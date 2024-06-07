@@ -6,7 +6,7 @@ def seed_addresses():
     demo_addresses = [
     Address(
         user_id=1,
-        nickname='home',
+        nickname='Home',
         address_line='123 Puppy Rd.',
         city='Philadelphia',
         state='Pennsylvania',
@@ -14,7 +14,7 @@ def seed_addresses():
     ),
     Address(
         user_id=2,
-        nickname='home',
+        nickname='Home',
         address_line='456 Sitter St.',
         city='New York',
         state='New York',
@@ -22,7 +22,7 @@ def seed_addresses():
     ),
     Address(
         user_id=3,
-        nickname='home',
+        nickname='Home',
         address_line='789 Doggo Ave.',
         city='San Francisco',
         state='California',
@@ -30,7 +30,7 @@ def seed_addresses():
     ),
     Address(
         user_id=4,
-        nickname='home',
+        nickname='Home',
         address_line='321 Cat Ln.',
         city='Seattle',
         state='Washington',
@@ -38,7 +38,7 @@ def seed_addresses():
     ),
     Address(
         user_id=5,
-        nickname='home',
+        nickname='Home',
         address_line='654 Pet St.',
         city='Austin',
         state='Texas',
@@ -46,7 +46,7 @@ def seed_addresses():
     ),
     Address(
         user_id=6,
-        nickname='home',
+        nickname='Home',
         address_line='987 Woof Blvd.',
         city='Denver',
         state='Colorado',
@@ -54,7 +54,7 @@ def seed_addresses():
     ),
     Address(
         user_id=7,
-        nickname='home',
+        nickname='Home',
         address_line='222 Barker Ln.',
         city='Boston',
         state='Massachusetts',
@@ -62,7 +62,7 @@ def seed_addresses():
     ),
     Address(
         user_id=8,
-        nickname='home',
+        nickname='Home',
         address_line='333 Meow Dr.',
         city='Chicago',
         state='Illinois',
@@ -70,7 +70,7 @@ def seed_addresses():
     ),
     Address(
         user_id=9,
-        nickname='home',
+        nickname='Home',
         address_line='444 Purr St.',
         city='Los Angeles',
         state='California',
@@ -78,7 +78,7 @@ def seed_addresses():
     ),
     Address(
         user_id=10,
-        nickname='home',
+        nickname='Home',
         address_line='555 Paw Ave.',
         city='Houston',
         state='Texas',
@@ -86,7 +86,7 @@ def seed_addresses():
     ),
         Address(
         user_id=11,
-        nickname='home',
+        nickname='Home',
         address_line='666 Pet Haven',
         city='Miami',
         state='Florida',
@@ -94,7 +94,7 @@ def seed_addresses():
     ),
     Address(
         user_id=12,
-        nickname='home',
+        nickname='Home',
         address_line='777 Fur Lane',
         city='Dallas',
         state='Texas',
@@ -102,7 +102,7 @@ def seed_addresses():
     ),
     Address(
         user_id=13,
-        nickname='home',
+        nickname='Home',
         address_line='888 Animal St.',
         city='Atlanta',
         state='Georgia',
@@ -110,7 +110,7 @@ def seed_addresses():
     ),
     Address(
         user_id=14,
-        nickname='home',
+        nickname='Home',
         address_line='999 Creature Rd.',
         city='Phoenix',
         state='Arizona',
@@ -118,7 +118,7 @@ def seed_addresses():
     ),
     Address(
         user_id=15,
-        nickname='home',
+        nickname='Home',
         address_line='111 Pet Park',
         city='Las Vegas',
         state='Nevada',
@@ -126,7 +126,7 @@ def seed_addresses():
     ),
     Address(
         user_id=16,
-        nickname='home',
+        nickname='Home',
         address_line='222 Critter Blvd.',
         city='Orlando',
         state='Florida',
@@ -134,7 +134,7 @@ def seed_addresses():
     ),
     Address(
         user_id=17,
-        nickname='home',
+        nickname='Home',
         address_line='333 Woofington Dr.',
         city='Portland',
         state='Oregon',
@@ -142,7 +142,7 @@ def seed_addresses():
     ),
     Address(
         user_id=18,
-        nickname='home',
+        nickname='Home',
         address_line='444 Paws Place',
         city='Salt Lake City',
         state='Utah',
@@ -150,7 +150,7 @@ def seed_addresses():
     ),
     Address(
         user_id=19,
-        nickname='home',
+        nickname='Home',
         address_line='555 Bark Blvd.',
         city='Kansas City',
         state='Missouri',
@@ -158,7 +158,7 @@ def seed_addresses():
     ),
     Address(
         user_id=20,
-        nickname='home',
+        nickname='Home',
         address_line='666 Furry Ln.',
         city='Minneapolis',
         state='Minnesota',
@@ -166,7 +166,7 @@ def seed_addresses():
     ),
     Address(
         user_id=21,
-        nickname='home',
+        nickname='Home',
         address_line='777 Pet Paws Rd.',
         city='Charlotte',
         state='North Carolina',

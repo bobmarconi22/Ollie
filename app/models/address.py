@@ -21,6 +21,7 @@ class Address(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'nickname': self.nickname,
             'address_line': self.address_line,
             'city': self.city,
             'state': self.state,

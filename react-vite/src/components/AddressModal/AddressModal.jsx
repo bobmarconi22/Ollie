@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-// import newAddressThunk
-// import editAddressThunk
+import { newAddressThunk } from "../../redux/address";
+import { editAddressThunk } from "../../redux/address";
 import DeleteModal from "../DeleteModal";
 import OpenDeleteModal from "../OpenDeleteModal";
 
@@ -20,10 +20,11 @@ function AddressModal({ address, setIsLoaded }) {
   useEffect(() => {
     if (!isOpen) {
       if (address) {
+        setNickname(address.nickname);
         setAddressLine(address.address_line);
         setCity(address.city);
         setState(address.state);
-        setPostal(address.postal);
+        setPostal(address.postal_code);
       } else {
         setAddressLine("");
         setCity("");

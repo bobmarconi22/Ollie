@@ -63,7 +63,7 @@ function PetPage() {
           </p>
           <OpenModalMenuItem
             itemText="Edit"
-            modalComponent={<PetModal pet={pet} setIsLoaded={setIsLoaded} />}
+            modalComponent={<PetModal pet={pet} user={user} setIsLoaded={setIsLoaded} />}
           />
           <h1
             className="form-title"

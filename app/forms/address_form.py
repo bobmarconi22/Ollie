@@ -8,3 +8,4 @@ class AddressForm(FlaskForm):
     address_line = StringField('address_line', validators=[DataRequired()])
     city = StringField('city', validators=[DataRequired()])
     state = StringField('state', validators=[DataRequired()])
+    postal_code = StringField('postal_code', validators=[DataRequired()])
