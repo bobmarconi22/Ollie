@@ -28,6 +28,7 @@
 
 #logo {
   width: 100px;
+  margin-left: -10px;
 }
 
 nav {
@@ -53,4 +54,38 @@ nav > button {
 
 nav > button:hover {
   cursor: pointer;
+}
+
+#about-button{
+  background-color: transparent;
+  background-image: url('./paw.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  padding: 20.5px;
+  margin-bottom: 6px;
+}
+
+#about-text{
+  position: absolute;
+  bottom: -5px;
+  border-top: 1px solid #011a30;
+  text-align: center;
+  left: 22.5px;
+  font-size: 13px;
+  color: #011a30;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#menu-text{
+  position: absolute;
+  bottom: -5px;
+  border-top: 1px solid #011a30;
+  text-align: center;
+  right: 60px;
+  font-size: 13px;
+  color: #011a30;
+  text-transform: uppercase;
+  font-weight: bold;
 }

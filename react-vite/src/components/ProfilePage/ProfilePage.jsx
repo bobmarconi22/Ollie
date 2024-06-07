@@ -184,9 +184,9 @@ function ProfilePage() {
           {user.phone && <p>Phone: {user.phone}</p>}
           {user.sitter ? (
             <>
-              <p>Bookings: {user.bookings.length}</p>
-              <p>Addresses: {user.addresses.length}</p>
-              <p>Reviews: {user.reviews.length}</p>
+              <p>Upcoming Bookings: &nbsp; {user.bookings.length}</p>
+              <p>Saved Addresses: &nbsp; {user.addresses.length}</p>
+              <p>Pet Reviews: &nbsp; {user.reviews.length}</p>
               <h4
                 style={{
                   fontSize: "25px",
@@ -215,9 +215,8 @@ function ProfilePage() {
             </>
           ) : (
             <>
-              <p>Pets: {user.pets.length}</p>
-              <p>Addresses: {user.addresses.length}</p>
-              <p>Bookings: {user.reviews.length}</p>
+              <p>Pet Accounts: &nbsp; {user.pets.length}</p>
+              <p>Saved Addresses: &nbsp; {user.addresses.length}</p>
             </>
           )}
         </div>
@@ -243,6 +242,7 @@ function ProfilePage() {
                     ) : (
                       <></>
                     ))}
+                  {booking.at_home ? <p></p> : <p></p>}
                 </div>
               ))
             ) : (
@@ -297,7 +297,7 @@ function ProfilePage() {
         </h1>
         <OpenModalMenuItem
           itemText="New Pet"
-          modalComponent={<PetModal setIsLoaded={setIsLoaded} />}
+          modalComponent={<PetModal user={user} setIsLoaded={setIsLoaded} />}
         />
         {user.pets.map((pet) => (
           <div className="card" key={pet.id}>
@@ -316,6 +316,9 @@ function ProfilePage() {
             {pet.special_requests && (
               <p>Special requests: {pet.special_requests}</p>
             )}
+            {pet.home_address ? (
+              pet.home_address.nickname && <p style={{fontStyle: 'italic'}}>{pet.home_address.nickname}</p> || <p style={{fontStyle: 'italic'}}>{pet.home_address.address_line} {pet.home_address.city}, {pet.home_address.state} {pet.home_address.postal_code}</p>) : <p style={{fontStyle: 'italic'}}>No Address Assigned</p>
+            }
             <OpenModalMenuItem
               itemText="Edit"
               modalComponent={<PetModal pet={pet} user={user} setIsLoaded={setIsLoaded} />}
@@ -326,7 +329,7 @@ function ProfilePage() {
           Saved Addresses
         </h1>
         <OpenModalMenuItem
-          itemText="New Address"
+          itemText="Add Address"
           modalComponent={<AddressModal setIsLoaded={setIsLoaded} />}
         />
         {user.addresses.map((address) => (

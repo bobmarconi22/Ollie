@@ -199,7 +199,7 @@
   background-color: #011a30;
   border: 2px solid #209c85;
   border-radius: 0 0 2em 2em;
-  transition: height 1s ease;
+  transition: height 0.5s ease;
 }
 
 .search-form-hidden{
@@ -221,7 +221,7 @@
   background-color: #011a30;
   border: 2px solid #209c85;
   border-radius: 0 0 2em 2em;
-  transition: height 1s ease, margin-top 2.8s ease;
+  transition: height 0.5s ease, margin-top 1.5s ease;
 }
 
 #search-bar {
@@ -261,7 +261,7 @@ input[type="search"]::-webkit-search-cancel-button {
   position: absolute;
   bottom: 30px;
   width: 90%;
-  transition: opacity 1s;
+  transition: opacity 2s;
 }
 
 #clear-search-button{
@@ -270,19 +270,30 @@ input[type="search"]::-webkit-search-cancel-button {
   font-size: 12px;
   background-color: #011a30;
   padding: 6px;
-  transition: opacity 1s;
+  transition: opacity 1.5s;
+}
+
+#clear-search-button:hover{
+  color: #209c85;
+  cursor: pointer;
 }
 
 .search-form-hidden > #search-bar {
   opacity: 0;
+  transition: opacity 0.5s ease, margin 3s;
+  margin-left: 200px;
 }
 
 .search-form-hidden > #submit-search-button {
   opacity: 0;
+  transition: opacity 0.5s ease, margin 3s;
+  margin-left: 200px;
 }
 
 .search-form-hidden > #clear-search-button {
   opacity: 0;
+  transition: opacity 0.5s ease, margin 3s;
+  margin-left: 200px;
 }
 
 #open-search-button{
@@ -295,4 +306,10 @@ input[type="search"]::-webkit-search-cancel-button {
   color: #209c85;
   background-color: #011a30;
   border: 2px solid #209c85;
+  z-index: 20;
+  cursor: pointer;
+}
+
+#open-search-button:hover{
+  cursor: pointer;
 }

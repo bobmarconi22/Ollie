@@ -3,12 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ReviewModal from "../ReviewModal";
 import PetModal from "../PetModal/PetModal";
-import "./PetPage.css";
+import "./AboutPage.css";
 import { useEffect, useState } from "react";
 import { getPetByIdThunk } from "../../redux/pet";
 import { getReviewsByPetThunk } from "../../redux/review";
 
-function PetPage() {
+function AboutPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const { petId } = useParams();
@@ -146,4 +146,4 @@ function PetPage() {
   );
 }
 
-export default PetPage;
+export default AboutPage;

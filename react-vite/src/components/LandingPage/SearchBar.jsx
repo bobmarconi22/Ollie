@@ -3,9 +3,7 @@ import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { searchThunk } from "../../redux/sitter"
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
-
-
-import { BsShopWindow } from "react-icons/bs";
+import "./LandingPage.css";
 
 function SearchBar() {
     const [search, setSearch] = useState('');
@@ -49,32 +47,33 @@ function SearchBar() {
             id="search-bar"
             onChange={(e) => setSearch(e.target.value)}
             style={{ color: '#011a30' }}
+            disabled={!showFilters}
           />
           <label className="rating-label">
             <div className="star-rating">
               {[1, 2, 3, 4, 5].map((value) => (
-                <span key={value} onClick={() => setRatingSearch(value)}>
+                <span key={value} disabled={!showFilters} onClick={() => setRatingSearch(value)}>
                   <i
                     className="fa-solid fa-paw filled"
                     style={{
                       fontSize: "30px",
                       margin: "2.5px",
                       color:
-                        value <= ratingSearch
+                        value >= ratingSearch
                           ? "#209c85"
                           : "rgba(255, 255, 255, 0.75)",
                       cursor: 'pointer',
                       opacity: showFilters
                           ? "1"
                           : "0",
-                      transition: 'opacity 1s ease',
+                      transition: 'opacity 0.5s ease',
                     }}
                   ></i>
                 </span>
               ))}
             </div>
           </label>
-          <button type="submit" id="submit-search-button">Search</button>
+          <button type="submit" id="submit-search-button" disabled={!showFilters}>Search</button>
           <button id="clear-search-button" onClick={clearAll}>Clear All Filters</button>
           <button onClick={() => setShowFilters(prevFilter => !prevFilter)} id="open-search-button">
             {showFilters ? <FiChevronUp /> : <FiChevronDown />}

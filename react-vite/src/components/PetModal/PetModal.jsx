@@ -39,6 +39,7 @@ function PetModal({ user, pet, setIsLoaded }) {
         setImagePreview(pet.pet_pic);
         setBirthday(formatDate(pet.birthday));
         setBreed(pet.breed);
+        setAddressId(pet.home_address);
         if (pet.special_requests) {
           setSpecial(pet.special_requests);
           setIsSpecial(true);
@@ -85,6 +86,7 @@ function PetModal({ user, pet, setIsLoaded }) {
       formData.append("breed", breed);
       formData.append("birthday", birthday);
       formData.append("special_requests", isSpecial ? special : "");
+      formData.append("home_address_id", addressId);
 
       setImageLoading(true);
 
@@ -108,7 +110,7 @@ function PetModal({ user, pet, setIsLoaded }) {
 
   return (
     isEditLoaded && (
-      <>{console.log('==============================>',user)}
+      <>{console.log('==============================>',addressId)}
         <h1 className="form-title">
           {pet ? `Edit ${pet.name}'s Information` : "New Pet"}
         </h1>
@@ -177,8 +179,7 @@ function PetModal({ user, pet, setIsLoaded }) {
       id="select-box"
       className="custom-select"
       value={addressId === 0 ? '' : addressId}
-      onChange={(e) => setAddressId(parseInt(e.target.value, 10))}
-      required
+      onChange={(e) => setAddressId(parseInt(e.target.value))}
     >
       <option value="" disabled>
         Assign an Address

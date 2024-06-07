@@ -10,6 +10,7 @@
 
 html,
 body {
+  margin: 0;
   background-color: #011a30;
   overflow-x: hidden;
 }
@@ -68,8 +69,8 @@ button:hover {
   color: rgba(255, 255, 255, 0.75);
   border: none;
   border-radius: 1em;
-  padding: 10px 20px;
-  width: 40%;
+  padding: 14px;
+  width: 97.5%;
   margin: 5px auto;
   text-align: center;
 }
@@ -159,6 +160,7 @@ form{
   top: 0.8rem;
   padding: 0 0.5rem;
   transition: 0.1s ease;
+  border-radius: 2em;
 }
 
 .form__input:focus ~ .form__label, .form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label {

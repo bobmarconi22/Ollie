@@ -50,3 +50,15 @@ class BookingRequest(db.Model):
     booked = db.relationship('Booking', back_populates='request', uselist=False)
     sitter = db.relationship('User', back_populates='booking_requests')
     pet = db.relationship('Pet', back_populates='booking_requests')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'pet_id': self.pet_id,
+            'sitter_id': self.sitter_id,
+            'at_home': self.at_home,
+            'overnight': self.overnight,
+            'pet': self.pet.to_dict(),
+            'start_date': self.start_date,
+            'end_date': self.end_date
+        }

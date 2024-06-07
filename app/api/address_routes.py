@@ -68,3 +68,4 @@ def delete_address(address_id):
         return jsonify({"message": "address couldn't be found"}), 404
     db.session.delete(address_to_delete)
     db.session.commit()
+    return jsonify({"message": "Successfully deleted"}), 200

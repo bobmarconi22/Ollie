@@ -24,6 +24,7 @@ function DeleteModal({ user, pet, review, address, setIsLoaded }) {
         closeModal()
         setIsLoaded(false)
       }
+      navigate('/profile')
       closeModal()
       setIsLoaded(false)
     });
@@ -34,7 +35,7 @@ function DeleteModal({ user, pet, review, address, setIsLoaded }) {
       <h1 className="form-title">Are you sure you want to delete this {obj}?</h1>
       <form onSubmit={handleSubmit}>
         <p style={{color: 'red', fontStyle: 'italic', fontSize: '20px'}}>This action <b style={{color: 'red', fontStyle: 'italic', textDecoration: 'underline', fontSize: '20px'}}>cannot</b> be undone</p>
-        <button className='confirm-delete' style={{width: '100%'}} type="submit">Delete</button>
+        <button className='confirm-delete' type="submit">Delete</button>
         <button type="button" onClick={closeModal}>Cancel</button>
       </form>
     </>

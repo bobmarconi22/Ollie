@@ -42,6 +42,7 @@ def create_pet():
             birthday=birthday,
             breed=form.data['breed'],
             special_requests=form.data['special_requests'],
+            home_address_id=form.data['home_address_id'],
             owner_id=current_user.id
         )
         db.session.add(new_pet)
@@ -71,11 +72,12 @@ def update_pet(pet_id):
 
             birthday = datetime.strptime(form.data['birthday'], '%Y-%m-%d')
 
-            pet_to_edit.name = form.name.data 
+            pet_to_edit.name = form.name.data
             pet_to_edit.pet_pic = pet_picture
             pet_to_edit.birthday = birthday
             pet_to_edit.breed = form.breed.data
             pet_to_edit.special_requests = form.special_requests.data
+            pet_to_edit.home_address_id = form.home_address_id.data
 
             db.session.commit()
 
