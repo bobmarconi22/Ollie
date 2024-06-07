@@ -1,50 +1,62 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { getSittersThunk } from "../../redux/sitter";
-import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs"
+import { searchThunk } from "../../redux/sitter";
+import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
+import SearchBar from "./SearchBar";
 import "./LandingPage.css";
+
 
 function LandingPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const allSitters = useSelector((state) => state.sitter.all);
+  const nonSearchedSitters = useSelector((state) => state.sitter?.all?.sitters);
+  const allSitters = useSelector((state) => state.sitter?.search);
   const user = useSelector((state) => state.session.user);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [slide, setSlide] = useState(0)
+  const [isLoaded, setIsLoaded] = useState(true);
+  const [slide, setSlide] = useState(0);
+  // const [allSitters, setAllSitters] = useState([]);
+  const [filter] = useSearchParams();
+  const searchFilter = filter.get("filter")?.split(" ").join("+");
 
   useEffect(() => {
-    dispatch(getSittersThunk()).then(() => {
-      setIsLoaded(true);
-    });
-  }, [dispatch]);
+    setIsLoaded(false);
+    if (searchFilter) {
+      dispatch(searchThunk(searchFilter));
+    } else {
+      dispatch(searchThunk());
+    }
+    setIsLoaded(true);
+    // setAllSitters(searchFilter ? searchedSitters : nonSearchedSitters);
+  }, [dispatch, searchFilter, isLoaded]);
 
   const slides = [
     {
-      'src': 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/4ef93842ec094f6a894b488e44f3923f.jpg',
-      alt: 'Image 1 for Carousel'
+      src: "https://marconi22-ollie.s3.us-east-2.amazonaws.com/4ef93842ec094f6a894b488e44f3923f.jpg",
+      alt: "Image 1 for Carousel",
     },
     {
-      'src': 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/3ccee02ea9594c62808847fc39415ef2.jpg',
-      alt: 'Image 2 for Carousel'
+      src: "https://marconi22-ollie.s3.us-east-2.amazonaws.com/3ccee02ea9594c62808847fc39415ef2.jpg",
+      alt: "Image 2 for Carousel",
     },
     {
-      'src': 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/5fec772503844428aa586e96bfe56106.jpg',
-      alt: 'Image 3 for Carousel'
+      src: "https://marconi22-ollie.s3.us-east-2.amazonaws.com/5fec772503844428aa586e96bfe56106.jpg",
+      alt: "Image 3 for Carousel",
     },
     {
-      'src': 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/4304884ee508475ea01788f0c80b2067.jpg',
-      alt: 'Image 4 for Carousel'
+      src: "https://marconi22-ollie.s3.us-east-2.amazonaws.com/4304884ee508475ea01788f0c80b2067.jpg",
+      alt: "Image 4 for Carousel",
     },
     {
-      'src': 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/00b15e1623f74f1c9416ea5b20471ea1.jpg',
-      alt: 'Image 5 for Carousel'
+      src: "https://marconi22-ollie.s3.us-east-2.amazonaws.com/00b15e1623f74f1c9416ea5b20471ea1.jpg",
+      alt: "Image 5 for Carousel",
     },
     {
-      'src': 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/87f3f0839e0046ce8fde93eedec4ad87.jpg',
-      alt: 'Image 6 for Carousel'
-    }
-  ]
+      src: "https://marconi22-ollie.s3.us-east-2.amazonaws.com/87f3f0839e0046ce8fde93eedec4ad87.jpg",
+      alt: "Image 6 for Carousel",
+    },
+  ];
 
   const avgReviews = (arr) => {
     let sum = 0;
@@ -151,7 +163,7 @@ function LandingPage() {
   };
 
   const backSlide = () => {
-    setSlide(prevSlide => {
+    setSlide((prevSlide) => {
       if (prevSlide === 0) {
         return slides.length - 1;
       }
@@ -160,7 +172,7 @@ function LandingPage() {
   };
 
   const nextSlide = () => {
-    setSlide(prevSlide => {
+    setSlide((prevSlide) => {
       if (prevSlide === slides.length - 1) {
         return 0;
       }
@@ -171,29 +183,52 @@ function LandingPage() {
   return (
     isLoaded && (
       <>
+        <SearchBar />
         <div id="landing-ad">
-          <h1>
-            Keep your best friends Paw-tected
-          </h1>
+          <h1>Keep your best friends Paw-tected</h1>
 
           <div id="img-div">
-            <BsArrowLeftCircleFill className="arrow arrow-left" disabled={slide === 0} onClick={backSlide}/>
+            <BsArrowLeftCircleFill
+              className="arrow arrow-left"
+              disabled={slide === 0}
+              onClick={backSlide}
+            />
             {slides.map((pic, i) => {
-              return <img src={pic.src} alt={pic.alt} key={i} className={slide === i ? 'slide' : "slide-hidden"}></img>
+              return (
+                <img
+                  src={pic.src}
+                  alt={pic.alt}
+                  key={i}
+                  className={slide === i ? "slide" : "slide-hidden"}
+                ></img>
+              );
             })}
-          <BsArrowRightCircleFill className="arrow arrow-right" onClick={nextSlide}/>
-          <span className="indicators">
-            {slides.map((_pic, i) => {
-              return <button key={i} onClick={() => setSlide(i)} style={{backgroundColor: slide === i ? '#209c85' : '#ffffff80'}} className="indicator"></button>
-            })}
-          </span>
+            <BsArrowRightCircleFill
+              className="arrow arrow-right"
+              onClick={nextSlide}
+            />
+            <span className="indicators">
+              {slides.map((_pic, i) => {
+                return (
+                  <button
+                    key={i}
+                    onClick={() => setSlide(i)}
+                    style={{
+                      backgroundColor: slide === i ? "#209c85" : "#ffffff80",
+                    }}
+                    className="indicator"
+                  ></button>
+                );
+              })}
+            </span>
           </div>
-
         </div>
         <div id="all-sitters">
-          <p style={{fontStyle: 'italic', fontSize: '20px'}}>Choose from a Bark-load of pet sitters to request a Sitting</p>
+          <p style={{ fontStyle: "italic", fontSize: "20px" }}>
+            Choose from a Bark-load of pet sitters to request a Sitting
+          </p>
           {allSitters &&
-            allSitters.sitters.map(
+            allSitters.map(
               (sitter) =>
                 (!user || sitter.id !== user.id) && (
                   <div

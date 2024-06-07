@@ -75,15 +75,19 @@ function EditUserFormModal({ user, setIsLoaded }) {
       <h1 className="form-title">Edit Info</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <label>
           <img src={imagePreview} alt="" className="form-pic" />
+          <div class="file-upload">
+          <label for="file-input" class="custom-file-upload">
+            Upload File
+          </label>
           <input
             type="file"
-            accept="image/*"
+            id="file-input"
+            accept="image/jpeg, image/png"
             className="choose-file"
             onChange={handleImageChange}
           />
-        </label>
+        </div>
         <div className="form">
           <input
             type="text"
@@ -195,6 +199,7 @@ function EditUserFormModal({ user, setIsLoaded }) {
         )}
         <label style={{ paddingTop: "10px" }}>
           Offer Pet Sitting Services?
+          
           <input
             type="checkbox"
             checked={isSitter}

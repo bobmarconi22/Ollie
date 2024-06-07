@@ -3,6 +3,7 @@
   height: 600px;
   padding-top: 85px;
   background-color: #212f44;
+  border: #209c85;
 }
 
 #landing-ad > h1 {
@@ -178,4 +179,120 @@
   margin-top: -77px;
   min-width: 200px;
   margin-left: 50px;
+}
+.search-form{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  width: 25%;
+  max-width: 400px;
+  min-width: 200px;
+  margin: 0;
+  padding: 0;
+  margin-top: 102px;
+  margin-left: 2px;
+  height: 225px;
+  background-color: #011a30;
+  border: 2px solid #209c85;
+  border-radius: 0 0 2em 2em;
+  transition: height 1s ease;
+}
+
+.search-form-hidden{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  width: 25%;
+  max-width: 400px;
+  min-width: 200px;
+  margin: 0;
+  padding: 0;
+  margin-top: 100px;
+  margin-left: 2px;
+  height: 0px;
+  background-color: #011a30;
+  border: 2px solid #209c85;
+  border-radius: 0 0 2em 2em;
+  transition: height 1s ease, margin-top 2.8s ease;
+}
+
+#search-bar {
+  position: absolute;
+  top: 0;
+  margin: 5px;
+  margin-top: 30px;
+  width: 90%;
+  border: none;
+  border-radius: 2em;
+  padding: 1em;
+  height: 30px;
+  box-shadow: 3px 3px 3px black;
+  color: #011a30;
+  font-size: 12px;
+  transition: opacity 1s;
+}
+
+#search-bar:focus {
+  box-shadow: 4px 4px 4px black;
+}
+
+#search-bar:focus {
+  border: none;
+  outline: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  padding: 5px;
+  margin-right: -0.75em;
+  cursor: pointer;
+}
+
+#submit-search-button{
+  margin-top: -5px;
+  padding: 10px;
+  position: absolute;
+  bottom: 30px;
+  width: 90%;
+  transition: opacity 1s;
+}
+
+#clear-search-button{
+  position: absolute;
+  bottom: 0;
+  font-size: 12px;
+  background-color: #011a30;
+  padding: 6px;
+  transition: opacity 1s;
+}
+
+.search-form-hidden > #search-bar {
+  opacity: 0;
+}
+
+.search-form-hidden > #submit-search-button {
+  opacity: 0;
+}
+
+.search-form-hidden > #clear-search-button {
+  opacity: 0;
+}
+
+#open-search-button{
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  padding: 0 30px;
+  border-radius: 0 0 2em 2em;
+  margin-bottom: -24px;
+  color: #209c85;
+  background-color: #011a30;
+  border: 2px solid #209c85;
 }

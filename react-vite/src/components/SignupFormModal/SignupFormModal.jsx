@@ -85,19 +85,24 @@ function SignupFormModal() {
   };
 
   return (
-    <>{console.log(errors)}
+    <>
+      {console.log(errors)}
       <h1 className="form-title">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <img src={imagePreview} alt="Pet" className="form-pic" />
-        <label>
+        <div class="file-upload">
+          <label for="file-input" class="custom-file-upload">
+            Upload File
+          </label>
           <input
             type="file"
+            id="file-input"
             accept="image/jpeg, image/png"
             className="choose-file"
             onChange={handleImageChange}
           />
-        </label>
+        </div>
         <div className="form">
           <input
             type="email"
@@ -127,12 +132,18 @@ function SignupFormModal() {
             Username
           </label>
         </div>
-          {errors.username && <p style={{
+        {errors.username && (
+          <p
+            style={{
               color: "red",
               fontStyle: "italic",
-              marginTop: '-10px',
-              marginBottom: '15px'
-            }}>{errors.username}</p>}
+              marginTop: "-10px",
+              marginBottom: "15px",
+            }}
+          >
+            {errors.username}
+          </p>
+        )}
         <div className="form">
           <input
             type="text"
@@ -162,12 +173,18 @@ function SignupFormModal() {
             First Name
           </label>
         </div>
-        {errors.firstName && <p style={{
+        {errors.firstName && (
+          <p
+            style={{
               color: "red",
               fontStyle: "italic",
-              marginTop: '-10px',
-              marginBottom: '15px'
-            }}>{errors.firstName}</p>}
+              marginTop: "-10px",
+              marginBottom: "15px",
+            }}
+          >
+            {errors.firstName}
+          </p>
+        )}
         <div className="form">
           <input
             type="text"
@@ -183,15 +200,21 @@ function SignupFormModal() {
             Last Name
           </label>
         </div>
-        {errors.lastName && <p style={{
+        {errors.lastName && (
+          <p
+            style={{
               color: "red",
               fontStyle: "italic",
-              marginTop: '-10px',
-              marginBottom: '15px'
-            }}>{errors.lastName}</p>}
+              marginTop: "-10px",
+              marginBottom: "15px",
+            }}
+          >
+            {errors.lastName}
+          </p>
+        )}
         <div className="form">
           <input
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             value={password}
             id={"password"}
             className="form__input"
@@ -203,11 +226,18 @@ function SignupFormModal() {
           <label htmlFor={"password"} className="form__label">
             Password
           </label>
-          <i className={showPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"} onClick={() => setShowPassword(prevShowPassword => !prevShowPassword)}></i>
+          <i
+            className={
+              showPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"
+            }
+            onClick={() =>
+              setShowPassword((prevShowPassword) => !prevShowPassword)
+            }
+          ></i>
         </div>
         <div className="form">
           <input
-            type={showConfPassword ? 'text' : 'password'}
+            type={showConfPassword ? "text" : "password"}
             value={confirmPassword}
             id={"confirmPassword"}
             className="form__input"
@@ -218,14 +248,23 @@ function SignupFormModal() {
           <label htmlFor={"confirmPassword"} className="form__label">
             Confirm Password
           </label>
-          <i className={showConfPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"} onClick={() => setShowConfPassword(prevShowConfPassword => !prevShowConfPassword)}></i>
+          <i
+            className={
+              showConfPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"
+            }
+            onClick={() =>
+              setShowConfPassword(
+                (prevShowConfPassword) => !prevShowConfPassword
+              )
+            }
+          ></i>
         </div>
         {errors.confirmPassword && (
           <p
             style={{
               color: "red",
               fontStyle: "italic",
-              marginBottom: '10px'
+              marginBottom: "10px",
             }}
           >
             {errors.confirmPassword}

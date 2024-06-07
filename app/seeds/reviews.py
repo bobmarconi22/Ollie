@@ -2,15 +2,14 @@ from app.models import db, Review, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_reviews():
-    # Reviews for Demo Sitter (Sitter ID: 6)
-    reviews_sitter_1 = [
-        Review(pet_id=5, sitter_id=6, review="Charlie had a great time!", rating=5),
-        Review(pet_id=8, sitter_id=6, review="Buddy needed medication and they handled it perfectly.", rating=5),
-        Review(pet_id=2, sitter_id=6, review="Very attentive sitter!", rating=5),
-        Review(pet_id=3, sitter_id=6, review="Max loved his stay!", rating=5),
-        Review(pet_id=9, sitter_id=6, review="Rocky had a lot of fun!", rating=4),
-        Review(pet_id=4, sitter_id=6, review="Lucy was happy and relaxed!", rating=5),
-        Review(pet_id=7, sitter_id=6, review="Molly enjoyed her stay!", rating=4)
+    # Reviews for Jane Smith (Sitter ID: 6)
+    reviews_sitter_3 = [
+        Review(pet_id=4, sitter_id=9, review="Lucy was well taken care of.", rating=3),
+        Review(pet_id=7, sitter_id=9, review="Molly seemed okay.", rating=2),
+        Review(pet_id=10, sitter_id=9, review="Sadie was comfortable.", rating=3),
+        Review(pet_id=8, sitter_id=9, review="Didn't answer my calls for over 30 minutes!!", rating=1),
+        Review(pet_id=1, sitter_id=9, review="Louie was happy and relaxed!", rating=4),
+        Review(pet_id=9, sitter_id=9, review="Rocky enjoyed his stay!", rating=4)
     ]
 
     # Reviews for John Doe (Sitter ID: 7)
@@ -23,23 +22,24 @@ def seed_reviews():
         Review(pet_id=4, sitter_id=7, review="Lucy seemed very happy!", rating=4)
     ]
 
-    # Reviews for Jane Smith (Sitter ID: 8)
-    reviews_sitter_3 = [
-        Review(pet_id=4, sitter_id=8, review="Lucy was well taken care of.", rating=3),
-        Review(pet_id=7, sitter_id=8, review="Molly was happy and healthy.", rating=4),
-        Review(pet_id=10, sitter_id=8, review="Sadie was very comfortable.", rating=4),
-        Review(pet_id=8, sitter_id=8, review="Didn't answer my calls for over 30 minutes!!", rating=1),
-        Review(pet_id=1, sitter_id=8, review="Louie was happy and relaxed!", rating=4),
-        Review(pet_id=9, sitter_id=8, review="Rocky enjoyed his stay!", rating=5)
+    # Reviews for Demo Sitter (Sitter ID: 8)
+    reviews_sitter_1 = [
+        Review(pet_id=5, sitter_id=8, review="Charlie had a great time!", rating=5),
+        Review(pet_id=8, sitter_id=8, review="Buddy needed medication and they handled it perfectly.", rating=5),
+        Review(pet_id=2, sitter_id=8, review="Very attentive sitter!", rating=5),
+        Review(pet_id=3, sitter_id=8, review="Max loved his stay!", rating=5),
+        Review(pet_id=9, sitter_id=8, review="Rocky had a lot of fun!", rating=4),
+        Review(pet_id=4, sitter_id=8, review="Lucy was happy and relaxed!", rating=5),
+        Review(pet_id=7, sitter_id=8, review="Molly enjoyed her stay!", rating=4)
     ]
 
     # Reviews for Alice Johnson (Sitter ID: 9)
     reviews_sitter_4 = [
-        Review(pet_id=1, sitter_id=9, review="Exceptional care!", rating=4),
-        Review(pet_id=2, sitter_id=9, review="Will definitely book again!", rating=5),
-        Review(pet_id=3, sitter_id=9, review="Highly recommend!", rating=5),
-        Review(pet_id=4, sitter_id=9, review="Lucy had a great time!", rating=5),
-        Review(pet_id=5, sitter_id=9, review="Charlie was very well cared for!", rating=4)
+        Review(pet_id=1, sitter_id=6, review="Exceptional care!", rating=4),
+        Review(pet_id=2, sitter_id=6, review="Will definitely book again!", rating=5),
+        Review(pet_id=3, sitter_id=6, review="Highly recommend!", rating=5),
+        Review(pet_id=4, sitter_id=6, review="Lucy had a great time!", rating=5),
+        Review(pet_id=5, sitter_id=6, review="Charlie was very well cared for!", rating=4)
     ]
 
     # Reviews for Bob Williams (Sitter ID: 10)
@@ -49,7 +49,7 @@ def seed_reviews():
         Review(pet_id=6, sitter_id=10, review="Great communication!", rating=4),
         Review(pet_id=8, sitter_id=10, review="Needed to be reminded of Buddy's medication!", rating=1),
         Review(pet_id=7, sitter_id=10, review="Molly was well looked after.", rating=5),
-        Review(pet_id=9, sitter_id=10, review="Rocky had a fantastic time!", rating=5)
+        Review(pet_id=6, sitter_id=10, review="Rocky had a fantastic time!", rating=5)
     ]
 
     # Reviews for Carol Brown (Sitter ID: 11)
@@ -136,9 +136,9 @@ def seed_reviews():
 
     # Reviews for Kate Martinez (Sitter ID: 20)
     reviews_sitter_15 = [
-        Review(pet_id=4, sitter_id=20, review="Kate was very good with Lucy.", rating=5),
+        Review(pet_id=4, sitter_id=20, review="Kate was very good with Lucy.", rating=4),
         Review(pet_id=5, sitter_id=20, review="Charlie loved his time with Kate.", rating=5),
-        Review(pet_id=6, sitter_id=20, review="Kate took great care of Daisy.", rating=4),
+        Review(pet_id=6, sitter_id=20, review="Kate took great care of Daisy. But Daisy was very nervous when I picked her up", rating=2),
         Review(pet_id=8, sitter_id=20, review="I've never seen Buddy as shy as when he came home!", rating=2),
         Review(pet_id=7, sitter_id=20, review="Molly was well looked after!", rating=5),
         Review(pet_id=9, sitter_id=20, review="Rocky had a fantastic time!", rating=5)

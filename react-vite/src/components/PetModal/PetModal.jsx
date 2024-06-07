@@ -114,15 +114,19 @@ function PetModal({ user, pet, setIsLoaded }) {
         </h1>
         {errors.server && <p>{errors.server}</p>}
         <form onSubmit={handleSubmit} encType="multipart/form-data">
-          <label>
             <img src={imagePreview} alt="Pet" className="form-pic" />
-            <input
-              type="file"
-              accept="image/jpeg, image/png"
-              className="choose-file"
-              onChange={handleImageChange}
-            />
+            <div class="file-upload">
+          <label for="file-input" class="custom-file-upload">
+            Upload File
           </label>
+          <input
+            type="file"
+            id="file-input"
+            accept="image/jpeg, image/png"
+            className="choose-file"
+            onChange={handleImageChange}
+          />
+        </div>
           {errors.image && <p style={{margin: '10px'}}>words</p>}
           <div className="form">
             <input
@@ -168,20 +172,23 @@ function PetModal({ user, pet, setIsLoaded }) {
               Breed
             </label>
           </div>
+          <div className="custom-select-wrapper">
           <select
               id="select-box"
+              className="custom-select"
               value={addressId === 0 ? '' : addressId}
               onChange={(e) => setPetId(e.target.value)}
               required
             >
               <option value="" disabled>Assign an Address
               </option>
-              {user.addresses.map((address) => (
+              {user?.addresses.map((address) => (
                 <option key={address.id} value={address.id}>
                   {address.name}
                 </option>
               ))}
             </select>
+            </div>
           <label style={{ padding: "15px 0" }}>
             Pet in need of Special Care?
             <input

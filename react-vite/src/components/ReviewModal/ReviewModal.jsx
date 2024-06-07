@@ -72,10 +72,11 @@ function ReviewModal({ user, sitter, review, setIsLoaded, sitterId }) {
         {errors.server && <p>{errors.server}</p>}
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           {!review && (
-            <div className="select-container">
+            <div className="custom-select-wrapper">
               <label htmlFor="select-box">Who Stayed?</label>
               <select
                 id="select-box"
+                className="custom-select"
                 value={petId === 0 ? "" : petId}
                 onChange={(e) => setPetId(e.target.value)}
                 required
@@ -113,6 +114,7 @@ function ReviewModal({ user, sitter, review, setIsLoaded, sitterId }) {
                         value <= rating
                           ? "#209c85"
                           : "rgba(255, 255, 255, 0.75)",
+                      cursor: 'pointer'
                     }}
                   ></i>
                 </span>

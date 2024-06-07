@@ -107,14 +107,16 @@ function AddressModal({ address, setIsLoaded }) {
             </label>
           </div>
           <label>
+          <div className="custom-select-wrapper">
             <select
               value={state}
+              className="custom-select"
               onChange={(e) => setState(e.target.value)}
               style={{fontSize: '16px', marginTop: '10px', marginBottom: '22px'}}
               required
             >
               <option value="" disabled>
-                Select your state
+                State
               </option>
               <option value="AL">Alabama</option>
               <option value="AK">Alaska</option>
@@ -167,6 +169,7 @@ function AddressModal({ address, setIsLoaded }) {
               <option value="WI">Wisconsin</option>
               <option value="WY">Wyoming</option>
             </select>
+            </div>
           </label>
           <div className="form">
             <input
