@@ -51,24 +51,24 @@ function AboutPage() {
        <div id="links-div">
        <a href="https://github.com/bobmarconi22" target="_blank"
           ><img
-            src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-github-outline-512.png"
+            src="https://cdn0.iconfinder.com/data/icons/eon-social-media-contact-info-2/32/github_coding_dev_developer-512.png"
             className="link-img" alt="github"
         /></a>
         <a href="https://www.facebook.com/Bobmarconi22/" target="_blank"
           ><img
-            src="https://cdn3.iconfinder.com/data/icons/social-network-outline-3/100/Facebook-512.png"
+            src="https://cdn3.iconfinder.com/data/icons/remixicon-logos/24/facebook-circle-line-512.png"
             className="link-img" alt="facebook"
         /></a>
         <a href="mailto:bobmarconi22@gmail.com"
           ><img
-            src="https://cdn0.iconfinder.com/data/icons/phosphor-thin-vol-1/256/at-thin-512.png"
+            src="https://cdn1.iconfinder.com/data/icons/ionicons-sharp-vol-1/512/at-sharp-512.png"
             className="link-img" alt="email"
         /></a>
         <a
           href="https://www.linkedin.com/in/bob-marconi-3656932a9/"
           target="_blank"
           ><img
-            src="https://cdn3.iconfinder.com/data/icons/peelicons-glyph/512/linkedin__social__media_icons-512.png"
+            src="/linkdin.png"
             className="link-img" alt="linkdin"
         /></a>
       </div>
