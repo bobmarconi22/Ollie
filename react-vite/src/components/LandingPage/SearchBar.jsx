@@ -76,7 +76,17 @@ function SearchBar() {
           <button type="submit" id="submit-search-button" disabled={!showFilters}>Search</button>
           <button id="clear-search-button" onClick={clearAll}>Clear All Filters</button>
           <button onClick={() => setShowFilters(prevFilter => !prevFilter)} id="open-search-button">
-            {showFilters ? <FiChevronUp /> : <FiChevronDown />}
+            {showFilters ? (
+            <>
+            <i>Search</i><br/>
+            <FiChevronUp />
+            </>)
+            : (
+            <>
+           <i>Search</i><br />
+           <FiChevronDown />
+           </>
+           )}
           </button>
         </form>
       </div>

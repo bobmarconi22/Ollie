@@ -41,108 +41,38 @@ function AboutPage() {
   }, [dispatch, petId, isLoaded]);
 
   return (
-    isLoaded && (
-      <>
-        <div id="pet-profile" style={{ width: "80%" }}>
-          <img
-            src={pet.pet_pic}
-            alt=""
-            className="pfp"
-            style={{ margin: "0 auto" }}
-          />
-          <h1 className="form-title" style={{ marginBottom: "10px" }}>
-            {pet.name}
-          </h1>
-          <p
-            style={{
-              fontSize: "15px",
-              fontStyle: "italic",
-              textAlign: "center",
-            }}
-          >
-            {pet.breed} ({getAge(pet.birthday)})
-          </p>
-          {pet.special_requests && (
-            <p>Special requests: {pet.special_requests}</p>
-          )}
-          {pet.home_address ? (
-            <>
-              {pet.home_address.nickname && <p style={{ fontStyle: "italic" }}>{pet.home_address.nickname}:</p>}
-              <p style={{fontStyle: 'italic'}}>{pet.home_address.address_line} {pet.home_address.city}, {pet.home_address.state} {pet.home_address.postal_code}</p>
-            </>
-          ) : (
-            <p style={{ fontStyle: "italic" }}>No Address Assigned</p>
-          )}
-          <br />
-          <OpenModalMenuItem
-            itemText={`Edit ${pet.name}'s Info`}
-            modalComponent={
-              <PetModal pet={pet} user={user} setIsLoaded={setIsLoaded} />
-            }
-          />
-          <br />
-          <h1
-            className="form-title"
-            style={{ marginBottom: "10px", marginTop: "30px" }}
-          >
-            {pet.name}'s Bookings
-          </h1>
-            {pet.bookings ? <></>
-            :(
-            <>
-            <p style={{marginBottom: '5px', marginTop: '35px'}}>No Upcoming Bookings</p>
-            <button onClick={() => navigate('/')}>Find A Sitter!</button>
-            </>
-            )}
-          <h1
-            className="form-title"
-            style={{ marginBottom: "10px", marginTop: "30px" }}
-          >
-            {pet.name}'s Reviews
-          </h1>
-          {reviews.pet_reviews
-            .slice()
-            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-            .map((review) => (
-              <div className="review-card" key={review.id}>
-                <h1 className="review-pet-name">
-                  {review.pet.name} -{" "}
-                  <i
-                    style={{
-                      fontSize: "16px",
-                      fontStyle: "italic",
-                      color: "rgba(255, 255, 255, 0.75)",
-                    }}
-                  >
-                    {getAge(review.pet.birthday)}
-                  </i>
-                </h1>
-
-                <p className="review-pet-rating">
-                  {review.rating} <i className="fa-solid fa-paw filled"></i>
-                </p>
-                <p
-                  className="review-pet-review"
-                  style={{ wordWrap: "break-word" }}
-                >
-                  {review.review}
-                </p>
-                <OpenModalMenuItem
-                  itemText="Edit Review"
-                  modalComponent={
-                    <ReviewModal
-                      user={user}
-                      review={review}
-                      setIsLoaded={setIsLoaded}
-                      sitterId={review.sitter_id}
-                    />
-                  }
-                />
-              </div>
-            ))}
-        </div>
-      </>
-    )
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+       <h1 className="form-title" style={{position: 'absolute', top: '120px', left: 0, right: 0}}>About</h1>
+        <img src="/me.png" className="pfp" style={{
+        margin: '0 auto', marginTop: '220px'
+       }} alt="" />
+       <p style={{textAlign: 'center'}}>Bob Marconi -- Software Engineer</p>
+       <p style={{textAlign: 'center'}}>Follow or see my other projects below!</p>
+       <div id="links-div">
+       <a href="https://github.com/bobmarconi22" target="_blank"
+          ><img
+            src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-github-outline-512.png"
+            className="link-img" alt="github"
+        /></a>
+        <a href="https://www.facebook.com/Bobmarconi22/" target="_blank"
+          ><img
+            src="https://cdn3.iconfinder.com/data/icons/social-network-outline-3/100/Facebook-512.png"
+            className="link-img" alt="facebook"
+        /></a>
+        <a href="mailto:bobmarconi22@gmail.com"
+          ><img
+            src="https://cdn0.iconfinder.com/data/icons/phosphor-thin-vol-1/256/at-thin-512.png"
+            className="link-img" alt="email"
+        /></a>
+        <a
+          href="https://www.linkedin.com/in/bob-marconi-3656932a9/"
+          target="_blank"
+          ><img
+            src="https://cdn3.iconfinder.com/data/icons/peelicons-glyph/512/linkedin__social__media_icons-512.png"
+            className="link-img" alt="linkdin"
+        /></a>
+      </div>
+      </div>
   );
 }
 

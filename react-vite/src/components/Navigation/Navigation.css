@@ -1,11 +1,13 @@
 .profile-dropdown {
   position: absolute;
-  right: 0;
-  margin-top: 192px;
-  margin-right: 38.5px;
+  right: 41px;
+  top: 86px;
   border-radius: 0 0 1em 1em;
   background-color: #011a30;
   border: 2px solid #209c85;
+  overflow: hidden;
+  height: 110px; /* Set the full height of the dropdown */
+  transition: height 0.5s ease, margin-top 1s ease;
 }
 
 .profile-dropdown > li {
@@ -17,13 +19,46 @@
   text-align: start;
   font-size: 15px;
   margin: 0;
-  text-align: end;
+  text-align: center;
+  padding-right: 42px;
 }
 
 .profile-dropdown > li:hover {
   cursor: pointer;
   color: #209c85;
   text-decoration: underline;
+}
+
+.profile-dropdown-hidden {
+  position: absolute;
+  right: 41px;
+  top: 84px;
+  border-radius: 0 0 1em 1em;
+  background-color: #011a30;
+  height: 0;
+  border: 2px solid #209c85;
+  transition: height 0.5s ease, top 1.3s;
+}
+
+.profile-dropdown-hidden > li {
+  background-color: #011a30;
+  color: rgba(255, 255, 255, 0.75);
+  border: none;
+  width: 75px;
+  padding: 18px 15px;
+  text-align: start;
+  font-size: 15px;
+  margin: 0;
+  text-align: center;
+  padding-right: 42px;
+  opacity: 0;
+}
+
+.profile-dropdown-hidden > li:hover {
+  cursor: pointer;
+  color: #209c85;
+  text-decoration: underline;
+  opacity: 0;
 }
 
 #logo {
@@ -62,8 +97,8 @@ nav > button:hover {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  padding: 20.5px;
-  margin-bottom: 6px;
+  padding: 20px;
+  margin-bottom: 9px;
 }
 
 #about-text{
