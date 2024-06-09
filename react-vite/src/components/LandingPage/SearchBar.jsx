@@ -42,7 +42,7 @@ function SearchBar() {
         <form onSubmit={handleSearch} className={showFilters ? "search-form" : "search-form-hidden"}>
           <input
             type="search"
-            placeholder="Search"
+            placeholder="Search by Name or Username"
             value={search}
             id="search-bar"
             onChange={(e) => setSearch(e.target.value)}
@@ -73,18 +73,16 @@ function SearchBar() {
               ))}
             </div>
           </label>
-          <button type="submit" id="submit-search-button" disabled={!showFilters}>Search</button>
+          <button type="submit" id="submit-search-button" disabled={!showFilters}>Apply Filters</button>
           <button id="clear-search-button" onClick={clearAll}>Clear All Filters</button>
           <button onClick={() => setShowFilters(prevFilter => !prevFilter)} id="open-search-button">
             {showFilters ? (
             <>
-            <i>Search</i><br/>
-            <FiChevronUp />
+            <i>Search</i><FiChevronUp style={{position: 'absolute'}} />
             </>)
             : (
             <>
-           <i>Search</i><br />
-           <FiChevronDown />
+           <i>Search</i><FiChevronDown style={{position: 'absolute'}} />
            </>
            )}
           </button>
