@@ -75,7 +75,7 @@ function AddressModal({ address, setIsLoaded }) {
               placeholder=" "
               onChange={(e) => setNickname(e.target.value)}
             />
-            <label for={"nickname"} className="form__label">
+            <label htmlFor={"nickname"} className="form__label">
               Nickname
             </label>
           </div>
@@ -89,7 +89,7 @@ function AddressModal({ address, setIsLoaded }) {
               required
               onChange={(e) => setAddressLine(e.target.value)}
             />
-            <label for={"addressLine"} className="form__label">
+            <label htmlFor={"addressLine"} className="form__label">
               Address Line
             </label>
           </div>
@@ -103,7 +103,7 @@ function AddressModal({ address, setIsLoaded }) {
               required
               onChange={(e) => setCity(e.target.value)}
             />
-            <label for={"city"} className="form__label">
+            <label htmlFor={"city"} className="form__label">
               City
             </label>
           </div>
@@ -182,7 +182,7 @@ function AddressModal({ address, setIsLoaded }) {
               required
               onChange={(e) => setPostal(e.target.value)}
             />
-            <label for={"postal"} className="form__label">
+            <label htmlFor={"postal"} className="form__label">
               Postal
             </label>
           </div>

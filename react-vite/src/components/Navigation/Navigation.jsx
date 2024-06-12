@@ -1,11 +1,10 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
-import SearchBar from "../LandingPage/SearchBar";
 import "./Navigation.css";
 
 function Navigation() {
   const navigate = useNavigate();
-  
+
   return (
     <nav id="navbar">
       <button id="about-button" onClick={() => navigate('/about')}></button>

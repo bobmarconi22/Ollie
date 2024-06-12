@@ -85,7 +85,7 @@ function PetPage() {
             className="form-title"
             style={{ marginBottom: "10px", marginTop: "30px" }}
           >
-            {pet.name}'s Bookings
+            {pet.name}&apos;s Bookings
           </h1>
             {pet.bookings ? <></>
             :(
@@ -98,7 +98,7 @@ function PetPage() {
             className="form-title"
             style={{ marginBottom: "10px", marginTop: "30px" }}
           >
-            {pet.name}'s Reviews
+            {pet.name}&apos;s Reviews
           </h1>
           {reviews.pet_reviews
             .slice()

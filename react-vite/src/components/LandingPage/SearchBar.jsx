@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { searchThunk } from "../../redux/sitter"
@@ -12,30 +12,30 @@ function SearchBar() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [triggerSearch, setTriggerSearch] = useState(false);
-
-  const handleSearch = async (e) => {
-    if (e) e.preventDefault();
-    const query = new URLSearchParams();
-    if (search) query.set('filter', search.split(' ').join('+'));
-    if (ratingSearch > 0) query.set('rating', ratingSearch);
-    navigate(`/?${query.toString()}`);
-    await dispatch(searchThunk(search, ratingSearch));
-  };
+    
+    const handleSearch = useCallback(async (e) => {
+      if (e) e.preventDefault();
+      const query = new URLSearchParams();
+      if (search) query.set('filter', search.split(' ').join('+'));
+      if (ratingSearch > 0) query.set('rating', ratingSearch);
+      navigate(`/?${query.toString()}`);
+      await dispatch(searchThunk(search, ratingSearch));
+    }, [search, ratingSearch, navigate, dispatch]);
 
 
     const clearAll = async (e) => {
       e.preventDefault();
       setSearch('');
       setRatingSearch(0);
-      setTriggerSearch(true); // Trigger the search after state updates
+      setTriggerSearch(true);
     };
 
     useEffect(() => {
       if (triggerSearch) {
         handleSearch();
-        setTriggerSearch(false); // Reset the trigger
+        setTriggerSearch(false);
       }
-    }, [triggerSearch]);
+    }, [triggerSearch, handleSearch]);
 
     return (
       <div id="search-section">

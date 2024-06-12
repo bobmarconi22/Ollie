@@ -1,14 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import PetModal from "../PetModal/PetModal";
-import DeleteModal from "../DeleteModal";
-import OpenDeleteModal from "../OpenDeleteModal";
 import { useEffect, useState } from "react";
 import { getSitterByIdThunk } from "../../redux/sitter";
-import "./SitterPage.css";
 import { getPetsThunk } from "../../redux/pet";
 import ReviewModal from "../ReviewModal/ReviewModal";
+import "./SitterPage.css";
 
 function SitterPage() {
   const dispatch = useDispatch();
@@ -32,11 +29,9 @@ function SitterPage() {
     const months = Math.floor((diffDays % 365) / 30);
 
     if (years >= 1) {
-      return `${years} Years`; // Return the age in years
+      return `${years} Years`;
     } else if (months >= 1) {
-      return `${months} Months`; // Return the age in months if less than 1 year
-    } else {
-      return `${days} days`;
+      return `${months} Months`;
     }
   };
   const avgReviews = (arr) => {

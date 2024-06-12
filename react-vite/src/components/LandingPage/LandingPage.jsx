@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { getSittersThunk } from "../../redux/sitter";
 import { searchThunk } from "../../redux/sitter";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import SearchBar from "./SearchBar";
@@ -11,12 +10,10 @@ import "./LandingPage.css";
 function LandingPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const nonSearchedSitters = useSelector((state) => state.sitter?.all?.sitters);
   const allSitters = useSelector((state) => state.sitter?.search);
   const user = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(true);
   const [slide, setSlide] = useState(0);
-  // const [allSitters, setAllSitters] = useState([]);
   const [filter] = useSearchParams();
   const searchFilter = filter.get("filter")?.split(" ").join("+");
 
@@ -28,7 +25,6 @@ function LandingPage() {
       dispatch(searchThunk());
     }
     setIsLoaded(true);
-    // setAllSitters(searchFilter ? searchedSitters : nonSearchedSitters);
   }, [dispatch, searchFilter, isLoaded]);
 
   const slides = [

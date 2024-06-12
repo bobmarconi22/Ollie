@@ -117,8 +117,8 @@ function PetModal({ user, pet, setIsLoaded }) {
         {errors.server && <p>{errors.server}</p>}
         <form onSubmit={handleSubmit} encType="multipart/form-data">
             <img src={imagePreview} alt="Pet" className="form-pic" />
-            <div class="file-upload">
-          <label for="file-input" class="custom-file-upload">
+            <div className="file-upload">
+          <label htmlFor="file-input" className="custom-file-upload">
             Upload File
           </label>
           <input
