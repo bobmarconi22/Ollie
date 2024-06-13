@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getSitterByIdThunk } from "../../redux/sitter";
 import { getPetsThunk } from "../../redux/pet";
 import ReviewModal from "../ReviewModal/ReviewModal";
+import BookingModal from "../BookingModal";
 import "./SitterPage.css";
 
 function SitterPage() {
@@ -164,6 +165,15 @@ function SitterPage() {
     );
   };
 
+  const Tooltip = ({ children, tooltipText }) => {
+    return (
+      <div className="tooltip-container">
+        {children}
+        <div className="tooltip-text">{tooltipText}</div>
+      </div>
+    );
+  };
+
   return (
     sitter &&
     isLoaded && (
@@ -179,10 +189,26 @@ function SitterPage() {
               {sitter.first_name} {sitter.last_name}
             </h1>
             <p id="sitter-page-location">
-              {sitter.addresses[0]?.city} {sitter.addresses[0]?.state}
+              {sitter.addresses[0]?.city} <br /> {sitter.addresses[0]?.state}
             </p>
-            {sitter.overnight && <p>Overnight Available</p>}
-            {sitter.at_home && <p>Comes to you!</p>}
+            <div id="tooltip-div">
+              {sitter.overnight && <Tooltip tooltipText="Offers Overnight Sitting!">
+            <button id="tool-button"><i class="fas fa-moon"></i></button>
+          </Tooltip>}
+          {sitter.at_home && <Tooltip tooltipText="Offers Travel Services">
+            <button id="tool-button"><i class="fas fa-home"></i></button>
+          </Tooltip>}
+          </div>
+          </div>
+          <div id="book-now-div">
+
+          <OpenModalMenuItem
+                itemText="Book Now!"
+                className='book-now-button'
+                modalComponent={
+                  <BookingModal user={user} setIsLoaded={setIsLoaded} sitterId={sitterId} sitter={sitter} />
+                }
+              />
           </div>
         </div>
         <div id="sitter-page-reviews">

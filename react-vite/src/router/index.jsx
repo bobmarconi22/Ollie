@@ -4,7 +4,6 @@ import LandingPage from '../components/LandingPage';
 import ProfilePage from '../components/ProfilePage';
 import SitterPage from '../components/SitterPage';
 import PetPage from '../components/PetPage';
-import AboutPage from '../components/AboutPage'
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -26,10 +25,6 @@ export const router = createBrowserRouter([
       {
         path: "/pet/:petId",
         element: <PetPage />,
-      },
-      {
-        path: "/about",
-        element: <AboutPage />,
       },
     ],
   },

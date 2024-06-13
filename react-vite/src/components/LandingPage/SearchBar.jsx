@@ -12,7 +12,7 @@ function SearchBar() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [triggerSearch, setTriggerSearch] = useState(false);
-    
+
     const handleSearch = useCallback(async (e) => {
       if (e) e.preventDefault();
       const query = new URLSearchParams();
@@ -75,14 +75,14 @@ function SearchBar() {
           </label>
           <button type="submit" id="submit-search-button" disabled={!showFilters}>Apply Filters</button>
           <button id="clear-search-button" onClick={clearAll}>Clear All Filters</button>
-          <button onClick={() => setShowFilters(prevFilter => !prevFilter)} id="open-search-button">
+          <button onClick={() => setShowFilters(prevFilter => !prevFilter)} id="open-search-button" style={{cursor: 'pointer'}}>
             {showFilters ? (
             <>
-            <i>Search</i><FiChevronUp style={{position: 'absolute'}} />
+            <i style={{cursor: 'pointer'}}>Search</i><FiChevronUp style={{position: 'absolute', cursor: 'pointer'}} />
             </>)
             : (
             <>
-           <i>Search</i><FiChevronDown style={{position: 'absolute'}} />
+           <i style={{cursor: 'pointer'}}>Search</i><FiChevronDown style={{position: 'absolute', cursor: 'pointer'}} />
            </>
            )}
           </button>

@@ -1,9 +1,12 @@
 #landing-ad{
-  width: 100%;
+  position: relative;
+  width: 95%;
   height: 600px;
   padding-top: 85px;
   background-color: #212f44;
   border: #209c85;
+  margin: 0 auto;
+  border-radius: 2em;
 }
 
 #landing-ad > h1 {
@@ -27,19 +30,23 @@
 }
 
 .slide{
-  height: 100%;
+  height: 99%;
+  width: 99%;
   object-fit: contain;
   transition: 0.4s ease;
-  border-radius: 2rem;
+  opacity: 1;
+  transition: opacity 1s ease;
 }
 
 .slide-hidden{
   display: none;
+  opacity: 0;
+  transition: opacity 1s ease;
 }
 
 .arrow {
   position: absolute;
-  margin: 25px;
+  margin: 50px;
   font-size: 25px;
   padding: 15px;
   transition: 0.4s ease;
@@ -186,7 +193,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  left: 100px;
+  left: 20px;
   top: 0;
   width: 25%;
   max-width: 400px;
@@ -194,7 +201,6 @@
   margin: 0;
   padding: 0;
   margin-top: 102px;
-  margin-left: 2px;
   height: 225px;
   background-color: #011a30;
   border: 2px solid #209c85;
@@ -208,7 +214,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  left: 100px;
+  left: 20px;
   top: 0;
   width: 25%;
   max-width: 400px;
@@ -216,7 +222,6 @@
   margin: 0;
   padding: 0;
   margin-top: 100px;
-  margin-left: 2px;
   height: 0px;
   background-color: #011a30;
   border: 2px solid #209c85;
@@ -325,7 +330,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 #open-search-button > i{
   font-size: 13px;
-
+  cursor: pointer;
 }
 
 #open-search-button:hover{

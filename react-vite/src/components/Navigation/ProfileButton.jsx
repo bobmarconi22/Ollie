@@ -49,7 +49,7 @@ function ProfileButton() {
   return (
     <>
       <button onClick={toggleMenu} id={"user-menu"}>
-        <img src="/paw.png" alt="" style={{width: '40px'}}/>
+        <img src="/paw.png" alt="" style={{width: '40px', cursor: 'pointer'}}/>
       </button>
           {user ? (
             <ul className={showMenu ? "profile-dropdown" : "profile-dropdown-hidden"}>

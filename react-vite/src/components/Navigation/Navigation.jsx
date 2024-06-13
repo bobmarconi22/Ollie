@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
+import AboutButton from "./AboutButton";
 import "./Navigation.css";
 
 function Navigation() {
@@ -7,14 +8,13 @@ function Navigation() {
 
   return (
     <nav id="navbar">
-      <button id="about-button" onClick={() => navigate('/about')}></button>
+      <AboutButton />
       <p id="about-text">About</p>
       <NavLink to="/">
-        <img src="/ollie.png" alt="" id="logo" />
+        <img src="/ollie.png" alt="" id="logo" style={{cursor: 'pointer'}}/>
       </NavLink>
       <ProfileButton />
       <p id="menu-text">Menu</p>
-
     </nav>
   );
 }

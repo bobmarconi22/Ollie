@@ -231,19 +231,21 @@ function LandingPage() {
                     className="sitter-card"
                     onClick={() => navigate(`/sitter/${sitter.id}`)}
                     key={sitter.id}
+                    style={{cursor: 'pointer'}}
                   >
-                    <h4 id="sitter-name">
+                    <h4 id="sitter-name" style={{cursor: 'pointer'}}>
                       {sitter.first_name} {sitter.last_name}
                     </h4>
-                    <p id="sitter-username">@{sitter.username}</p>
+                    <p id="sitter-username" style={{cursor: 'pointer'}}>@{sitter.username}</p>
                     <img
                       src={sitter.profile_pic}
                       alt=""
                       className="sitter-pfp"
+                      style={{cursor: 'pointer'}}
                     />
-                    <div id="sitter-reviews">{avgReviews(sitter.reviews)}</div>
-                    <p id="sitter-location">
-                      {sitter.addresses[0]?.city}&nbsp;&nbsp;
+                    <div id="sitter-reviews" style={{cursor: 'pointer'}}>{avgReviews(sitter.reviews)}</div>
+                    <p id="sitter-location" style={{cursor: 'pointer'}}>
+                      {sitter.addresses[0]?.city}<br/>
                       {sitter.addresses[0]?.state}
                     </p>
                   </div>

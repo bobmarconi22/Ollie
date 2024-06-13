@@ -1,0 +1,16 @@
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    padding: 60px;
+    z-index: 1000;
+}
+
+#profile-form{
+    position: absolute;
+    top: 0;
+    margin: 25%;
+    z-index: 1000;
+}
