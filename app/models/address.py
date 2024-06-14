@@ -13,6 +13,7 @@ class Address(db.Model):
     city = db.Column(db.String(50), nullable=False)
     state = db.Column(db.String(50), nullable=False)
     postal_code = db.Column(db.String(50), nullable=False)
+    sitting_address =db.Column(db.Boolean)
 
     user = db.relationship('User', back_populates='addresses')
     pets = db.relationship('Pet', back_populates='home_address', foreign_keys='Pet.home_address_id')
@@ -26,4 +27,5 @@ class Address(db.Model):
             'city': self.city,
             'state': self.state,
             'postal_code': self.postal_code,
+            'sitting_address': self.sitting_address
         }

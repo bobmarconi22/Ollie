@@ -119,7 +119,9 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
                 ))}
               </select>
             </div>
-          <div className="form">
+            {sitter.overnight ?
+            <>
+              <div className="form">
             <input
               type="date"
               value={startDate}
@@ -135,20 +137,63 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
           </div>
           <div className="form">
             <input
-              type="text"
-              value={breed}
-              id={"breed"}
+              type="date"
+              value={endDate}
+              id={"endDate"}
               className="form__input"
               placeholder=" "
-              onChange={(e) => setBreed(e.target.value)}
-              maxLength={30}
+              onChange={(e) => setEndDate(e.target.value)}
               required
             />
-            <label htmlFor={"name"} className="form__label">
-              Breed
+            <label htmlFor={"endDate"} className="form__label">
+              End Date
             </label>
           </div>
-          <div className="custom-select-wrapper">
+            </>
+            :
+            <div className="form">
+            <input
+              type="date"
+              value={startDate}
+              id={"startDate"}
+              className="form__input"
+              placeholder=" "
+              onChange={(e) => {
+                setStartDate(e.target.value);
+                setEndDate(e.target.value)
+              }}
+              required
+            />
+            <label htmlFor={"startDate"} className="form__label">
+              Sitting Date
+            </label>
+          </div>
+
+            }
+
+          {isSpecial ? (
+            <div className="form">
+              <input
+                type="text"
+                value={special}
+                id={"special"}
+                className="form__input"
+                placeholder=" "
+                onChange={(e) => setSpecial(e.target.value)}
+                maxLength={255}
+                required
+              />
+              <label htmlFor={"special"} className="form__label">
+                Special Requests
+              </label>
+            </div>
+          ) : (
+            <p
+              style={{ height: "19px", padding: "10px", paddingTop: "3px" }}
+            ></p>
+          )}
+          {sitter.at_home ?
+            <div className="custom-select-wrapper">
           <select
       id="select-box"
       className="custom-select"
@@ -156,15 +201,10 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
       onChange={(e) => setAddressId(parseInt(e.target.value))}
     >
       <option value="" disabled>
-        Assign an Address
+        Address
       </option>
-      {user?.addresses.map((address) => (
-        <option key={address.id} value={address.id}>
-          {address.nickname || address.address_line}
-        </option>
-      ))}
     </select>
-            </div>
+            </div> : <>{sitter.addresses.filter(address => address.sitting_address)}</>}
           <label style={{ padding: "15px 0" }}>
             Pet in need of Special Care?
             <input

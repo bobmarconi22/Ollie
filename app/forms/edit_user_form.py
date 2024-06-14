@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField
+from wtforms import StringField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, Email, ValidationError
 from app.models import User
 from flask_wtf.file import FileField, FileAllowed
@@ -25,3 +25,4 @@ class EditUserForm(FlaskForm):
     sitter = BooleanField('sitter')
     overnight = BooleanField('overnight')
     at_home = BooleanField('at_home')
+    sitting_address_id = IntegerField('sitting_address_id')

@@ -50,7 +50,8 @@ def seed_addresses():
         address_line='987 Woof Blvd.',
         city='Denver',
         state='Colorado',
-        postal_code='80203'
+        postal_code='80203',
+        sitting_address=True
     ),
     Address(
         user_id=7,
@@ -58,7 +59,8 @@ def seed_addresses():
         address_line='222 Barker Ln.',
         city='Boston',
         state='Massachusetts',
-        postal_code='02118'
+        postal_code='02118',
+        sitting_address=True
     ),
     Address(
         user_id=8,
@@ -66,7 +68,8 @@ def seed_addresses():
         address_line='333 Meow Dr.',
         city='Chicago',
         state='Illinois',
-        postal_code='60607'
+        postal_code='60607',
+        sitting_address=True
     ),
     Address(
         user_id=9,
@@ -74,7 +77,8 @@ def seed_addresses():
         address_line='444 Purr St.',
         city='Los Angeles',
         state='California',
-        postal_code='90001'
+        postal_code='90001',
+        sitting_address=True
     ),
     Address(
         user_id=10,
@@ -82,7 +86,8 @@ def seed_addresses():
         address_line='555 Paw Ave.',
         city='Houston',
         state='Texas',
-        postal_code='77001'
+        postal_code='77001',
+        sitting_address=True
     ),
         Address(
         user_id=11,
@@ -90,7 +95,8 @@ def seed_addresses():
         address_line='666 Pet Haven',
         city='Miami',
         state='Florida',
-        postal_code='33101'
+        postal_code='33101',
+        sitting_address=True
     ),
     Address(
         user_id=12,
@@ -98,7 +104,8 @@ def seed_addresses():
         address_line='777 Fur Lane',
         city='Dallas',
         state='Texas',
-        postal_code='75201'
+        postal_code='75201',
+        sitting_address=True
     ),
     Address(
         user_id=13,
@@ -106,7 +113,8 @@ def seed_addresses():
         address_line='888 Animal St.',
         city='Atlanta',
         state='Georgia',
-        postal_code='30301'
+        postal_code='30301',
+        sitting_address=True
     ),
     Address(
         user_id=14,
@@ -114,7 +122,8 @@ def seed_addresses():
         address_line='999 Creature Rd.',
         city='Phoenix',
         state='Arizona',
-        postal_code='85001'
+        postal_code='85001',
+        sitting_address=True
     ),
     Address(
         user_id=15,
@@ -122,7 +131,8 @@ def seed_addresses():
         address_line='111 Pet Park',
         city='Las Vegas',
         state='Nevada',
-        postal_code='89101'
+        postal_code='89101',
+        sitting_address=True
     ),
     Address(
         user_id=16,
@@ -130,7 +140,8 @@ def seed_addresses():
         address_line='222 Critter Blvd.',
         city='Orlando',
         state='Florida',
-        postal_code='32801'
+        postal_code='32801',
+        sitting_address=True
     ),
     Address(
         user_id=17,
@@ -138,7 +149,8 @@ def seed_addresses():
         address_line='333 Woofington Dr.',
         city='Portland',
         state='Oregon',
-        postal_code='97201'
+        postal_code='97201',
+        sitting_address=True
     ),
     Address(
         user_id=18,
@@ -146,7 +158,8 @@ def seed_addresses():
         address_line='444 Paws Place',
         city='Salt Lake City',
         state='Utah',
-        postal_code='84101'
+        postal_code='84101',
+        sitting_address=True
     ),
     Address(
         user_id=19,
@@ -154,7 +167,8 @@ def seed_addresses():
         address_line='555 Bark Blvd.',
         city='Kansas City',
         state='Missouri',
-        postal_code='64101'
+        postal_code='64101',
+        sitting_address=True
     ),
     Address(
         user_id=20,
@@ -162,7 +176,8 @@ def seed_addresses():
         address_line='666 Furry Ln.',
         city='Minneapolis',
         state='Minnesota',
-        postal_code='55401'
+        postal_code='55401',
+        sitting_address=True
     ),
     Address(
         user_id=21,
@@ -170,7 +185,8 @@ def seed_addresses():
         address_line='777 Pet Paws Rd.',
         city='Charlotte',
         state='North Carolina',
-        postal_code='28201'
+        postal_code='28201',
+        sitting_address=True
     )
     ]
 

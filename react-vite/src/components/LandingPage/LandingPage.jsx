@@ -226,7 +226,7 @@ function LandingPage() {
           {allSitters &&
             allSitters.map(
               (sitter) =>
-                (!user || sitter.id !== user.id) && (
+                (!user || sitter.id !== user.id) && (sitter.addresses.filter(address => address.sitting_address).length) && (
                   <div
                     className="sitter-card"
                     onClick={() => navigate(`/sitter/${sitter.id}`)}

@@ -25,7 +25,8 @@ def create_address():
             address_line=form.data['address_line'],
             city=form.data['city'],
             state=form.data['state'],
-            postal_code=form.data['postal_code']
+            postal_code=form.data['postal_code'],
+            sitting_address=form.data['sitting_address']
         )
         db.session.add(new_address)
         db.session.commit()

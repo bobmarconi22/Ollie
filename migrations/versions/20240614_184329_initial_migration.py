@@ -1,8 +1,8 @@
-"""initial migrate
+"""initial migration
 
-Revision ID: 320fec69338e
+Revision ID: fcaf648b0967
 Revises:
-Create Date: 2024-06-06 20:09:49.773164
+Create Date: 2024-06-14 18:43:29.899462
 
 """
 from alembic import op
@@ -12,7 +12,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '320fec69338e'
+revision = 'fcaf648b0967'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -47,6 +47,7 @@ def upgrade():
     sa.Column('city', sa.String(length=50), nullable=False),
     sa.Column('state', sa.String(length=50), nullable=False),
     sa.Column('postal_code', sa.String(length=50), nullable=False),
+    sa.Column('sitting_address', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )

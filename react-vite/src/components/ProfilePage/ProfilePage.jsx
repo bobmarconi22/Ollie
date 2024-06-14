@@ -169,6 +169,32 @@ function ProfilePage() {
     isLoaded && (
       <>
         <div id="profile-info">
+          {user.sitter &&
+            (user.addresses.filter(address => address.sitting_address).length === 0
+            ) && (
+              <>
+                <p style={{ color: "#ec223a", fontStyle: "italic" }}>
+                  NOTICE: YOUR SITTING ACCOUNT WILL NOT BE ADVERTISED WITHOUT AN
+                  ASSOCIATED ADDRESS FOR YOUR SERVICE
+                </p>
+                {user.addresses.length ? (
+                  <OpenModalMenuItem
+                    itemText="Assign"
+                    modalComponent={
+                      <EditUserFormModal
+                        user={user}
+                        setIsLoaded={setIsLoaded}
+                      />
+                    }
+                  />
+                ) : (
+                  <OpenModalMenuItem
+                    itemText="New Address"
+                    modalComponent={<AddressModal setIsLoaded={setIsLoaded} />}
+                  />
+                )}
+              </>
+            )}
           <h1 className="form-title" style={{ marginBottom: "10px" }}>
             Hi, {user.first_name}
           </h1>
@@ -317,11 +343,24 @@ function ProfilePage() {
               <p>Special requests: {pet.special_requests}</p>
             )}
             {pet.home_address ? (
-              pet.home_address.nickname && <p style={{fontStyle: 'italic'}}>{pet.home_address.nickname}</p> || <p style={{fontStyle: 'italic'}}>{pet.home_address.address_line} {pet.home_address.city}, {pet.home_address.state} {pet.home_address.postal_code}</p>) : <p style={{fontStyle: 'italic'}}>No Address Assigned</p>
-            }
+              (pet.home_address.nickname && (
+                <p style={{ fontStyle: "italic" }}>
+                  {pet.home_address.nickname}
+                </p>
+              )) || (
+                <p style={{ fontStyle: "italic" }}>
+                  {pet.home_address.address_line} {pet.home_address.city},{" "}
+                  {pet.home_address.state} {pet.home_address.postal_code}
+                </p>
+              )
+            ) : (
+              <p style={{ fontStyle: "italic" }}>No Address Assigned</p>
+            )}
             <OpenModalMenuItem
               itemText="Edit"
-              modalComponent={<PetModal pet={pet} user={user} setIsLoaded={setIsLoaded} />}
+              modalComponent={
+                <PetModal pet={pet} user={user} setIsLoaded={setIsLoaded} />
+              }
             />
           </div>
         ))}
@@ -334,10 +373,11 @@ function ProfilePage() {
         />
         {user.addresses.map((address) => (
           <div className="card" key={address.id}>
-            <h2>
-              {address.nickname || address.address_line}
-            </h2>
-              <p>{address.address_line} {address.city}, {address.state} {address.postal_code} </p>
+            <h2>{address.nickname || address.address_line}</h2>
+            <p>
+              {address.address_line} {address.city}, {address.state}{" "}
+              {address.postal_code}{" "}
+            </p>
             <OpenModalMenuItem
               itemText="Edit"
               modalComponent={

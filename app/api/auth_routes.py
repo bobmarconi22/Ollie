@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import User, db
+from app.models import User, Address, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from app.forms import EditUserForm
@@ -108,7 +108,34 @@ def update_user(user_id):
         user_to_edit.last_name=form.data['last_name']
         user_to_edit.overnight=form.data['overnight']
         user_to_edit.at_home=form.data['at_home']
+        print(form.data)
+        new_sitting_address_id = form.data['sitting_address_id']
+        if new_sitting_address_id:
+            # Debug print
+            print(f"New Sitting Address ID: {new_sitting_address_id}")
 
+            # Deactivate the current sitting address
+            current_sitting_address = Address.query.filter(
+                Address.user_id == user_to_edit.id,
+                Address.sitting_address == True
+            ).first()
+
+            # Debug print
+            print(f"====================>Current Sitting Address: {current_sitting_address}")
+
+            if current_sitting_address:
+                current_sitting_address.sitting_address = False
+
+            # Assign the new sitting address
+            new_sitting_address = Address.query.get(new_sitting_address_id)
+
+            # Debug print
+            print(f"New Sitting Address: {new_sitting_address}")
+
+            if new_sitting_address:
+                new_sitting_address.sitting_address = True
+
+        db.session.commit()
         db.session.commit()
 
         return user_to_edit.to_dict()
