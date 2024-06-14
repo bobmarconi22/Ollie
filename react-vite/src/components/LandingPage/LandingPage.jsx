@@ -176,6 +176,15 @@ function LandingPage() {
     });
   };
 
+  const Tooltip = ({ children, tooltipText }) => {
+    return (
+      <div className="tooltip-container">
+        {children}
+        <div className="tooltip-text">{tooltipText}</div>
+      </div>
+    );
+  };
+
   return (
     isLoaded && (
       <>
@@ -248,6 +257,10 @@ function LandingPage() {
                       {sitter.addresses[0]?.city}<br/>
                       {sitter.addresses[0]?.state}
                     </p>
+                    <div id="services-div">
+              {sitter.overnight && <i class="fas fa-moon"></i>}
+          {sitter.at_home &&<i class="fas fa-home"></i>}
+          </div>
                   </div>
                 )
             )}
