@@ -7,7 +7,7 @@ import OpenDeleteModal from "../OpenDeleteModal";
 import DeleteModal from "../DeleteModal";
 import "./PetModal.css";
 
-function PetModal({ user, pet, setIsLoaded }) {
+function PetModal({ pet, user, setIsLoaded }) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
@@ -16,7 +16,7 @@ function PetModal({ user, pet, setIsLoaded }) {
   const [imageLoading, setImageLoading] = useState(false);
   const [breed, setBreed] = useState("");
   const [special, setSpecial] = useState("");
-  const [addressId, setAddressId] = useState(0);
+  const [addressId, setAddressId] = useState("");
   const [isSpecial, setIsSpecial] = useState(false);
   const [isEditLoaded, setIsEditLoaded] = useState(false);
   const [errors, setErrors] = useState({});
@@ -39,10 +39,12 @@ function PetModal({ user, pet, setIsLoaded }) {
         setImagePreview(pet.pet_pic);
         setBirthday(formatDate(pet.birthday));
         setBreed(pet.breed);
-        setAddressId(pet.home_address);
         if (pet.special_requests) {
           setSpecial(pet.special_requests);
           setIsSpecial(true);
+        }
+        if (pet.home_address) {
+          setAddressId(pet.home_address.id);
         }
       } else {
         setName("");
@@ -86,7 +88,7 @@ function PetModal({ user, pet, setIsLoaded }) {
       formData.append("breed", breed);
       formData.append("birthday", birthday);
       formData.append("special_requests", isSpecial ? special : "");
-      formData.append("home_address_id", addressId);
+      formData.append("home_address_id", addressId ? addressId : "");
 
       setImageLoading(true);
 
@@ -103,33 +105,27 @@ function PetModal({ user, pet, setIsLoaded }) {
           setIsLoaded(false);
         });
       }
-
-
     }
   };
 
   return (
     isEditLoaded && (
-      <>{console.log('==============================>',addressId)}
+      <>
         <h1 className="form-title">
           {pet ? `Edit ${pet.name}'s Information` : "New Pet"}
         </h1>
         {errors.server && <p>{errors.server}</p>}
         <form onSubmit={handleSubmit} encType="multipart/form-data">
+          <label>
             <img src={imagePreview} alt="Pet" className="form-pic" />
-            <div className="file-upload">
-          <label htmlFor="file-input" className="custom-file-upload">
-            Upload File
+            <input
+              type="file"
+              accept="image/jpeg, image/png"
+              className="choose-file"
+              onChange={handleImageChange}
+            />
           </label>
-          <input
-            type="file"
-            id="file-input"
-            accept="image/jpeg, image/png"
-            className="choose-file"
-            onChange={handleImageChange}
-          />
-        </div>
-          {errors.image && <p style={{margin: '10px'}}>words</p>}
+          {errors.image && <p style={{ margin: "10px" }}>words</p>}
           <div className="form">
             <input
               type="text"
@@ -174,23 +170,6 @@ function PetModal({ user, pet, setIsLoaded }) {
               Breed
             </label>
           </div>
-          <div className="custom-select-wrapper">
-          <select
-      id="select-box"
-      className="custom-select"
-      value={addressId === 0 ? '' : addressId}
-      onChange={(e) => setAddressId(parseInt(e.target.value))}
-    >
-      <option value="" disabled>
-        Assign an Address
-      </option>
-      {user?.addresses.map((address) => (
-        <option key={address.id} value={address.id}>
-          {address.nickname || address.address_line}
-        </option>
-      ))}
-    </select>
-            </div>
           <label style={{ padding: "15px 0" }}>
             Pet in need of Special Care?
             <input
@@ -199,6 +178,23 @@ function PetModal({ user, pet, setIsLoaded }) {
               onChange={() => setIsSpecial((prev) => !prev)}
             />
           </label>
+          <div className="custom-select-wrapper">
+            <select
+              id="select-box"
+              className="custom-select"
+              value={addressId}
+              onChange={(e) => setAddressId(e.target.value)}
+            >
+              <option value="" disabled>
+                Assign an Address
+              </option>
+              {user?.addresses.map((address) => (
+                <option key={address.id} value={address.id}>
+                  {address.nickname || address.address_line}
+                </option>
+              ))}
+            </select>
+          </div>
           {isSpecial ? (
             <div className="form">
               <input

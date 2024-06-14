@@ -42,7 +42,7 @@ def create_pet():
             birthday=birthday,
             breed=form.data['breed'],
             special_requests=form.data['special_requests'],
-            home_address_id=form.data['home_address_id'],
+            home_address_id=form.data['home_address_id'] or None,
             owner_id=current_user.id
         )
         db.session.add(new_pet)
@@ -61,6 +61,16 @@ def update_pet(pet_id):
         form = PetForm()
         form['csrf_token'].data = request.cookies['csrf_token']
 
+                # Print form data for debugging
+        print('Form data received:')
+        print('Name:', form.name.data)
+        print('Pet Pic:', form.pet_pic.data)
+        print('Birthday:', form.birthday.data)
+        print('Breed:', form.breed.data)
+        print('Special Requests:', form.special_requests.data)
+        print('Home Address ID:', form.home_address_id.data)
+
+
         if form.validate_on_submit():
             if form.data['pet_pic']:
                 image = form.data['pet_pic']
@@ -77,7 +87,7 @@ def update_pet(pet_id):
             pet_to_edit.birthday = birthday
             pet_to_edit.breed = form.breed.data
             pet_to_edit.special_requests = form.special_requests.data
-            pet_to_edit.home_address_id = form.home_address_id.data
+            pet_to_edit.home_address_id = form.home_address_id.data or None
 
             db.session.commit()
 
