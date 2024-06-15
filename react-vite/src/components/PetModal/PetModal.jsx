@@ -170,14 +170,6 @@ function PetModal({ pet, user, setIsLoaded }) {
               Breed
             </label>
           </div>
-          <label style={{ padding: "15px 0" }}>
-            Pet in need of Special Care?
-            <input
-              type="checkbox"
-              checked={isSpecial}
-              onChange={() => setIsSpecial((prev) => !prev)}
-            />
-          </label>
           <div className="custom-select-wrapper">
             <select
               id="select-box"
@@ -195,6 +187,14 @@ function PetModal({ pet, user, setIsLoaded }) {
               ))}
             </select>
           </div>
+          <label style={{ padding: "15px 0" }}>
+            Pet in need of Special Care?
+            <input
+              type="checkbox"
+              checked={isSpecial}
+              onChange={() => setIsSpecial((prev) => !prev)}
+            />
+          </label>
           {isSpecial ? (
             <div className="form">
               <input

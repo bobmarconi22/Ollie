@@ -6,7 +6,6 @@ import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import SearchBar from "./SearchBar";
 import "./LandingPage.css";
 
-
 function LandingPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -235,32 +234,39 @@ function LandingPage() {
           {allSitters &&
             allSitters.map(
               (sitter) =>
-                (!user || sitter.id !== user.id) && (sitter.addresses.filter(address => address.sitting_address).length) && (
+                (!user || sitter.id !== user.id) &&
+                sitter.addresses.filter((address) => address.sitting_address)
+                  .length && (
                   <div
                     className="sitter-card"
                     onClick={() => navigate(`/sitter/${sitter.id}`)}
                     key={sitter.id}
-                    style={{cursor: 'pointer'}}
+                    style={{ cursor: "pointer" }}
                   >
-                    <h4 id="sitter-name" style={{cursor: 'pointer'}}>
+                    <h4 id="sitter-name" style={{ cursor: "pointer" }}>
                       {sitter.first_name} {sitter.last_name}
                     </h4>
-                    <p id="sitter-username" style={{cursor: 'pointer'}}>@{sitter.username}</p>
+                    <p id="sitter-username" style={{ cursor: "pointer" }}>
+                      @{sitter.username}
+                    </p>
                     <img
                       src={sitter.profile_pic}
                       alt=""
                       className="sitter-pfp"
-                      style={{cursor: 'pointer'}}
+                      style={{ cursor: "pointer" }}
                     />
-                    <div id="sitter-reviews" style={{cursor: 'pointer'}}>{avgReviews(sitter.reviews)}</div>
-                    <p id="sitter-location" style={{cursor: 'pointer'}}>
-                      {sitter.addresses[0]?.city}<br/>
+                    <div id="sitter-reviews" style={{ cursor: "pointer" }}>
+                      {avgReviews(sitter.reviews)}
+                    </div>
+                    <p id="sitter-location" style={{ cursor: "pointer" }}>
+                      {sitter.addresses[0]?.city}
+                      <br />
                       {sitter.addresses[0]?.state}
                     </p>
                     <div id="services-div">
-              {sitter.overnight && <i class="fas fa-moon"></i>}
-          {sitter.at_home &&<i class="fas fa-home"></i>}
-          </div>
+                      {sitter.at_home && <i class="fas fa-home"></i>}
+                      {sitter.overnight && <i class="fas fa-moon"></i>}
+                    </div>
                   </div>
                 )
             )}

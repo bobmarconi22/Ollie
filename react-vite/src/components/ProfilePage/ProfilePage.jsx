@@ -170,28 +170,36 @@ function ProfilePage() {
       <>
         <div id="profile-info">
           {user.sitter &&
-            (user.addresses.filter(address => address.sitting_address).length === 0
-            ) && (
+            user.addresses.filter((address) => address.sitting_address)
+              .length === 0 && (
               <>
                 <p style={{ color: "#ec223a", fontStyle: "italic" }}>
                   NOTICE: YOUR SITTING ACCOUNT WILL NOT BE ADVERTISED WITHOUT AN
                   ASSOCIATED ADDRESS FOR YOUR SERVICE
                 </p>
                 {user.addresses.length ? (
-                  <OpenModalMenuItem
-                    itemText="Assign"
-                    modalComponent={
-                      <EditUserFormModal
-                        user={user}
-                        setIsLoaded={setIsLoaded}
-                      />
-                    }
-                  />
+                  <>
+                    <p>Simply Assign An Address Below </p>
+                    <OpenModalMenuItem
+                      itemText="Assign An Address"
+                      modalComponent={
+                        <EditUserFormModal
+                          user={user}
+                          setIsLoaded={setIsLoaded}
+                        />
+                      }
+                    />
+                  </>
                 ) : (
-                  <OpenModalMenuItem
-                    itemText="New Address"
-                    modalComponent={<AddressModal setIsLoaded={setIsLoaded} />}
-                  />
+                  <>
+                    <p>Ruh Roh! You don't have any Saved Addresses!</p>
+                    <OpenModalMenuItem
+                      itemText="Add Your First Address"
+                      modalComponent={
+                        <AddressModal setIsLoaded={setIsLoaded} />
+                      }
+                    />
+                  </>
                 )}
               </>
             )}

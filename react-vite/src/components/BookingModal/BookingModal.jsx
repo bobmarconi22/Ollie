@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { newPetThunk } from "../../redux/pet";
 import { editPetThunk } from "../../redux/pet";
@@ -9,11 +9,13 @@ import "./BookingModal.css";
 
 function BookingModal({ user, pet, setIsLoaded, sitter }) {
   const dispatch = useDispatch();
+  const pets = useSelector(state => state.pet.all.pets)
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [overnight, setOvernight] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
   const [breed, setBreed] = useState("");
   const [special, setSpecial] = useState("");
@@ -39,6 +41,20 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
       setErrors({});
     }
   }, [pet, isOpen, isEditLoaded]);
+
+  useEffect(() => {
+    const checkOvernight = () => {
+      if (startDate && endDate) {
+        if (new Date(startDate).toDateString() !== new Date(endDate).toDateString()) {
+          setOvernight(true);
+        } else {
+          setOvernight(false);
+        }
+      }
+    };
+
+    checkOvernight();
+  }, [startDate, endDate]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -103,7 +119,10 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
                 id="select-box"
                 className="custom-select"
                 value={petId === 0 ? "" : petId}
-                onChange={(e) => setPetId(e.target.value)}
+                onChange={(e) => {
+                  setPetId(e.target.value)
+                  setIsSpecial(pets.find(pet => pet.id === petId))
+                }}
                 required
               >
                 <option value="" disabled>
@@ -170,43 +189,31 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
           </div>
 
             }
-
-          {isSpecial ? (
-            <div className="form">
-              <input
-                type="text"
-                value={special}
-                id={"special"}
-                className="form__input"
-                placeholder=" "
-                onChange={(e) => setSpecial(e.target.value)}
-                maxLength={255}
-                required
-              />
-              <label htmlFor={"special"} className="form__label">
-                Special Requests
-              </label>
-            </div>
-          ) : (
-            <p
-              style={{ height: "19px", padding: "10px", paddingTop: "3px" }}
-            ></p>
-          )}
-          {sitter.at_home ?
+          {sitter.at_home && !overnight ?
             <div className="custom-select-wrapper">
           <select
       id="select-box"
       className="custom-select"
       value={addressId === 0 ? '' : addressId}
       onChange={(e) => setAddressId(parseInt(e.target.value))}
+      style={{margin: '38px auto 37px auto'}}
     >
       <option value="" disabled>
         Address
       </option>
     </select>
-            </div> : <>{sitter.addresses.filter(address => address.sitting_address)}</>}
+            </div>
+            :
+            <>
+            {sitter.overnight && overnight && <p style={{fontStyle: 'italic', margin: '5px'}}>Overnight Sitting Appointments are drop off only</p>}
+            <p>
+              Drop Off At: <br />
+              <br />
+              {sitter.addresses.find(address => address.sitting_address).address_line} {sitter.addresses.find(address => address.sitting_address).city} {sitter.addresses.find(address => address.sitting_address).state} {sitter.addresses.find(address => address.sitting_address).postal_code}</p>
+            </>
+            }
           <label style={{ padding: "15px 0" }}>
-            Pet in need of Special Care?
+            Special Requests?
             <input
               type="checkbox"
               checked={isSpecial}

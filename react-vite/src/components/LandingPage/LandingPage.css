@@ -143,9 +143,14 @@
   position: absolute;
   bottom: 0;
   text-align: start;
-  margin-top: -10px;
-  margin-left: 20px;
+  left: 10px;
   color: rgba(255, 255, 255, 0.75);
+}
+
+#sitter-location{
+  position: absolute;
+  right: 100px;
+  bottom: -10px;
 }
 
 /* .sitter-total-reviews{
