@@ -41,7 +41,7 @@ function RequestModal({ user, setIsLoaded }) {
           <h1 className="form-title">Requests</h1>
           {user.booking_requests.map((request) => (
             <>
-            {console.log(request)}
+              {console.log(request)}
               <div
                 key={request.id}
                 className="card"
@@ -65,12 +65,12 @@ function RequestModal({ user, setIsLoaded }) {
                   <p>Special requests: {request.special_requests}</p>
                 )}
                 {request.overnight ? (
-                  <p className="date">
+                  <p id="date">
                     {userFormatDate(request.start_date)} -{" "}
                     {userFormatDate(request.end_date)}
                   </p>
                 ) : (
-                  <p className="date">{userFormatDate(request.start_date)}</p>
+                  <p id="date">{userFormatDate(request.start_date)}</p>
                 )}
               </div>
               <div className="request-buttons">
