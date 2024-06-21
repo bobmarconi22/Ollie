@@ -106,7 +106,16 @@ def seed_bookings():
             end_date=now + timedelta(days=6),
             at_home=False,
             overnight=True,
-        )
+        ),
+        BookingRequest(
+            sitter_id=8,  # Demo Sitter
+            pet_id=15,
+            address_id=8,
+            start_date=now + timedelta(days=7),
+            end_date=now + timedelta(days=7),
+            at_home=False,
+            overnight=True,
+        ),
     ]
 
     db.session.add_all(demo_bookings)
