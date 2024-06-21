@@ -18,17 +18,17 @@ function RequestModal({ user, setIsLoaded }) {
     formData.append("pet_id", request.pet_id);
     formData.append("sitter_id", request.sitter_id);
     formData.append("address_id", request.address_id);
-    formData.append("start_date", new Date(request.start_date));
-    formData.append("end_date", new Date(request.end_date));
+    formData.append("start_date", request.start_date);
+    formData.append("end_date", request.end_date);
 
-    dispatch(acceptBookingThunk(formData)).then(() => {
+    dispatch(acceptBookingThunk(formData, request.id)).then(() => {
       closeModal();
       setIsLoaded(false);
     });
   };
 
   const declineBooking = (request) => () => {
-    dispatch(deleteRequestThunk(request)).then(() => {
+    dispatch(deleteRequestThunk(request.id)).then(() => {
       closeModal();
       setIsLoaded(false);
     });
@@ -41,6 +41,7 @@ function RequestModal({ user, setIsLoaded }) {
           <h1 className="form-title">Requests</h1>
           {user.booking_requests.map((request) => (
             <>
+            {console.log(request)}
               <div
                 key={request.id}
                 className="card"

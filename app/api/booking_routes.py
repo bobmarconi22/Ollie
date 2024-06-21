@@ -7,6 +7,8 @@ from flask_login import login_required
 booking_routes = Blueprint('booking', __name__)
 
 
+#REQUEST SPECIFIC ROUTES
+
 #CREATE REQUEST
 @booking_routes.route('/request/create', methods=['POST'])
 @login_required
@@ -38,6 +40,22 @@ def create_request():
     print(form.errors)
     return jsonify(form.errors), 400
 
+#DELETE REQUEST
+@booking_routes.route("/request/<int:request_id>/delete", methods=['DELETE'])
+@login_required
+def delete_request(request_id):
+    request_to_delete = BookingRequest.query.get(request_id)
+    if not request_to_delete:
+        return jsonify({"message": "request couldn't be found"}), 404
+    db.session.delete(request_to_delete)
+    db.session.commit()
+    return jsonify({"message": "Successfully deleted"}), 200
+
+
+
+
+# BOOKING SPECIFIC ROUTES
+
 #CREATE BOOKING
 @booking_routes.route('/create', methods=['POST'])
 @login_required
@@ -49,13 +67,13 @@ def create_booking():
     print(form.validate_on_submit())
     if form.validate_on_submit():
 
-        start = datetime.strptime(form.data['start_date'], '%Y-%m-%d')
-        end = datetime.strptime(form.data['end_date'], '%Y-%m-%d')
+        start = datetime.strptime(form.data['start_date'], '%a, %d %b %Y %H:%M:%S %Z')
+        end = datetime.strptime(form.data['end_date'], '%a, %d %b %Y %H:%M:%S %Z')
 
         new_booking = Booking(
             sitter_id=form.data['sitter_id'],
             pet_id=form.data['pet_id'],
-            address_id =form.data['address_id'],
+            address_id=form.data['address_id'],
             at_home=form.data['at_home'],
             overnight=form.data['overnight'],
             start_date=start,
@@ -91,15 +109,3 @@ def create_booking():
 
 #         return form.errors, 400
 #     return {'error': 'Unauthorized'}, 401
-
-
-# #DELETE ADDRESS
-# @booking_routes.route("/<int:address_id>/delete", methods=['DELETE'])
-# @login_required
-# def delete_address(address_id):
-#     address_to_delete = Address.query.get(address_id)
-#     if not address_to_delete:
-#         return jsonify({"message": "address couldn't be found"}), 404
-#     db.session.delete(address_to_delete)
-#     db.session.commit()
-#     return jsonify({"message": "Successfully deleted"}), 200

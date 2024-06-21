@@ -16,7 +16,7 @@ export const newRequestThunk = (formData) => async (dispatch) => {
   }
 };
 
-export const acceptBookingThunk = (formData) => async (dispatch) => {
+export const acceptBookingThunk = (formData, requestId) => async (dispatch) => {
   const res = await fetch('/api/booking/create', {
     method: "POST",
     body: formData,
@@ -25,7 +25,8 @@ export const acceptBookingThunk = (formData) => async (dispatch) => {
   if (res.ok) {
     const message = await res.json();
     dispatch(thunkAuthenticate());
-    dispatch(deleteRequestThunk(res.id))
+    console.log('=========>',requestId)
+    dispatch(deleteRequestThunk(requestId))
     return message;
   } else {
     const errors = await res.json();
