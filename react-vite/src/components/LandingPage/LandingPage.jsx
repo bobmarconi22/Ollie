@@ -53,6 +53,28 @@ function LandingPage() {
     },
   ];
 
+  const checkPaw = (avg, num) => {
+    return(
+    <span className="paw-wrapper">
+    <i
+    className="fa-solid fa-paw"
+            style={{ fontSize: "25px", margin: ' 0 2px'}}
+          ></i>
+    <i
+
+    className="fa-solid fa-paw filled"
+    style={{
+      clipPath:
+        avg >= num
+          ? "none"
+          : `polygon(0 0, ${(avg - (num - 1)) * 100}% 0, ${(avg - (num - 1)) * 100}% 100%, 0 100%)`,
+      fontSize: "25px",
+      margin: ' 0 2px'
+    }}
+  ></i>
+  </span>)
+  }
+
   const avgReviews = (arr) => {
     let sum = 0;
     for (let review of arr) {
@@ -61,75 +83,12 @@ function LandingPage() {
     let avg = (sum / arr.length).toFixed(1);
 
     return arr.length ? (
-      <div className="sitter-reviews">
-        <span className="paw-wrapper">
-          <i className="fa-solid fa-paw"></i>
-          <i
-            className="fa-solid fa-paw filled"
-            style={{
-              clipPath:
-                avg >= 1
-                  ? "none"
-                  : `polygon(0 0, ${avg * 100}% 0, ${avg * 100}% 100%, 0 100%)`,
-            }}
-          ></i>
-        </span>
-        <span className="paw-wrapper">
-          <i className="fa-solid fa-paw"></i>
-          <i
-            className="fa-solid fa-paw filled"
-            style={{
-              clipPath:
-                avg >= 2
-                  ? "none"
-                  : `polygon(0 0, ${(avg - 1) * 100}% 0, ${
-                      (avg - 1) * 100
-                    }% 100%, 0 100%)`,
-            }}
-          ></i>
-        </span>
-        <span className="paw-wrapper">
-          <i className="fa-solid fa-paw"></i>
-          <i
-            className="fa-solid fa-paw filled"
-            style={{
-              clipPath:
-                avg >= 3
-                  ? "none"
-                  : `polygon(0 0, ${(avg - 2) * 100}% 0, ${
-                      (avg - 2) * 100
-                    }% 100%, 0 100%)`,
-            }}
-          ></i>
-        </span>
-        <span className="paw-wrapper">
-          <i className="fa-solid fa-paw"></i>
-          <i
-            className="fa-solid fa-paw filled"
-            style={{
-              clipPath:
-                avg >= 4
-                  ? "none"
-                  : `polygon(0 0, ${(avg - 3) * 100}% 0, ${
-                      (avg - 3) * 100
-                    }% 100%, 0 100%)`,
-            }}
-          ></i>
-        </span>
-        <span className="paw-wrapper">
-          <i className="fa-solid fa-paw"></i>
-          <i
-            className="fa-solid fa-paw filled"
-            style={{
-              clipPath:
-                avg >= 5
-                  ? "none"
-                  : `polygon(0 0, ${(avg - 4) * 100}% 0, ${
-                      (avg - 4) * 100
-                    }% 100%, 0 100%)`,
-            }}
-          ></i>
-        </span>
+     <div className="sitter-reviews">
+          {checkPaw(avg, 1)}
+          {checkPaw(avg, 2)}
+          {checkPaw(avg, 3)}
+          {checkPaw(avg, 4)}
+          {checkPaw(avg, 5)}
         &nbsp;&nbsp;
         <span className="paw-wrapper">
           <p style={{ fontSize: "12px" }}>
@@ -137,6 +96,7 @@ function LandingPage() {
               style={{
                 color: "rgba(255, 255, 255, 0.75)",
                 textDecoration: "underline",
+                fontSize: "18px",
               }}
             >
               {arr.length}
@@ -146,7 +106,7 @@ function LandingPage() {
         </span>
       </div>
     ) : (
-      <div className="sitter-reviews">
+      <div className="sitter-page-reviews">
         <p
           className="paw-wrapper"
           style={{ color: "rgba(255, 255, 255, 0.75)", fontSize: "17px" }}
@@ -173,15 +133,6 @@ function LandingPage() {
       }
       return prevSlide + 1;
     });
-  };
-
-  const Tooltip = ({ children, tooltipText }) => {
-    return (
-      <div className="tooltip-container">
-        {children}
-        <div className="tooltip-text">{tooltipText}</div>
-      </div>
-    );
   };
 
   return (
@@ -264,8 +215,8 @@ function LandingPage() {
                       {sitter.addresses[0]?.state}
                     </p>
                     <div id="services-div">
-                      {sitter.at_home && <i class="fas fa-home"></i>}
-                      {sitter.overnight && <i class="fas fa-moon"></i>}
+                      {sitter.at_home && <i className="fas fa-home"></i>}
+                      {sitter.overnight && <i className="fas fa-moon"></i>}
                     </div>
                   </div>
                 )

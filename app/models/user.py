@@ -56,5 +56,6 @@ class User(db.Model, UserMixin):
             'reviews': [review.to_dict() for review in self.reviews],
             'pets': [pet.to_dict() for pet in self.pets],
             'addresses': [address.to_dict() for address in self.addresses],
-            'bookings': [booking.to_dict() for booking in self.bookings]
+            'bookings': [booking.to_dict() for booking in self.bookings],
+            'booking_requests': [booking.to_dict() for booking in self.booking_requests]
         }

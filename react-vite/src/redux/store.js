@@ -9,12 +9,14 @@ import sessionReducer from "./session";
 import sitterReducer from "./sitter";
 import petReducer from "./pet";
 import reviewReducer from "./review";
+import bookingReducer from "./booking";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   sitter: sitterReducer,
   pet: petReducer,
-  review: reviewReducer
+  review: reviewReducer,
+  booking: bookingReducer
 });
 
 let enhancer;

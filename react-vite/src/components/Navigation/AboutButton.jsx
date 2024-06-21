@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom'
+
 
 function AboutButton() {
   const [showMenu, setShowMenu] = useState(false);
@@ -24,8 +23,6 @@ function AboutButton() {
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
-
-  const closeMenu = () => setShowMenu(false);
 
   return (
     <>

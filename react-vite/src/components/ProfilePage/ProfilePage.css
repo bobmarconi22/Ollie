@@ -30,3 +30,32 @@
   margin-bottom: 20px;
   font-size: 24px;
 }
+
+#booking-inbox{
+  position: absolute;
+  right: 5%;
+  top: -72px;
+}
+
+#booking-noti{
+  position: absolute;
+  top: -15px;
+  right: -25px;
+  font-size: 24px;
+  color: red;
+}
+
+#booking-noti-num{
+  position: absolute;
+  top: -23.5px;
+  right: -17px;
+  font-size: 13px;
+}
+
+#booking-inbox:hover{
+  cursor: pointer;
+}
+
+#booking-noti:hover{
+  cursor: pointer;
+}

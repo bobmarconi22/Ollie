@@ -17,6 +17,8 @@ class Address(db.Model):
 
     user = db.relationship('User', back_populates='addresses')
     pets = db.relationship('Pet', back_populates='home_address', foreign_keys='Pet.home_address_id')
+    booking_requests = db.relationship('BookingRequest', back_populates='address')
+    bookings = db.relationship('Booking', back_populates='address')
 
     def to_dict(self):
         return {

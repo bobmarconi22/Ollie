@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import EditUserFormModal from "../EditUserFormModal";
 import PetModal from "../PetModal/PetModal";
-import "./ProfilePage.css";
+import RequestModal from "../RequestModal";
 import { useEffect, useState } from "react";
 import { thunkAuthenticate } from "../../redux/session";
 import AddressModal from "../AddressModal/AddressModal";
+import "./ProfilePage.css";
 
 function ProfilePage() {
   const dispatch = useDispatch();
@@ -27,108 +28,43 @@ function ProfilePage() {
     }
   };
 
+  const checkPaw = (avg, num) => {
+    return (
+      <span className="paw-wrapper">
+        <i
+          className="fa-solid fa-paw"
+          style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
+        ></i>
+        <i
+          className="fa-solid fa-paw filled"
+          style={{
+            clipPath:
+              avg >= num
+                ? "none"
+                : `polygon(0 0, ${(avg - (num - 1)) * 100}% 0, ${
+                    (avg - (num - 1)) * 100
+                  }% 100%, 0 100%)`,
+            fontSize: "50px",
+            margin: "5px",
+          }}
+        ></i>
+      </span>
+    );
+  };
+
   const avgReviews = (arr) => {
     let sum = 0;
     for (let review of arr) {
       sum += review.rating;
     }
     let avg = (sum / arr.length).toFixed(1);
-
     return arr.length ? (
       <div className="sitter-reviews">
-        <span className="paw-wrapper">
-          <i
-            className="fa-solid fa-paw"
-            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
-          ></i>
-          <i
-            className="fa-solid fa-paw filled"
-            style={{
-              clipPath:
-                avg >= 1
-                  ? "none"
-                  : `polygon(0 0, ${avg * 100}% 0, ${avg * 100}% 100%, 0 100%)`,
-              fontSize: "50px",
-              margin: "5px",
-            }}
-          ></i>
-        </span>
-        <span className="paw-wrapper">
-          <i
-            className="fa-solid fa-paw"
-            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
-          ></i>
-          <i
-            className="fa-solid fa-paw filled"
-            style={{
-              clipPath:
-                avg >= 2
-                  ? "none"
-                  : `polygon(0 0, ${(avg - 1) * 100}% 0, ${
-                      (avg - 1) * 100
-                    }% 100%, 0 100%)`,
-              fontSize: "50px",
-              margin: "5px",
-            }}
-          ></i>
-        </span>
-        <span className="paw-wrapper">
-          <i
-            className="fa-solid fa-paw"
-            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
-          ></i>
-          <i
-            className="fa-solid fa-paw filled"
-            style={{
-              clipPath:
-                avg >= 3
-                  ? "none"
-                  : `polygon(0 0, ${(avg - 2) * 100}% 0, ${
-                      (avg - 2) * 100
-                    }% 100%, 0 100%)`,
-              fontSize: "50px",
-              margin: "5px",
-            }}
-          ></i>
-        </span>
-        <span className="paw-wrapper">
-          <i
-            className="fa-solid fa-paw"
-            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
-          ></i>
-          <i
-            className="fa-solid fa-paw filled"
-            style={{
-              clipPath:
-                avg >= 4
-                  ? "none"
-                  : `polygon(0 0, ${(avg - 3) * 100}% 0, ${
-                      (avg - 3) * 100
-                    }% 100%, 0 100%)`,
-              fontSize: "50px",
-              margin: "5px",
-            }}
-          ></i>
-        </span>
-        <span className="paw-wrapper">
-          <i
-            className="fa-solid fa-paw"
-            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
-          ></i>
-          <i
-            className="fa-solid fa-paw filled"
-            style={{
-              clipPath:
-                avg >= 5
-                  ? "none"
-                  : `polygon(0 0, ${(avg - 4) * 100}% 0, ${
-                      (avg - 4) * 100
-                    }% 100%, 0 100%)`,
-              fontSize: "50px",
-              margin: "5px",
-            }}
-          ></i>
-        </span>
+        {checkPaw(avg, 1)}
+        {checkPaw(avg, 2)}
+        {checkPaw(avg, 3)}
+        {checkPaw(avg, 4)}
+        {checkPaw(avg, 5)}
         &nbsp;&nbsp;
         <span className="paw-wrapper">
           <p style={{ fontSize: "24px" }}>
@@ -159,10 +95,16 @@ function ProfilePage() {
 
   useEffect(() => {
     if (user && !isLoaded) {
-      dispatch(thunkAuthenticate(user.id));
+      dispatch(thunkAuthenticate());
       setIsLoaded(true);
     }
-  }, [dispatch, user, isLoaded]);
+  }, [dispatch, user, isLoaded, user.booking_requests]);
+
+  const userFormatDate = (date) => {
+    return `${date.split(" ")[0]} ${date.split(" ")[2]} ${date.split(" ")[1]} ${
+      date.split(" ")[3]
+    }`;
+  };
 
   return (
     user &&
@@ -192,7 +134,7 @@ function ProfilePage() {
                   </>
                 ) : (
                   <>
-                    <p>Ruh Roh! You don't have any Saved Addresses!</p>
+                    <p>Ruh Roh! You don&apos;t have any Saved Addresses!</p>
                     <OpenModalMenuItem
                       itemText="Add Your First Address"
                       modalComponent={
@@ -260,6 +202,39 @@ function ProfilePage() {
             <h1 className="form-title" style={{ marginBottom: "10px" }}>
               Upcoming Bookings
             </h1>
+            <OpenModalMenuItem
+              itemText={
+                <div style={{ position: "relative", cursor: "pointer" }}>
+                  <i
+                    className="fa-solid fa-inbox"
+                    style={{ cursor: "pointer" }}
+                  >
+                    {user?.booking_requests?.length ? (
+                      <>
+                        <i
+                          className="fa-solid fa-circle"
+                          id="booking-noti"
+                          style={{ cursor: "pointer" }}
+                        ></i>
+                        <p
+                          id="booking-noti-num"
+                          style={
+                            user?.booking_requests?.length > 9
+                              ? { right: "-20px", cursor: "pointer" }
+                              : { cursor: "pointer" }
+                          }
+                        >
+                          {user?.booking_requests?.length}
+                        </p>
+                      </>
+                    ) : null}
+                  </i>
+                </div>
+              }
+              modalComponent={
+                <RequestModal user={user} setIsLoaded={setIsLoaded} />
+              }
+            />
             {user.bookings.length ? (
               user.bookings.map((booking) => (
                 <div className="card" key={booking.id}>
@@ -273,10 +248,19 @@ function ProfilePage() {
                   {booking.pet.special_requests &&
                     (booking.special_requests ? (
                       <p>Special requests: {booking.special_requests}</p>
+
                     ) : (
                       <></>
                     ))}
                   {booking.at_home ? <p></p> : <p></p>}
+                  {booking.overnight ? (
+                <p id="date">
+                  {userFormatDate(booking.start_date)} -{" "}
+                  {userFormatDate(booking.end_date)}
+                </p>
+              ) : (
+                <p id="date">{userFormatDate(booking.start_date)}</p>
+              )}
                 </div>
               ))
             ) : (

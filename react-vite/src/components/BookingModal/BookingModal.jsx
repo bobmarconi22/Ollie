@@ -1,23 +1,16 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { newPetThunk } from "../../redux/pet";
-import { editPetThunk } from "../../redux/pet";
-import OpenDeleteModal from "../OpenDeleteModal";
-import DeleteModal from "../DeleteModal";
 import "./BookingModal.css";
+import { newRequestThunk } from "../../redux/booking";
 
-function BookingModal({ user, pet, setIsLoaded, sitter }) {
+function BookingModal({ user, setIsLoaded, sitter }) {
   const dispatch = useDispatch();
-  const pets = useSelector(state => state.pet.all.pets)
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const [imagePreview, setImagePreview] = useState("");
+  const sitterAddress = useSelector(state => state.sitter.selected.addresses.find(address => address.sitting_address === true))
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [validDate, setValidDate] = useState(true)
   const [overnight, setOvernight] = useState(false);
-  const [imageLoading, setImageLoading] = useState(false);
-  const [breed, setBreed] = useState("");
   const [special, setSpecial] = useState("");
   const [addressId, setAddressId] = useState(0);
   const [isSpecial, setIsSpecial] = useState(false);
@@ -26,13 +19,7 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
   const [errors, setErrors] = useState({});
   const { closeModal, isOpen } = useModal();
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  };
+  const selectedPet = user.pets.find(pet => pet.id === petId);
 
   useEffect(() => {
     setIsSpecial(false);
@@ -40,12 +27,16 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
       setIsEditLoaded(true);
       setErrors({});
     }
-  }, [pet, isOpen, isEditLoaded]);
+    if(selectedPet && selectedPet.special_requests){
+      setIsSpecial(true)
+      setSpecial(selectedPet.special_requests)
+    }
+  }, [selectedPet, isOpen, isEditLoaded]);
 
   useEffect(() => {
     const checkOvernight = () => {
       if (startDate && endDate) {
-        if (new Date(startDate).toDateString() !== new Date(endDate).toDateString()) {
+        if (new Date(startDate).toDateString() < new Date(endDate).toDateString()) {
           setOvernight(true);
         } else {
           setOvernight(false);
@@ -56,49 +47,30 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
     checkOvernight();
   }, [startDate, endDate]);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-      setImagePreview(URL.createObjectURL(file));
-    }
-  };
+  const checkValidEnd = () => {
+    if (startDate && endDate) {
+      if (new Date(endDate) > new Date('01-01-1000') )
+      if (new Date(startDate).toDateString() < new Date(endDate).toDateString()) {
+        setValidDate(false)
+      }
+  }
+  setValidDate(true)
+}
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const err = {};
-    setErrors(err);
-    if (!imagePreview.includes(".png") || !imagePreview.includes(".jpg")) {
-      err.image = "Image file must be a .JPG or .PNG";
-    }
-
-    setErrors(err);
-
+    e.preventDefault()
     if (Object.keys(errors).length === 0) {
       const formData = new FormData();
-      formData.append("pet_pic", image);
-      formData.append("name", name);
-      formData.append("breed", breed);
-      formData.append("birthday", birthday);
-      formData.append("special_requests", isSpecial ? special : "");
-      formData.append("home_address_id", addressId);
+      formData.append("pet_id", petId);
+      formData.append("sitter_id", sitter.id);
+      formData.append("address_id", addressId);
+      formData.append("start_date", startDate);
+      formData.append("end_date", endDate);
 
-      setImageLoading(true);
-
-      if (pet) {
-        dispatch(editPetThunk(formData, pet.id)).then(() => {
+        dispatch(newRequestThunk(formData)).then(() => {
           closeModal();
-          setImageLoading(false);
           setIsLoaded(false);
         });
-      } else {
-        dispatch(newPetThunk(formData)).then(() => {
-          closeModal();
-          setImageLoading(false);
-          setIsLoaded(false);
-        });
-      }
 
 
     }
@@ -118,14 +90,11 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
               <select
                 id="select-box"
                 className="custom-select"
-                value={petId === 0 ? "" : petId}
-                onChange={(e) => {
-                  setPetId(e.target.value)
-                  setIsSpecial(pets.find(pet => pet.id === petId))
-                }}
+                value={petId}
+                onChange={(e) => setPetId(parseInt(e.target.value))}
                 required
               >
-                <option value="" disabled>
+                <option value={0} disabled>
                   Select a Pet
                 </option>
                 {user.pets.map((pet) => (
@@ -147,7 +116,10 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
               id={"startDate"}
               className="form__input"
               placeholder=" "
-              onChange={(e) => setStartDate(e.target.value)}
+              onChange={(e) => {
+                setStartDate(e.target.value);
+                setEndDate(e.target.value)
+              }}
               required
             />
             <label htmlFor={"startDate"} className="form__label">
@@ -168,6 +140,7 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
               End Date
             </label>
           </div>
+            {checkValidEnd && !validDate && <p style={{margin: 0, fontStyle: 'italic', color: '#ec223a'}}>Cannot end before it starts!!!</p>}
             </>
             :
             <div className="form">
@@ -201,6 +174,12 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
       <option value="" disabled>
         Address
       </option>
+      {selectedPet && selectedPet.home_address && (
+        <option value={selectedPet.home_address.id}>{selectedPet.home_address.nickname || selectedPet.home_address.address_line}</option>
+      )}
+      {sitterAddress && (
+        <option value={sitterAddress.id}>{sitterAddress.address_line}</option>
+      )}
     </select>
             </div>
             :
@@ -213,7 +192,7 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
             </>
             }
           <label style={{ padding: "15px 0" }}>
-            Special Requests?
+            Include Special Requests?
             <input
               type="checkbox"
               checked={isSpecial}
@@ -242,17 +221,7 @@ function BookingModal({ user, pet, setIsLoaded, sitter }) {
             ></p>
           )}
           {errors.special && <p>{errors.special}</p>}
-          <button type="submit">{pet ? "Update" : "Create"}</button>
-          <div className="delete-div">
-            {pet && (
-              <OpenDeleteModal
-                modalComponent={
-                  <DeleteModal pet={pet} setIsLoaded={setIsLoaded} />
-                }
-              />
-            )}
-          </div>
-          {imageLoading && <p>Loading...</p>}
+          <button type="submit">{selectedPet ? "Update" : "Create"}</button>
         </form>
       </>
     )
