@@ -4,7 +4,7 @@ import { useModal } from "../../context/Modal";
 import "./BookingModal.css";
 import { newRequestThunk } from "../../redux/booking";
 
-function BookingModal({ user, setIsLoaded, sitter }) {
+function BookingModal({ user, booking, setIsLoaded, sitter }) {
   const dispatch = useDispatch();
   const sitterAddress = useSelector(state => state.sitter.selected.addresses.find(address => address.sitting_address === true))
   const [startDate, setStartDate] = useState("");
@@ -24,8 +24,23 @@ function BookingModal({ user, setIsLoaded, sitter }) {
   useEffect(() => {
     setIsSpecial(false);
     if (!isOpen) {
-      setIsEditLoaded(true);
-      setErrors({});
+      if (booking) {
+        setStartDate(booking.startDate);
+        setEndDate(booking.endDate);
+        setValidDate(booking.booking_pic);
+        setBirthday(formatDate(booking.birthday));
+        setBreed(booking.breed);
+        if (booking.special_requests) {
+          setSpecial(booking.special_requests);
+          setIsSpecial(true);
+        }
+        if (booking.home_address) {
+          setAddressId(booking.home_address.id);
+        }
+      } else{
+        setIsEditLoaded(true);
+        setErrors({});
+      }
     }
     if(selectedPet && selectedPet.special_requests){
       setIsSpecial(true)

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import Booking, BookingRequest, db
+from app.models import Booking, BookingRequest, Address, db
 from app.forms import BookingForm
 from datetime import datetime
 from flask_login import login_required
@@ -22,13 +22,13 @@ def create_request():
 
         start = datetime.strptime(form.data['start_date'], '%Y-%m-%d')
         end = datetime.strptime(form.data['end_date'], '%Y-%m-%d')
-
+        address_check = db.session.query(Address).filter(Address.user_id == form.data['sitter_id']).all()
         new_request = BookingRequest(
             sitter_id=form.data['sitter_id'],
             pet_id=form.data['pet_id'],
             address_id =form.data['address_id'],
-            at_home=form.data['at_home'],
-            overnight=form.data['overnight'],
+            at_home=len(address_check) != 0,
+            overnight=start != end,
             start_date=start,
             end_date=end,
             requested_at=datetime.now()
@@ -69,13 +69,13 @@ def create_booking():
 
         start = datetime.strptime(form.data['start_date'], '%a, %d %b %Y %H:%M:%S %Z')
         end = datetime.strptime(form.data['end_date'], '%a, %d %b %Y %H:%M:%S %Z')
-
+        address_check = db.session.query(Address).filter(Address.user_id == form.data['sitter_id']).all()
         new_booking = Booking(
             sitter_id=form.data['sitter_id'],
             pet_id=form.data['pet_id'],
             address_id=form.data['address_id'],
-            at_home=form.data['at_home'],
-            overnight=form.data['overnight'],
+            at_home=len(address_check) != 0,
+            overnight=start != end,
             start_date=start,
             end_date=end
         )
