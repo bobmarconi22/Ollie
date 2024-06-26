@@ -3,10 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ReviewModal from "../ReviewModal";
 import PetModal from "../PetModal/PetModal";
-import "./PetPage.css";
 import { useEffect, useState } from "react";
 import { getPetByIdThunk } from "../../redux/pet";
 import { getReviewsByPetThunk } from "../../redux/review";
+import Loading from "../Loading";
+import "./PetPage.css";
 
 function PetPage() {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function PetPage() {
   }, [dispatch, petId, isLoaded]);
 
   return (
-    isLoaded && (
+    isLoaded ? (
       <>
         <div id="pet-profile" style={{ width: "80%" }}>
           <img
@@ -143,6 +144,8 @@ function PetPage() {
         </div>
       </>
     )
+    :
+    <Loading />
   );
 }
 

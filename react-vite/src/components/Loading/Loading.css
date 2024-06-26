@@ -1,0 +1,85 @@
+#loading-div {
+  margin: 50% 50% 50% 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(55px);
+    animation-timing-function: ease-out;
+  }
+  50% {
+    transform: translateY(-180px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateY(55px);
+  }
+}
+
+@keyframes roll {
+  0%,
+  100% {
+    transform: translateX(-125px);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+#bounce-wrapper {
+  animation: bounce 2s infinite;
+}
+
+#roll-wrapper {
+  animation: roll 4s linear infinite;
+}
+
+#loading {
+  width: 100px;
+  height: 100px;
+  font-size: 100px;
+  margin-bottom: 50px;
+  animation: spin 6s linear infinite;
+}
+
+#loading-ground {
+  border-top: 5px solid;
+  z-index: 10;
+}
+
+#fetching{
+  margin-left: 45.25%;
+  font-size: 30px;
+}
+
+@keyframes dots {
+  0% {
+    content: '';
+  }
+  33% {
+    content: '.';
+  }
+  66% {
+    content: '..';
+  }
+  100% {
+    content: '...';
+  }
+}
+
+#dots::after {
+  content: '';
+  animation: dots 1.75s steps(4, end) infinite;
+}

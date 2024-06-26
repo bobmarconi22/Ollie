@@ -61,7 +61,7 @@ function AddressModal({ address, setIsLoaded }) {
   };
 
   return (
-    isEditLoaded && (
+    isEditLoaded ? (
       <>
         <h1 className="form-title">{address ? `Edit Address` : "New Address"}</h1>
         {errors.server && <p>{errors.server}</p>}
@@ -199,6 +199,8 @@ function AddressModal({ address, setIsLoaded }) {
         </form>
       </>
     )
+    :
+    <Loading />
   );
 }
 

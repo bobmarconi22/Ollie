@@ -6,6 +6,7 @@ import { getSitterByIdThunk } from "../../redux/sitter";
 import { getPetsThunk } from "../../redux/pet";
 import ReviewModal from "../ReviewModal/ReviewModal";
 import BookingModal from "../BookingModal";
+import Loading from "../Loading";
 import "./SitterPage.css";
 
 function SitterPage() {
@@ -37,26 +38,28 @@ function SitterPage() {
   };
 
   const checkPaw = (avg, num) => {
-    return(
-    <span className="paw-wrapper">
-    <i
-    className="fa-solid fa-paw"
-            style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
-          ></i>
-    <i
-
-    className="fa-solid fa-paw filled"
-    style={{
-      clipPath:
-        avg >= num
-          ? "none"
-          : `polygon(0 0, ${(avg - (num - 1)) * 100}% 0, ${(avg - (num - 1)) * 100}% 100%, 0 100%)`,
-      fontSize: "50px",
-      margin: "5px",
-    }}
-  ></i>
-  </span>)
-  }
+    return (
+      <span className="paw-wrapper">
+        <i
+          className="fa-solid fa-paw"
+          style={{ fontSize: "50px", margin: "5px", marginTop: "7px" }}
+        ></i>
+        <i
+          className="fa-solid fa-paw filled"
+          style={{
+            clipPath:
+              avg >= num
+                ? "none"
+                : `polygon(0 0, ${(avg - (num - 1)) * 100}% 0, ${
+                    (avg - (num - 1)) * 100
+                  }% 100%, 0 100%)`,
+            fontSize: "50px",
+            margin: "5px",
+          }}
+        ></i>
+      </span>
+    );
+  };
 
   const avgReviews = (arr) => {
     let sum = 0;
@@ -66,12 +69,12 @@ function SitterPage() {
     let avg = (sum / arr.length).toFixed(1);
 
     return arr.length ? (
-     <div className="sitter-reviews">
-          {checkPaw(avg, 1)}
-          {checkPaw(avg, 2)}
-          {checkPaw(avg, 3)}
-          {checkPaw(avg, 4)}
-          {checkPaw(avg, 5)}
+      <div className="sitter-reviews">
+        {checkPaw(avg, 1)}
+        {checkPaw(avg, 2)}
+        {checkPaw(avg, 3)}
+        {checkPaw(avg, 4)}
+        {checkPaw(avg, 5)}
         &nbsp;&nbsp;
         <span className="paw-wrapper">
           <p style={{ fontSize: "24px" }}>
@@ -109,9 +112,8 @@ function SitterPage() {
     );
   };
 
-  return (
-    sitter &&
-    isLoaded && (
+  return sitter ? (
+    isLoaded ? (
       <>
         <div id="sitter-info">
           <img
@@ -127,23 +129,35 @@ function SitterPage() {
               {sitter.addresses[0]?.city} <br /> {sitter.addresses[0]?.state}
             </p>
             <div id="tooltip-div">
-              {sitter.overnight && <Tooltip tooltipText="Offers Overnight Sitting!">
-            <button id="tool-button"><i className="fas fa-moon"></i></button>
-          </Tooltip>}
-          {sitter.at_home && <Tooltip tooltipText="Offers Travel Services">
-            <button id="tool-button"><i className="fas fa-home"></i></button>
-          </Tooltip>}
-          </div>
+              {sitter.overnight && (
+                <Tooltip tooltipText="Offers Overnight Sitting!">
+                  <button id="tool-button">
+                    <i className="fas fa-moon"></i>
+                  </button>
+                </Tooltip>
+              )}
+              {sitter.at_home && (
+                <Tooltip tooltipText="Offers Travel Services">
+                  <button id="tool-button">
+                    <i className="fas fa-home"></i>
+                  </button>
+                </Tooltip>
+              )}
+            </div>
           </div>
           <div id="book-now-div">
-
-          <OpenModalMenuItem
-                itemText="Book Now!"
-                className='book-now-button'
-                modalComponent={
-                  <BookingModal user={user} setIsLoaded={setIsLoaded} sitterId={sitterId} sitter={sitter} />
-                }
-              />
+            <OpenModalMenuItem
+              itemText="Book Now!"
+              className="book-now-button"
+              modalComponent={
+                <BookingModal
+                  user={user}
+                  setIsLoaded={setIsLoaded}
+                  sitterId={sitterId}
+                  sitter={sitter}
+                />
+              }
+            />
           </div>
         </div>
         <div id="sitter-page-reviews">
@@ -153,48 +167,72 @@ function SitterPage() {
               <OpenModalMenuItem
                 itemText="New Review"
                 modalComponent={
-                  <ReviewModal user={user} setIsLoaded={setIsLoaded} sitterId={sitterId} sitter={sitter} />
+                  <ReviewModal
+                    user={user}
+                    setIsLoaded={setIsLoaded}
+                    sitterId={sitterId}
+                    sitter={sitter}
+                  />
                 }
               />
             )}
           </div>
-          {sitter.reviews.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map((review) => {
-            return (
-              <div className="review-card" key={review.id}>
-                <h1 className="review-pet-name">
-                  {review.pet.name} -{" "}
-                  <i
-                    style={{
-                      fontSize: "16px",
-                      fontStyle: "italic",
-                      color: "rgba(255, 255, 255, 0.75)",
-                    }}
-                  >
-                    {getAge(review.pet.birthday)}
-                  </i>
-                </h1>
+          {sitter.reviews
+            .slice()
+            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+            .map((review) => {
+              return (
+                <div className="review-card" key={review.id}>
+                  <h1 className="review-pet-name">
+                    {review.pet.name} -{" "}
+                    <i
+                      style={{
+                        fontSize: "16px",
+                        fontStyle: "italic",
+                        color: "rgba(255, 255, 255, 0.75)",
+                      }}
+                    >
+                      {getAge(review.pet.birthday)}
+                    </i>
+                  </h1>
 
-                <p className="review-pet-rating">
-                  {review.rating} <i className="fa-solid fa-paw filled"></i>
-                </p>
-                <p className="review-pet-review" style={{wordWrap: 'break-word'
-                }}>{review.review}</p>
-                {user && user.pets.filter((pet) => pet.id === review.pet_id).length !== 0 && (
-                  <>
-                    <OpenModalMenuItem
-                      itemText="Edit Review"
-                      modalComponent={
-                        <ReviewModal user={user} review={review} setIsLoaded={setIsLoaded} sitterId={sitterId} sitter={sitter} />
-                      }
-                    />
-                  </>
-                )}
-              </div>
-            );
-          })}
+                  <p className="review-pet-rating">
+                    {review.rating} <i className="fa-solid fa-paw filled"></i>
+                  </p>
+                  <p
+                    className="review-pet-review"
+                    style={{ wordWrap: "break-word" }}
+                  >
+                    {review.review}
+                  </p>
+                  {user &&
+                    user.pets.filter((pet) => pet.id === review.pet_id)
+                      .length !== 0 && (
+                      <>
+                        <OpenModalMenuItem
+                          itemText="Edit Review"
+                          modalComponent={
+                            <ReviewModal
+                              user={user}
+                              review={review}
+                              setIsLoaded={setIsLoaded}
+                              sitterId={sitterId}
+                              sitter={sitter}
+                            />
+                          }
+                        />
+                      </>
+                    )}
+                </div>
+              );
+            })}
         </div>
       </>
+    ) : (
+      <Loading />
     )
+  ) : (
+    <h1>Sitter Not Found</h1>
   );
 }
 

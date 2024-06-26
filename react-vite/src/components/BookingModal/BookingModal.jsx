@@ -92,7 +92,7 @@ function BookingModal({ user, booking, setIsLoaded, sitter }) {
   };
 
   return (
-    isEditLoaded && (
+    isEditLoaded ? (
       <>
         <h1 className="form-title">
           {sitter.first_name} {sitter.last_name}
@@ -240,6 +240,8 @@ function BookingModal({ user, booking, setIsLoaded, sitter }) {
         </form>
       </>
     )
+    :
+    <Loading />
   );
 }
 

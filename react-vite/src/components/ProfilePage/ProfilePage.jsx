@@ -7,6 +7,7 @@ import RequestModal from "../RequestModal";
 import { useEffect, useState } from "react";
 import { thunkAuthenticate } from "../../redux/session";
 import AddressModal from "../AddressModal/AddressModal";
+import Loading from "../Loading";
 import "./ProfilePage.css";
 
 function ProfilePage() {
@@ -108,7 +109,7 @@ function ProfilePage() {
 
   return (
     user &&
-    isLoaded && (
+    isLoaded ? (
       <>
         <div id="profile-info">
           {user.sitter &&
@@ -380,6 +381,8 @@ function ProfilePage() {
         ))}
       </>
     )
+    :
+    <Loading />
   );
 }
 

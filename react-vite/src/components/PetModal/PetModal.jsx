@@ -5,6 +5,7 @@ import { newPetThunk } from "../../redux/pet";
 import { editPetThunk } from "../../redux/pet";
 import OpenDeleteModal from "../OpenDeleteModal";
 import DeleteModal from "../DeleteModal";
+import Loading from "../Loading";
 import "./PetModal.css";
 
 function PetModal({ pet, user, setIsLoaded }) {
@@ -109,7 +110,7 @@ function PetModal({ pet, user, setIsLoaded }) {
   };
 
   return (
-    isEditLoaded && (
+    isEditLoaded ? (
       <>
         <h1 className="form-title">
           {pet ? `Edit ${pet.name}'s Information` : "New Pet"}
@@ -231,6 +232,8 @@ function PetModal({ pet, user, setIsLoaded }) {
         </form>
       </>
     )
+    :
+    <Loading />
   );
 }
 
