@@ -108,32 +108,18 @@ def update_user(user_id):
         user_to_edit.last_name=form.data['last_name']
         user_to_edit.overnight=form.data['overnight']
         user_to_edit.at_home=form.data['at_home']
-        print(form.data)
-        new_sitting_address_id = form.data['sitting_address_id']
-        if new_sitting_address_id:
-            # Debug print
-            print(f"New Sitting Address ID: {new_sitting_address_id}")
+        sitting_address_id = form.data['sitting_address_id']
+        if sitting_address_id != user_to_edit.sitting_address.id:
 
-            # Deactivate the current sitting address
             current_sitting_address = Address.query.filter(
                 Address.user_id == user_to_edit.id,
                 Address.sitting_address == True
             ).first()
 
-            # Debug print
-            print(f"====================>Current Sitting Address: {current_sitting_address}")
+            current_sitting_address.sitting_address = False
 
-            if current_sitting_address:
-                current_sitting_address.sitting_address = False
-
-            # Assign the new sitting address
-            new_sitting_address = Address.query.get(new_sitting_address_id)
-
-            # Debug print
-            print(f"New Sitting Address: {new_sitting_address}")
-
-            if new_sitting_address:
-                new_sitting_address.sitting_address = True
+            new_sitting_address = Address.query.get(sitting_address_id)
+            new_sitting_address.sitting_address = True
 
         db.session.commit()
         db.session.commit()
