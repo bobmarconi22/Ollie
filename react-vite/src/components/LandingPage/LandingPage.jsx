@@ -21,13 +21,15 @@ function LandingPage() {
     const fetchData = async () => {
       setIsLoaded(false);
       if (searchFilter) {
-        await dispatch(searchThunk(searchFilter));
+        dispatch(searchThunk(searchFilter)).then(() => {
+          setIsLoaded(true)
+        });
       } else {
-        await dispatch(searchThunk());
-      }
-      setIsLoaded(true);
+        dispatch(searchThunk()).then(() => {
+          setIsLoaded(true)
+      })
     };
-
+  }
     fetchData();
   }, [dispatch, searchFilter]);
 
