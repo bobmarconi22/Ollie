@@ -141,7 +141,7 @@ function LandingPage() {
   };
 
   return (
-    isLoaded && 0 ? (
+    isLoaded ? (
       <>
         <SearchBar />
         <div id="landing-ad">
