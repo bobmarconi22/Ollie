@@ -12,7 +12,7 @@ function LandingPage() {
   const navigate = useNavigate();
   const allSitters = useSelector((state) => state.sitter?.search);
   const user = useSelector((state) => state.session.user);
-  const [isLoaded, setIsLoaded] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [slide, setSlide] = useState(0);
   const [filter] = useSearchParams();
   const searchFilter = filter.get("filter")?.split(" ").join("+");
@@ -30,6 +30,7 @@ function LandingPage() {
 
     fetchData();
   }, [dispatch, searchFilter]);
+
 
   const slides = [
     {
