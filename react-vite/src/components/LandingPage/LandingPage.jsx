@@ -18,14 +18,18 @@ function LandingPage() {
   const searchFilter = filter.get("filter")?.split(" ").join("+");
 
   useEffect(() => {
-    setIsLoaded(false);
-    if (searchFilter) {
-      dispatch(searchThunk(searchFilter));
-    } else {
-      dispatch(searchThunk());
-    }
-    setIsLoaded(true);
-  }, [dispatch, searchFilter, isLoaded]);
+    const fetchData = async () => {
+      setIsLoaded(false);
+      if (searchFilter) {
+        await dispatch(searchThunk(searchFilter));
+      } else {
+        await dispatch(searchThunk());
+      }
+      setIsLoaded(true);
+    };
+
+    fetchData();
+  }, [dispatch, searchFilter]);
 
   const slides = [
     {
@@ -137,7 +141,7 @@ function LandingPage() {
   };
 
   return (
-    isLoaded ? (
+    isLoaded && 0 ? (
       <>
         <SearchBar />
         <div id="landing-ad">
