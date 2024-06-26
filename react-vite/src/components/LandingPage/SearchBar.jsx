@@ -5,7 +5,7 @@ import { searchThunk } from "../../redux/sitter"
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import "./LandingPage.css";
 
-function SearchBar() {
+function SearchBar({setIsLoaded}) {
     const [search, setSearch] = useState('');
     const [showFilters, setShowFilters] = useState(false);
     const [ratingSearch, setRatingSearch] = useState(0);
@@ -15,11 +15,13 @@ function SearchBar() {
 
     const handleSearch = useCallback(async (e) => {
       if (e) e.preventDefault();
+      setIsLoaded(false)
       const query = new URLSearchParams();
       if (search) query.set('filter', search.split(' ').join('+'));
       if (ratingSearch > 0) query.set('rating', ratingSearch);
       navigate(`/?${query.toString()}`);
       await dispatch(searchThunk(search, ratingSearch));
+      setIsLoaded(true)
     }, [search, ratingSearch, navigate, dispatch]);
 
 
@@ -73,9 +75,9 @@ function SearchBar() {
               ))}
             </div>
           </label>
-          <button type="submit" id="submit-search-button" disabled={!showFilters}>Apply Filters</button>
-          <button id="clear-search-button" onClick={clearAll}>Clear All Filters</button>
-          <button onClick={() => setShowFilters(prevFilter => !prevFilter)} id="open-search-button" style={{cursor: 'pointer'}}>
+          <button type="submit" id="submit-search-button" disabled={!showFilters} >Apply Filters</button>
+          <button type="button" id="clear-search-button" onClick={clearAll}>Clear All Filters</button>
+          <button type="button" onClick={() => setShowFilters(prevFilter => !prevFilter)} id="open-search-button" style={{cursor: 'pointer'}}>
             {showFilters ? (
             <>
             <i style={{cursor: 'pointer'}}>Search</i><FiChevronUp style={{position: 'absolute', cursor: 'pointer'}} />

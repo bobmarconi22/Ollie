@@ -31,7 +31,7 @@ function LandingPage() {
     };
   }
     fetchData();
-  }, [dispatch, searchFilter]);
+  }, [dispatch, searchFilter, setIsLoaded]);
 
 
   const slides = [
@@ -146,7 +146,7 @@ function LandingPage() {
   return (
     isLoaded ? (
       <>
-        <SearchBar />
+        <SearchBar setIsLoaded={setIsLoaded} />
         <div id="landing-ad">
           <h1>Keep your best friends Paw-tected</h1>
 
