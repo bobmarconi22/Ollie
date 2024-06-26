@@ -57,7 +57,7 @@ function EditUserFormModal({ user, setIsLoaded }) {
       formData.append("overnight", overnight);
       formData.append("at_home", atHome);
       formData.append("sitter", isSitter);
-      formData.append("sitting_address_id", addressId);
+      formData.append("sitting_address_id", parseInt(addressId.id));
 
       setImageLoading(true);
       const serverResponse = await dispatch(editUserThunk(formData, user.id));
