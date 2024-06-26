@@ -149,7 +149,7 @@ function ProfilePage() {
           <h1 className="form-title" style={{ marginBottom: "10px" }}>
             Hi, {user.first_name}
           </h1>
-          <img src={user.profile_pic} alt="" className="pfp" />
+          <img src={user.profile_pic} alt="" className="pfp" style={{ marginLeft: "-8px" }} />
           <OpenModalMenuItem
             itemText="Edit"
             modalComponent={
@@ -245,7 +245,7 @@ function ProfilePage() {
                       {booking.pet.breed} ({getAge(booking.pet.birthday)})
                     </i>
                   </h2>
-                  <img src={booking.pet.pet_pic} alt="" className="pfp" />
+                  <img src={booking.pet.pet_pic} alt="" className="pfp" style={{ marginLeft: "-8px" }} />
                   {booking.pet.special_requests &&
                     (booking.special_requests ? (
                       <p>Special requests: {booking.special_requests}</p>

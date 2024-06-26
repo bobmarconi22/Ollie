@@ -79,17 +79,16 @@
   left: 33%;
   right: 34.6%;
   top: 100px;
-  height: 0px;
   border-radius: 0 0 5em 5em;
   background-color: #011a30;
   border: 2px solid #209c85;
   overflow: hidden;
   transition: height 1s ease, top 1.7s;
+  height: 0px;
 }
 
 .about-dropdown-hidden > img {
   opacity: 0;
-  display: none;
 }
 
 #logo {
@@ -174,7 +173,7 @@ nav > button:hover {
 @media (max-width: 920px){
   .about-dropdown {
     position: absolute;
-    left: 20%;
+    left: 12.5%;
     right: 20%;
     top: 102px;
     border-radius: 0 0 5em 5em;
@@ -182,5 +181,18 @@ nav > button:hover {
     border: 2px solid #209c85;
     transition: height 1s ease;
     height: 500px;
+  }
+
+  .about-dropdown-hidden {
+    position: absolute;
+    left: 12.5%;
+    right: 20%;
+    top: 100px;
+    border-radius: 0 0 5em 5em;
+    background-color: #011a30;
+    border: 2px solid #209c85;
+    overflow: hidden;
+    transition: height 1s ease, top 1.7s;
+    height: 0px;
   }
 }
