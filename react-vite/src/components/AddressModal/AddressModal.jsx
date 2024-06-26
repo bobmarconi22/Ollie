@@ -5,6 +5,7 @@ import { newAddressThunk } from "../../redux/address";
 import { editAddressThunk } from "../../redux/address";
 import DeleteModal from "../DeleteModal";
 import OpenDeleteModal from "../OpenDeleteModal";
+import Loading from "../Loading";
 
 function AddressModal({ address, setIsLoaded }) {
   const dispatch = useDispatch();
