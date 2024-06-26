@@ -13,7 +13,7 @@ Ollie, Inspired by Rover, is an interactive site where Pet Sitters can advertise
 [Ollie Site (Live Host)](https://ollie-05bo.onrender.com)
 
 ## Images:
-
+![Page GIF](/react-vite/public/screen-capture.gif)
 
 ## About The Creator:
 
