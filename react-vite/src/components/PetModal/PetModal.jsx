@@ -17,7 +17,7 @@ function PetModal({ pet, user, setIsLoaded }) {
   const [imageLoading, setImageLoading] = useState(false);
   const [breed, setBreed] = useState("");
   const [special, setSpecial] = useState("");
-  const [addressId, setAddressId] = useState("");
+  const [addressId, setAddressId] = useState(0);
   const [isSpecial, setIsSpecial] = useState(false);
   const [isEditLoaded, setIsEditLoaded] = useState(false);
   const [errors, setErrors] = useState({});
@@ -88,8 +88,12 @@ function PetModal({ pet, user, setIsLoaded }) {
       formData.append("name", name);
       formData.append("breed", breed);
       formData.append("birthday", birthday);
-      formData.append("special_requests", isSpecial ? special : "");
-      formData.append("home_address_id", addressId ? addressId : "");
+      if (isSpecial){
+        formData.append("special_requests", special);
+      }
+      if (addressId){
+        formData.append("home_address_id", addressId);
+      }
 
       setImageLoading(true);
 
@@ -110,6 +114,7 @@ function PetModal({ pet, user, setIsLoaded }) {
   };
 
   return (
+
     isEditLoaded ? (
       <>
         <h1 className="form-title">
@@ -178,7 +183,7 @@ function PetModal({ pet, user, setIsLoaded }) {
               value={addressId}
               onChange={(e) => setAddressId(e.target.value)}
             >
-              <option value="" disabled>
+              <option value={0} disabled>
                 Assign an Address
               </option>
               {user?.addresses.map((address) => (

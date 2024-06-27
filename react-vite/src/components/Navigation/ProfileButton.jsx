@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
@@ -8,7 +8,7 @@ import SignupFormModal from "../SignupFormModal";
 
 function ProfileButton() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
@@ -42,36 +42,38 @@ function ProfileButton() {
   };
 
   const handleNav = () => {
-    navigate('/profile')
-    closeMenu()
-  }
+    navigate('/profile');
+    closeMenu();
+  };
 
   return (
     <>
-      <button onClick={toggleMenu} id={"user-menu"}>
-        <img src="/paw.png" alt="" style={{width: '40px', cursor: 'pointer'}}/>
+      <button onClick={toggleMenu} id="user-menu">
+        <img src="/paw.png" alt="" style={{ width: '40px', cursor: 'pointer' }} />
       </button>
-          {user ? (
-            <ul className={showMenu ? "profile-dropdown" : "profile-dropdown-hidden"}>
-              <li onClick={handleNav} style={{borderRadius: '0'}}>{user.username}</li>
-              <li onClick={logout} style={{borderRadius: '0 0 1em 1em'}}>Logout</li>
-            </ul>
-          ) : (
-            <ul className={showMenu ? "profile-dropdown" : "profile-dropdown-hidden"}>
-              <OpenModalMenuItem
-                itemText="Log In"
-                onItemClick={closeMenu}
-                style={{borderRadius: '0', display: 'none'}}
-                modalComponent={<LoginFormModal />}
-              />
-              <OpenModalMenuItem
-                itemText="Sign Up"
-                onItemClick={closeMenu}
-                style={{borderRadius: '0 0 1em 1em'}}
-                modalComponent={<SignupFormModal />}
-              />
-            </ul>
-          )}
+      <ul ref={ulRef} className={showMenu ? "profile-dropdown" : "profile-dropdown-hidden"}>
+        {user ? (
+          <>
+            <li onClick={handleNav} style={{ borderRadius: '0' }}>{user.username}</li>
+            <li onClick={logout} style={{ borderRadius: '0 0 1em 1em' }}>Logout</li>
+          </>
+        ) : (
+          <>
+            <OpenModalMenuItem
+              itemText="Log In"
+              onItemClick={closeMenu}
+              style={{ borderRadius: '0', display: 'none' }}
+              modalComponent={<LoginFormModal />}
+            />
+            <OpenModalMenuItem
+              itemText="Sign Up"
+              onItemClick={closeMenu}
+              style={{ borderRadius: '0 0 1em 1em' }}
+              modalComponent={<SignupFormModal />}
+            />
+          </>
+        )}
+      </ul>
     </>
   );
 }

@@ -26,6 +26,8 @@ function ProfilePage() {
       return `${years} Years`; // Return the age in years
     } else if (months >= 1) {
       return `${months} Months`; // Return the age in months if less than 1 year
+    } else{
+      return `${diffDays + 1} Days`
     }
   };
 

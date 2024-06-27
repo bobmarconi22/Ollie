@@ -34,6 +34,8 @@ function SitterPage() {
       return `${years} Years`;
     } else if (months >= 1) {
       return `${months} Months`;
+    } else{
+      return `${diffDays + 1} Days`
     }
   };
 

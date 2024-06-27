@@ -92,7 +92,7 @@ def seed_addresses():
         Address(
         user_id=11,
         nickname='Home',
-        address_line='666 Pet Haven',
+        address_line='464 Pet Haven',
         city='Miami',
         state='Florida',
         postal_code='33101',
@@ -173,7 +173,7 @@ def seed_addresses():
     Address(
         user_id=20,
         nickname='Home',
-        address_line='666 Furry Ln.',
+        address_line='2121 Furry Ln.',
         city='Minneapolis',
         state='Minnesota',
         postal_code='55401',

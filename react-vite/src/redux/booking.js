@@ -25,7 +25,6 @@ export const acceptBookingThunk = (formData, requestId) => async (dispatch) => {
   if (res.ok) {
     const message = await res.json();
     dispatch(thunkAuthenticate());
-    console.log('=========>',requestId)
     dispatch(deleteRequestThunk(requestId))
     return message;
   } else {

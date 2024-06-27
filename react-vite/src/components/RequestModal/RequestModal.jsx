@@ -41,7 +41,6 @@ function RequestModal({ user, setIsLoaded }) {
           <h1 className="form-title">Requests</h1>
           {user.booking_requests.map((request) => (
             <>
-              {console.log(request)}
               <div
                 key={request.id}
                 className="card"

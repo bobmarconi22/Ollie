@@ -61,16 +61,6 @@ def update_pet(pet_id):
         form = PetForm()
         form['csrf_token'].data = request.cookies['csrf_token']
 
-                # Print form data for debugging
-        print('Form data received:')
-        print('Name:', form.name.data)
-        print('Pet Pic:', form.pet_pic.data)
-        print('Birthday:', form.birthday.data)
-        print('Breed:', form.breed.data)
-        print('Special Requests:', form.special_requests.data)
-        print('Home Address ID:', form.home_address_id.data)
-
-
         if form.validate_on_submit():
             if form.data['pet_pic']:
                 image = form.data['pet_pic']
@@ -103,7 +93,6 @@ def delete_pet(pet_id):
     pet_to_delete = Pet.query.get(pet_id)
     if pet_to_delete.pet_pic != 'https://marconi22-ollie.s3.us-east-2.amazonaws.com/7d4c441d895e45c7856f569a466eb240.png':
         file_to_delete = remove_file_from_s3(pet_to_delete.pet_pic)
-        print(file_to_delete)
     if not pet_to_delete:
         return jsonify({"message": "pet couldn't be found"}), 404
     db.session.delete(pet_to_delete)

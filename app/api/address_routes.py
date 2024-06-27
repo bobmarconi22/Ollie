@@ -17,8 +17,6 @@ def create_address():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
 
-        print('Form data:', form.data)
-
         new_address = Address(
             user_id=current_user.id,
             nickname=form.data['nickname'],

@@ -22,8 +22,6 @@ def create_review():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
 
-        print('Form data:', form.data)
-
         new_review = Review(
             rating=form.data['rating'],
             review=form.data['review'],
@@ -47,7 +45,6 @@ def update_review(review_id):
         form = ReviewForm(data=body)
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
-            print('=======================================>',form.data)
             review_to_edit.rating = form.rating.data
             review_to_edit.review = form.review.data
 

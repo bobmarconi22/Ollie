@@ -67,7 +67,6 @@ function ReviewModal({ user, sitter, review, setIsLoaded, sitterId }) {
   return (
     isEditLoaded && (
       <>
-        {console.log(errors.review, rating)}
         <h1 className="form-title">{review ? `Edit Review` : "New Review"}</h1>
         {errors.server && <p>{errors.server}</p>}
         <form onSubmit={handleSubmit} encType="multipart/form-data">

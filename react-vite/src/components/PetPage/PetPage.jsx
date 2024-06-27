@@ -27,7 +27,7 @@ function PetPage() {
     if (years >= 1) {
       return `${years} Years`;
     } else {
-      return `${months} Months`;
+      return `${months + 1} Months`;
     }
   };
 

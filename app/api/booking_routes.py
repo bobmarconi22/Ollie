@@ -17,7 +17,6 @@ def create_request():
 
     form = BookingForm(data=body)
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.validate_on_submit())
     if form.validate_on_submit():
 
         start = datetime.strptime(form.data['start_date'], '%Y-%m-%d')
@@ -64,7 +63,6 @@ def create_booking():
 
     form = BookingForm(data=body)
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.validate_on_submit())
     if form.validate_on_submit():
 
         start = datetime.strptime(form.data['start_date'], '%a, %d %b %Y %H:%M:%S %Z')

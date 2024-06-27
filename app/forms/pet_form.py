@@ -9,5 +9,5 @@ class PetForm(FlaskForm):
     pet_pic = FileField("pet_pic", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     birthday = StringField('birthday', validators=[DataRequired()])
     breed = StringField('breed', validators=[DataRequired()])
-    special_requests = StringField('special_requests')
-    home_address_id = IntegerField('home_address_id')
+    special_requests = StringField('special_requests', validators=[Optional()])
+    home_address_id = IntegerField('home_address_id', validators=[Optional()])

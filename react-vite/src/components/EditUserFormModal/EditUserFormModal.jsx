@@ -61,7 +61,6 @@ function EditUserFormModal({ user, setIsLoaded }) {
 
       setImageLoading(true);
       const serverResponse = await dispatch(editUserThunk(formData, user.id));
-      console.log("===========================>", serverResponse);
       if (serverResponse.errors) {
         setErrors(serverResponse.errors);
       } else {
