@@ -71,7 +71,6 @@ function EditUserFormModal({ user, setIsLoaded }) {
 
   return (
     <>
-      {console.log(errors)}
       <h1 className="form-title">Edit Info</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">

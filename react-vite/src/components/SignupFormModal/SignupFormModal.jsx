@@ -86,7 +86,6 @@ function SignupFormModal() {
 
   return (
     <>
-      {console.log(errors)}
       <h1 className="form-title">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
