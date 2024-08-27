@@ -20,7 +20,7 @@ function AboutPage() {
             Bob Marconi -- Software Engineer
           </p>
           <p style={{ textAlign: "center" }}>
-            Follow or see my other projects below!
+            Follow me or see my other projects below!
           </p>
           <div id="links-div">
             <a
