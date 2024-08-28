@@ -41,7 +41,7 @@ export const getSittersThunk = () => async (dispatch) => {
   } else {
     const errors = await res.json();
     return errors;
-  }
+  };
 };
 
 export const getSitterByIdThunk = (sitterId) => async (dispatch) => {
@@ -53,7 +53,7 @@ export const getSitterByIdThunk = (sitterId) => async (dispatch) => {
   } else {
     const errors = await res.json();
     return errors;
-  }
+  };
 };
 
 const initialState = { all: null, selected: null };
@@ -68,7 +68,7 @@ function sitterReducer(state = initialState, action) {
       return { ...state, selected: action.payload };
     default:
       return state;
-  }
-}
+  };
+};
 
 export default sitterReducer;
